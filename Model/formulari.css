@@ -1,0 +1,89 @@
+/* Estilos para el contenedor .enlace */
+.enlace {
+    margin-bottom: 15px; /* Espacio entre los contenedores */
+}
+
+/* Estilos para los enlaces dentro de .enlace */
+.enlace a {
+    display: block; /* Hace que los enlaces ocupen todo el ancho del contenedor */
+    padding: 10px; /* Espaciado interno */
+    background-color: #f0f0f0; /* Color de fondo */
+    text-decoration: none; /* Quita la subrayado predeterminado del enlace */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-bottom: 5px; /* Espacio entre enlaces */
+    text-align: center; /* Centrar el texto */
+    color: #333; /* Color del texto */
+}
+
+/* Estilos para el hover */
+.enlace a:hover {
+    background-color: #e0e0e0; /* Cambia el color de fondo al pasar el cursor sobre el enlace */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    color: #007bff;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
