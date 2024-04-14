@@ -8,7 +8,7 @@
  * @return object
  */
 function connexio(){
-    $dbname = 'pt05_benito_martinez';
+    $dbname = 'projecte';
     $username = 'root';
     $password = '';
     $connexio = new PDO("mysql:host=localhost;dbname=$dbname", $username, $password);
