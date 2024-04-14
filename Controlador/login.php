@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Las credenciales son correctas
         // Verificar el tipo de usuario y redirigir a la página correspondiente
         if ($rol === 'admin') {
-            header("Location: editor.php");
+            header("Location: ../editor.php");
             exit();
         } else {
             header("Location: editor2.php");

@@ -11,6 +11,6 @@
     <textarea id="editor" rows="10" cols="50"></textarea>
 
     <script src="script.js"></script>
-    <a href="login.php" target="_blank">Login</a>
+    <a href="./Controlador/login.php" target="_blank">Login</a>
 </body>
 </html>
