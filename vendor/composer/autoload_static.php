@@ -27,6 +27,7 @@ class ComposerStaticInitd23dd0b52b11fa9f66a65a3d180262c3
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'ParagonIE\\ConstantTime\\' => 23,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -62,8 +63,8 @@ class ComposerStaticInitd23dd0b52b11fa9f66a65a3d180262c3
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -76,6 +77,10 @@ class ComposerStaticInitd23dd0b52b11fa9f66a65a3d180262c3
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Monolog\\' => 
         array (

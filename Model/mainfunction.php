@@ -1,4 +1,55 @@
 <?php 
+require 'C:/xampp/htdocs/projecteFinal/src/PHPMailer.php';
+require 'C:/xampp/htdocs/projecteFinal/src/Exception.php';
+require 'C:/xampp/htdocs/projecteFinal/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+/**
+ * phphmailer
+ * Enviem l'email de recuperació de contrasenya
+ * @param  mixed $nom
+ * @param  mixed $adreca
+ * @param  mixed $text
+ * @return void
+ */
+function phphmailer($nom, $adreca, $text) {
+    $mail = new PHPMailer(true);
+    try {
+      $nom; $adreca;
+      // Canviar les opcions del SMTP
+      $mail->SMTPDebug =0;
+      $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );                      
+      $mail->isSMTP();                                            //Enviar utilitzant SMTP
+      $mail->Host       = 'smtp.gmail.com';                    
+      $mail->SMTPAuth   = true;                                   //Activem l'autenticació SMTP
+      $mail->Username   = 'xamppbmartinez@gmail.com';                     //Email on creem la clau
+      $mail->Password   = 'jvrg fwih oxgm ncwm';                          //Clau d'acces
+      $mail->SMTPSecure = 'PHPMailer::ENCRYPTION_STARTTLS';            //Enable implicit TLS encryption
+      $mail->Port       = 587;                                    // Utilitzem el port 587
+    
+      //Recipients
+      $mail->setFrom('xamppbmartinez@gmail.com', $nom); 
+      $mail->addAddress($adreca);     
+    
+      //Content
+      $mail->isHTML(true); //Enviar l'email en format HTML
+      $mail->Subject = 'Recuperacio de contrasenya'; // Assumpte
+      $mail->Body    = $text;  
+    
+      $mail->send(); // Enviem l'email
+    } catch (Exception $e) {
+      // Si hi ha cap error ens mostrarà el tipus d'error que sigui
+      
+    }
+  }
 
 
 
@@ -14,7 +65,24 @@ function connexio(){
     $connexio = new PDO("mysql:host=localhost;dbname=$dbname", $username, $password);
     return $connexio;
 }
-
+/**
+ * encontrarPorEmail
+ *  Retornem l'usuari filtrant per l'email
+ * @param  mixed $email
+ * @return void
+ */
+function idUsuariPerEmail($email){
+    $usuari = "";
+    $connexio = "";
+    $connexio = connexio();
+    $statement = $connexio->prepare("SELECT id FROM usuaris WHERE email = ?");
+    $statement->bindParam(1,$email);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $usuari = $row["id"];
+    }
+    return $usuari;
+}
 /**
  * encontrarPorEmail
  *  Retornem l'usuari filtrant per l'email
