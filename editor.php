@@ -9,7 +9,9 @@
 <body>
     <h1>Editor</h1>
     <textarea id="editor" rows="10" cols="50"></textarea>
-
+    <form id="editorForm">
+        <button type="submit">Enviar</button>
+    </form>
     <script src="script.js"></script>
     <a href="./Controlador/login.php" target="_blank">Login</a>
 </body>

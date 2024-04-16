@@ -12,6 +12,14 @@ $data_fi = $_POST['data_fi'];
 $email_usuario = 'd.vallmanya@sapalomera.cat'; // Email del usuario al que se compartirá el proyecto
 $id_usuari = idUsuariPerEmail($email_usuario);
 
+$statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi, id_usuari) VALUES (?,?,?,?,?)");
+$statement->bindParam(1,$nombre_proyecto);
+$statement->bindParam(2,$descripcion);
+$statement->bindParam(3,$data_inici);
+$statement->bindParam(4,$data_fi);
+$statement->bindParam(5,$id_usuari);
+$statement->execute();
+
 // Insertar el proyecto en la base de datos
 $sql = "INSERT INTO projectes (nom, descripcio, data_inici, data_fi, id_usuari) VALUES ('$nombre_proyecto', '$descripcion','$data_inici' , '$data_fi' ,$id_usuari)";
 

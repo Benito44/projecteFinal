@@ -1,4 +1,25 @@
 $(document).ready(function(){
+    $('#editorForm').submit(function(event) {
+        // Evita que el formulario se envíe de forma predeterminada
+        event.preventDefault();
+
+        // Obtiene el contenido del textarea
+        var content = $('#editor').val();
+
+        // Envía los datos al servidor usando AJAX
+        $.ajax({
+            url: 'guardar_en_bd.php', // Ruta al script PHP que manejará la inserción en la base de datos
+            method: 'POST',
+            data: { content: content }, // Datos que se enviarán al servidor
+            success: function(response) {
+                alert('Contenido guardado exitosamente en la base de datos.');
+            },
+            error: function(xhr, status, error) {
+                alert('Error al guardar el contenido en la base de datos.');
+                console.error(xhr, status, error);
+            }
+        });
+    });
     var temporitzador;
     var acabat = 1; 
     var estaEscribint = false;
