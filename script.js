@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
-    const urlParams = new URLSearchParams(window.location.search);
-    const proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
     
     
     $.ajax({
@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#editorForm').submit(function(event) {
        
         event.preventDefault();
-        const content = $('#editor').val();
+        var content = $('#editor').val();
 
         $.ajax({
             url: 'guardar_en_bd.php', 
@@ -50,9 +50,9 @@ $(document).ready(function(){
         });
     });
 
-    let temporitzador;
-    const acabat = 1; 
-    const estaEscribint = false;
+    var temporitzador;
+    var acabat = 1; 
+    var estaEscribint = false;
 
     $('#editor').on('input', function(){
         clearTimeout(temporitzador);
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
     function escriure(){
         estaEscribint = false;
-        const content = $('#editor').val();
+        var content = $('#editor').val();
         guardarContingut(content);
     }
 

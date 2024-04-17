@@ -41,7 +41,7 @@ function phphmailer($nom, $adreca, $text) {
     
       //Content
       $mail->isHTML(true); //Enviar l'email en format HTML
-      $mail->Subject = 'Recuperacio de contrasenya'; // Assumpte
+      $mail->Subject = 'Projecte Compartit'; // Assumpte
       $mail->Body    = $text;  
     
       $mail->send(); // Enviem l'email
