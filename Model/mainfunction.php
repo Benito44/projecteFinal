@@ -52,7 +52,19 @@ function phphmailer($nom, $adreca, $text) {
   }
 
 
+// Función para obtener el nombre del proyecto basado en su ID
+function obtenerNombreProyecto($id) {
+    $conn = connexio(); // Conexión a la base de datos
 
+    // Consulta para obtener el nombre del proyecto
+    $sql = "SELECT nom FROM projectes WHERE id = ?";
+    $statement = $conn->prepare($sql);
+    $statement->execute([$id]);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // Devolver el nombre del proyecto
+    return $row['nom'];
+}
 /**
  * connexio
  * Retornem la connexió a la base de dades

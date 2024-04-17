@@ -1,33 +1,32 @@
 $(document).ready(function(){
-        // Obtener el parámetro 'proyecto' de la URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
-        
-        // Realizar una solicitud AJAX para obtener el nombre del proyecto
-        $.ajax({
-            url: 'obtener_nombre_proyecto.php', // Ruta al archivo PHP que obtiene el nombre del proyecto
-            method: 'GET',
-            data: { id: proyectoId }, // Pasar el ID del proyecto como parámetro
-            success: function(response) {
-                // Actualizar el contenido del elemento #nombre_proyecto con el nombre del proyecto obtenido
-                $('#nombre_proyecto').text(response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al obtener el nombre del proyecto:', error);
-            }
-        });
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+    
+    
+    $.ajax({
+        url: 'obtener_nombre_proyecto.php', 
+        method: 'GET',
+        data: { id: proyectoId }, // Pasar el ID del proyecto como parámetro
+        success: function(response) {
+            // Actualizar el contenido del elemento #nombre_proyecto con el nombre del proyecto obtenido
+            $('#nombre_proyecto').text(response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al obtener el nombre del proyecto:', error);
+        }
+    });
+
+    
     $('#editorForm').submit(function(event) {
-        // Evita que el formulario se envíe de forma predeterminada
+       
         event.preventDefault();
+        const content = $('#editor').val();
 
-        // Obtiene el contenido del textarea
-        var content = $('#editor').val();
-
-        // Envía los datos al servidor usando AJAX
         $.ajax({
-            url: 'guardar_en_bd.php', // Ruta al script PHP que manejará la inserción en la base de datos
+            url: 'guardar_en_bd.php', 
             method: 'POST',
-            data: { content: content }, // Datos que se enviarán al servidor
+            data: { content: content, nombre_proyecto: $('#nombre_proyecto').text().trim() }, // Le pasamos el contenido y el nombre del proyecto
             success: function(response) {
                 alert('Contenido guardado exitosamente en la base de datos.');
             },
@@ -36,10 +35,24 @@ $(document).ready(function(){
                 console.error(xhr, status, error);
             }
         });
+
+        $.ajax({
+            url: 'guardar_dades.php',
+            method: 'POST',
+            data: { content: content, nombre_proyecto: $('#nombre_proyecto').text().trim() }, // Le pasamos el contenido y el nombre del proyecto
+            success: function(response) {
+                alert('Contenido guardado exitosamente en el archivo del proyecto.');
+            },
+            error: function(xhr, status, error) {
+                alert('Error al guardar el contenido en el archivo del proyecto.');
+                console.error(xhr, status, error);
+            }
+        });
     });
-    var temporitzador;
-    var acabat = 1; 
-    var estaEscribint = false;
+
+    let temporitzador;
+    const acabat = 1; 
+    const estaEscribint = false;
 
     $('#editor').on('input', function(){
         clearTimeout(temporitzador);
@@ -49,7 +62,7 @@ $(document).ready(function(){
 
     function escriure(){
         estaEscribint = false;
-        var content = $('#editor').val();
+        const content = $('#editor').val();
         guardarContingut(content);
     }
 
@@ -57,7 +70,7 @@ $(document).ready(function(){
         $.ajax({
             url: 'guardar_dades.php',
             type: 'POST',
-            data: {content: content},
+            data: {content: content, nombre_proyecto: $('#nombre_proyecto').text().trim()},
             success: function(response){
                 console.log(response);
             },
@@ -72,6 +85,7 @@ $(document).ready(function(){
             $.ajax({
                 url: 'obtenir_dades.php',
                 type: 'GET',
+                data: {nombre_proyecto: $('#nombre_proyecto').text().trim()},
                 success: function(response){
                     $('#editor').val(response);
                 },

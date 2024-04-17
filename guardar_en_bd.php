@@ -1,32 +1,25 @@
 <?php
-// Establece la conexión con la base de datos (reemplaza estos valores con los tuyos)
-$dsn = 'mysql:host=localhost;dbname=projecte';
-$username = 'root';
-$password = '';
+include './Model/mainfunction.php';
 
 try {
-    $pdo = new PDO($dsn, $username, $password);
+    $pdo = connexio();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $content = $_POST['content'];
-    $nombre = 'asd';
+    $nombre_proyecto = $_POST['nombre_proyecto'];
 
-    // Prepara la consulta para actualizar el contenido en la base de datos basado en el nombre
-    $statement = $pdo->prepare("UPDATE projectes SET text = :content WHERE nom = :nombre");
+    // Actualizamos el contenido de la base de datos 
+    $statement = $pdo->prepare("UPDATE projectes SET text = :content WHERE nom = :nombre_proyecto");
     $statement->bindParam(':content', $content);
-    $statement->bindParam(':nombre', $nombre);
+    $statement->bindParam(':nombre_proyecto', $nombre_proyecto);
     $statement->execute();
 
-    // Verifica si se realizó una actualización
     if ($statement->rowCount() > 0) {
-        // Envía una respuesta de éxito al cliente
-        echo 'Contenido actualizado exitosamente en la base de datos para el nombre: ' . $nombre;
+        echo 'Contenido actualizado exitosamente en la base de datos para el proyecto: ' . $nombre_proyecto;
     } else {
-        // Envía un mensaje de error si no se encontró el nombre en la base de datos
-        echo 'No se encontró ningún registro con el nombre: ' . $nombre;
+        echo 'No se encontró ningún proyecto con el nombre: ' . $nombre_proyecto;
     }
 } catch(PDOException $e) {
-    // En caso de error, envía un mensaje de error al cliente
     echo 'Error al actualizar el contenido en la base de datos: ' . $e->getMessage();
 }
 ?>
