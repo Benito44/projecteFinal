@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Las credenciales son correctas
         // Verificar el tipo de usuario y redirigir a la página correspondiente
         if ($rol === 'admin') {
-            header("Location: crear_proyecte.php");
+            header("Location: ../Vista/creacio_projecte.vista.php");
             exit();
         } else {
             header("Location: editor2.php");

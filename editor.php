@@ -7,7 +7,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Editor</h1>
+<h1 id="nombre_proyecto"></h1>
+
     <textarea id="editor" rows="10" cols="50"></textarea>
     <form id="editorForm">
         <button type="submit">Enviar</button>

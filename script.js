@@ -1,4 +1,21 @@
 $(document).ready(function(){
+        // Obtener el parámetro 'proyecto' de la URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+        
+        // Realizar una solicitud AJAX para obtener el nombre del proyecto
+        $.ajax({
+            url: 'obtener_nombre_proyecto.php', // Ruta al archivo PHP que obtiene el nombre del proyecto
+            method: 'GET',
+            data: { id: proyectoId }, // Pasar el ID del proyecto como parámetro
+            success: function(response) {
+                // Actualizar el contenido del elemento #nombre_proyecto con el nombre del proyecto obtenido
+                $('#nombre_proyecto').text(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al obtener el nombre del proyecto:', error);
+            }
+        });
     $('#editorForm').submit(function(event) {
         // Evita que el formulario se envíe de forma predeterminada
         event.preventDefault();

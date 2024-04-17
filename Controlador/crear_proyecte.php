@@ -9,7 +9,7 @@ $nombre_proyecto = $_POST['nombre_proyecto'];
 $descripcion = $_POST['descripcion'];
 $data_inici = date("Y-m-d");
 $data_fi = $_POST['data_fi'];
-$email_usuario = 'd.vallmanya@sapalomera.cat'; // Email del usuario al que se compartirá el proyecto
+$email_usuario = 'b.martinez2@sapalomera.cat'; // Email del usuario al que se compartirá el proyecto
 $id_usuari = idUsuariPerEmail($email_usuario);
 
 $statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi, id_usuari) VALUES (?,?,?,?,?)");
@@ -26,12 +26,16 @@ $sql = "INSERT INTO projectes (nom, descripcio, data_inici, data_fi, id_usuari) 
 if ($conn) {
     $last_id = $conn->lastInsertId(); // Obtener el ID del proyecto recién insertado
 
+    // Construir el enlace del proyecto
+    $link_proyecto = "http://localhost/projecteFinal/editor.php?id=" . $last_id;
+
     // Obtener el nombre del usuario
     $usuari = encontrarPorEmail($email_usuario); // Suponiendo que esta función devuelve el nombre de usuario
 
-    // Configurar el texto del correo electrónico
-    $text = 'Hola ' . $usuari . '<br>' . 'Este proyecto ha sido compartido contigo.';
-
+    // Configurar el texto del correo electrónico con el enlace del proyecto
+    $text = 'Hola ' . $usuari . ',<br><br>';
+    $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';
+    $text .= '<a href="' . $link_proyecto . '">' . $link_proyecto . '</a>';
     // Enviar el correo electrónico
     phphmailer($usuari, $email_usuario, $text);
 
