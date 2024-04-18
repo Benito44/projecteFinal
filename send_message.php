@@ -36,13 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
         http_response_code(404); // Not Found
         echo "Error: No se encontró el proyecto 'DVD2' en la base de datos";
     }
-} else {
-    // Si no se proporcionó un mensaje en la solicitud POST, devolver un mensaje de error
-    http_response_code(400); // Bad Request
-    echo "Error: No se proporcionó un mensaje válido";
-}
-?>
-
     // Obtener los mensajes actualizados del chat (simulado aquí como un array de mensajes)
     $updatedMessages = [
         "Usuario 1: Hola",
@@ -58,4 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
     http_response_code(400); // Bad Request
     echo "Error: No se proporcionó un mensaje válido";
 }
+
+
+
 ?>
