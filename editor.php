@@ -14,6 +14,7 @@
         <button type="submit">Enviar</button>
     </form>
     <script src="script.js"></script>
+    
     <a href="./Controlador/login.php" target="_blank">Login</a>
 </body>
 </html>
