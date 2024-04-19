@@ -96,44 +96,43 @@ $(document).ready(function(){
     }
 
     setInterval(obtenirDades, 1000); // Obtener contenido cada 1 segundo
-                // Función para cargar los mensajes del chat
-                function loadChatMessages() {
-                    $.ajax({
-                        url: 'chat_server.php',
-                        method: 'GET',
-                        success: function(response) {
-                            let messages = JSON.parse(response);
-                            let chatContent = messages.join('\n');
-                            $('#chat-messages').val(chatContent);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Error al cargar mensajes del chat:', error);
-                        }
-                    });
-                }
+// Función para cargar los mensajes del chat para un proyecto específico
+function loadChatMessages(proyectoId) {
+    $.ajax({
+        url: 'chat_server.php',
+        method: 'GET',
+        data: { proyectoId: proyectoId }, // Pasar el ID del proyecto al servidor
+        success: function(response) {
+            let messages = JSON.parse(response);
+            let chatContent = messages.join('\n');
+            $('#chat-messages').val(chatContent);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al cargar mensajes del chat:', error);
+        }
+    });
+}
+loadChatMessages(proyectoId); // Cargar los mensajes del chat al cargar la página
                 
-                // Cargar los mensajes del chat al cargar la página
-                loadChatMessages();
-                
-                // Enviar mensaje al hacer submit en el formulario
-                $('#chat-form').submit(function(event) {
-                    event.preventDefault();
-                    let message = $('#message-input').val().trim();
-                    if (message !== '') {
-                        $.ajax({
-                            url: 'chat_server.php',
-                            method: 'POST',
-                            data: { message: message },
-                            success: function(response) {
-                                loadChatMessages(); // Recargar mensajes después de enviar un nuevo mensaje
-                                $('#message-input').val(''); // Limpiar el campo de entrada
-                            },
-                            error: function(xhr, status, error) {
-                                console.error('Error al enviar mensaje:', error);
-                            }
-                        });
-                    }
-                });
+// Enviar mensaje al hacer submit en el formulario
+$('#chat-form').submit(function(event) {
+    event.preventDefault();
+    let message = $('#message-input').val().trim();
+    if (message !== '') {
+        $.ajax({
+            url: 'chat_server.php',
+            method: 'POST',
+            data: { proyectoId: proyectoId, message: message }, // Pasar el ID del proyecto al servidor junto con el mensaje
+            success: function(response) {
+                loadChatMessages(proyectoId); // Recargar mensajes después de enviar un nuevo mensaje
+                $('#message-input').val(''); // Limpiar el campo de entrada
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al enviar mensaje:', error);
+            }
+        });
+    }
+});
                 
                 // Actualizar el chat cada 3 segundos
                 setInterval(loadChatMessages, 1000);
