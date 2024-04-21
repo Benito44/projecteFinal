@@ -18,5 +18,14 @@
 
         <input type="submit" value="Crear Proyecto">
     </form>
+    <form action="../Controlador/crear_proyecte.php" method="post">
+        <label for="nombre_proyecto_compartido">Nombre del Proyecto:</label><br>
+        <input type="text" id="nombre_proyecto_compartido" name="nombre_proyecto_compartido" required value="DVD2"><br><br>
+        
+        <label for="email_compartido">email:</label><br>
+        <input type="text" id="email_compartido" name="email_compartido" required><br><br>
+        
+        <input type="submit" value="Compartir">
+    </form>
 </body>
 </html>

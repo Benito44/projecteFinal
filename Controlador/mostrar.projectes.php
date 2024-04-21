@@ -14,14 +14,14 @@ if (!isset($_SESSION['email'])) {
 }
 
 $connexio = connexio(); 
-$sql = "SELECT * FROM projectes WHERE id_usuari = ?";
-$stmt = $connexio->prepare($sql);
-$stmt->execute([$row['id']]);
-$proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT p.* FROM proyecto_usuario pu INNER JOIN projectes p ON pu.id_proyecto = p.id WHERE pu.id_usuario = ?";
+$statement = $connexio->prepare($sql);
+$statement->execute([$row['id']]);
+$proyectos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 if (!$proyectos) {
     exit("Error: No se encontraron proyectos para este usuario");
 }
-include '../Vista/mostrar.projectes.vista.php'; 
 
+include '../Vista/mostrar.projectes.vista.php'; 
 ?>
