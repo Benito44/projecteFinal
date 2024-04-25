@@ -1,5 +1,5 @@
 <?php
-include './Model/mainfunction.php';
+include '../Model/mainfunction.php';
 
 // Función para obtener los comentarios de un proyecto específico desde la base de datos
 function getProjectComments($projectId) {

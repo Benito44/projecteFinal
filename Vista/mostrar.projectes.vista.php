@@ -9,7 +9,7 @@
     <h1>Lista de Proyectos</h1>
     <ul>
         <?php foreach($proyectos as $proyecto): ?>
-            <li><a href="http://localhost/projecteFinal/editor.php?id=<?php echo $proyecto['id']; ?>"><?php echo $proyecto['nom']; ?></a></li>
+            <li><a href="http://localhost/projecteFinal/Vista/editor.php?id=<?php echo $proyecto['id']; ?>"><?php echo $proyecto['nom']; ?></a></li>
         <?php endforeach; ?>
     </ul>
 </body>

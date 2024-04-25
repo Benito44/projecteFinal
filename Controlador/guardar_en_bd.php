@@ -1,5 +1,5 @@
 <?php
-include './Model/mainfunction.php';
+include '../Model/mainfunction.php';
 
 try {
     $pdo = connexio();

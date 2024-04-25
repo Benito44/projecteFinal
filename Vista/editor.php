@@ -112,19 +112,19 @@
     <form id="editorForm">
         <button type="submit">Enviar</button>
     </form>
-            <a href="./Controlador/login.php" target="_blank">Login</a>
+            <a href="../Controlador/login.php" target="_blank">Login</a>
     
-            <script src="script.js"></script>
-    <!-- Contenedor del chat -->
+
+
     <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
     
-    <!-- Formulario para enviar mensajes -->
+
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
     </form>
-    
+    <script src="script.js"></script>
 </body>
 </html>
