@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: php:8.1-apache
+    image: proj-act-cohesio
     depends_on:
       - db
     ports:
@@ -13,13 +13,14 @@ services:
       - OAUTH_REDIRECT_URI=http://localhost/index.php
       - DB_HOST=db
       - DB_USER=root
+      - DB_PASSW=cohesio
       - DB_NAME=projecte
 
   db:
-    image: mysql:latest
+    image: mariadb:10.2
     restart: always
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_ROOT_PASSWORD=cohesio
     volumes:
       - ./db_data:/var/lib/mysql
       - ./docs/projecte.sql:/docker-entrypoint-initdb.d/projecte.sql
