@@ -9,14 +9,16 @@ $descripcion = $_POST['descripcion'];
 $data_inici = date("Y-m-d");
 $data_fi = $_POST['data_fi'];
 $email_usuario = 'b.martinez2@sapalomera.cat'; 
-$id_usuari = idUsuariPerEmail($email_usuario);
+//$id_usuari = idUsuariPerEmail($email_usuario);
+$id_usuari = 2;
 
 if (isset($nombre_proyecto)) {
-    $statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi) VALUES (?,?,?,?)");
+    $statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi,id_usuari) VALUES (?,?,?,?,?)");
     $statement->bindParam(1,$nombre_proyecto);
     $statement->bindParam(2,$descripcion);
     $statement->bindParam(3,$data_inici);
     $statement->bindParam(4,$data_fi);
+    $statement->bindParam(5,$id_usuari);
     $statement->execute();
     
 }

@@ -3,7 +3,7 @@
 session_start();
 
 
-    header('Location: Controlador/login.php');
+    header('Location: Vista/login.vista.php');
 
 
 ?>

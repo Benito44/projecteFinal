@@ -1,19 +1,15 @@
 <?php
 session_start();
 require '../Model/mainfunction.php';
-include '../Vista/login.vista.php';
 
 function verificarCredenciales($email, $password) {
     $conn = connexio();
-
     // Sel·leccionar els usuaris corresponents a l'email
     $query = "SELECT * FROM usuaris WHERE email = :email";
     $statement = $conn->prepare($query);
     $statement->bindParam(':email', $email);
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    
     if ($user) {
         if ($password == $user['contrasenya']) {
             return $user['rol'];
@@ -42,9 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        echo "Credencials erroneas";
+        echo "Credenciales incorrectas";
         exit();
     }
 }
-
 ?>

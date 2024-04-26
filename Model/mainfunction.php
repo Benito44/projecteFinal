@@ -14,6 +14,7 @@ use PHPMailer\PHPMailer\Exception;
  * @param  mixed $text
  * @return void
  */
+if (!function_exists('phphmailer')) {
 function phphmailer($nom, $adreca, $text) {
     $mail = new PHPMailer(true);
     try {
@@ -50,7 +51,7 @@ function phphmailer($nom, $adreca, $text) {
       
     }
   }
-
+}
 
 // Función para obtener el nombre del proyecto basado en su ID
 function obtenerNombreProyecto($id) {
@@ -73,8 +74,8 @@ function obtenerNombreProyecto($id) {
 function connexio(){
     $dbname = 'projecte';
     $username = 'root';
-    $password = '';
-    $connexio = new PDO("mysql:host=localhost;dbname=$dbname", $username, $password);
+    $password = 'cohesio';
+    $connexio = new PDO("mysql:host=db;dbname=$dbname", $username, $password);
     return $connexio;
 }
 
