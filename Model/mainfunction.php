@@ -1,7 +1,7 @@
 <?php 
-require 'C:/xampp/htdocs/projecteFinal/src/PHPMailer.php';
-require 'C:/xampp/htdocs/projecteFinal/src/Exception.php';
-require 'C:/xampp/htdocs/projecteFinal/src/SMTP.php';
+require '../src/PHPMailer.php';
+require '../src/Exception.php';
+require '../src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -70,13 +70,31 @@ function obtenerNombreProyecto($id) {
  * Retornem la connexió a la base de dades
  * @return object
  */
-function connexio(){
+function connexio() {
+    $HOST = getenv('DB_HOST') ?: "localhost";
+    $USER = getenv('DB_USER') ?: "root";
+    $PASS = getenv('DB_PASSWORD') ?: '';
+    $DB = getenv('DB_NAME') ?: "projecte";
+    
+    try {
+        $conn = new PDO("mysql:host=$HOST;dbname=$DB", $USER, $PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        // Set PDO to throw exceptions on error
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+        die();
+    }
+}
+
+/*
     $dbname = 'projecte';
     $username = 'root';
     $password = '';
-    $connexio = new PDO("mysql:host=localhost;dbname=$dbname", $username, $password);
+    $host = '127.0.0.1'; // Cambia 'localhost' por la dirección IP de tu servidor MySQL
+    $connexio = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     return $connexio;
-}
+*/
 /**
  * encontrarPorEmail
  *  Retornem l'usuari filtrant per l'email

@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    var urlParams = new URLSearchParams(window.location.search);
-    var proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+    let urlParams = new URLSearchParams(window.location.search);
+    let proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
     
     
     $.ajax({
@@ -20,7 +20,7 @@ $(document).ready(function(){
     $('#editorForm').submit(function(event) {
        
         event.preventDefault();
-        var content = $('#editor').val();
+        let content = $('#editor').val();
 
         $.ajax({
             url: '../Controlador/guardar_en_bd.php', 
@@ -49,20 +49,24 @@ $(document).ready(function(){
         });
     });
 
-    var temporitzador;
-    var acabat = 1; 
-    var estaEscribint = false;
+    let temporitzador;
+    let acabat = 1; 
+    let estaEscribint = false;
+
+    let timeout; // Variable para almacenar el temporizador
 
     $('#editor').on('input', function(){
-        clearTimeout(temporitzador);
+        clearTimeout(timeout); // Limpiar el temporizador cada vez que se detecte un evento de entrada
         estaEscribint = true;
-        temporitzador = setTimeout(escriure, acabat);
+        timeout = setTimeout(escribir, 1000); // Establecer un temporizador para llamar a la función escribir() después de 1 segundo de inactividad
     });
 
-    function escriure(){
+    function escribir(){
         estaEscribint = false;
-        var content = $('#editor').val();
-        guardarContingut(content);
+        let content = $('#editor').val();
+        console.log(content);
+        console.log($('#nombre_proyecto').text().trim());
+        guardarContingut(content); // Llamar a la función para guardar el contenido
     }
 
     function guardarContingut(content) {

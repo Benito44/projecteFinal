@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../Model/mainfunction.php';
+require_once '../Model/mainfunction.php';
 include '../Vista/login.vista.php';
 
 function verificarCredenciales($email, $password) {

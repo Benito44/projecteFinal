@@ -1,5 +1,7 @@
 <?php
+
 include '../Model/mainfunction.php';
+session_start();
 
 // Función para obtener los comentarios de un proyecto específico desde la base de datos
 function getProjectComments($projectId) {
@@ -32,6 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
     // Si se recibe un mensaje y un ID de proyecto a través de POST, agregar el comentario a la base de datos
     $projectId = $_POST['projectId'];
     $message = $_POST['message'];
+    
+    // Obtener el nombre de usuario de la sesión
+    $username = isset($_SESSION['email']) ? $_SESSION['email'] : 'Usuario Desconocido';
 
     try {
         $pdo = connexio(); // Conectar a la base de datos
@@ -45,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
         $existingComment = $existingCommentResult['comentari'];
 
         // Concatenar el nuevo comentario al existente (con un salto de línea)
-        $updatedComment = $existingComment . "\n" . $message;
+        $updatedComment = $existingComment . "\n" . $username . ': ' . $message;
 
         // Actualizar el campo de comentarios en la tabla de proyectos
         $updateStatement = $pdo->prepare("UPDATE projectes SET comentari = :comment WHERE id = :project_id");
@@ -57,9 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
     } catch(PDOException $e) {
         echo "Error al agregar comentario: " . $e->getMessage();
     }
-
-    // Cerrar la conexión PDO
-    $pdo = null;
 } else {
     // Si no se recibe un ID de proyecto válido o un mensaje válido, devolver un mensaje de error
     echo "ID de proyecto o mensaje no válido.";
