@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['usuario'])) {
+    // Si no ha iniciado sesión, mostrar un mensaje de error
+    echo "Acceso denegado. Por favor, inicia sesión para acceder a este proyecto.";
+    exit; // Detener la ejecución del script después de mostrar el mensaje de error
+}
+
+require '../Model/mainfunction.php';
+$connexio = connexio();
+
+// Verificar si el usuario tiene permisos para acceder al proyecto
+$proyectoId = $_GET['id']; // Obtener el ID del proyecto de la URL
+$usuarioActual = encontrarPorUsuario($_SESSION['usuario']); // Obtener el ID del usuario de la sesión
+$sql = "SELECT * FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?";
+$statement = $connexio->prepare($sql);
+$statement->execute([$usuarioActual, $proyectoId]);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+if ($row) {
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,3 +152,8 @@
     <script src="script.js"></script>
 </body>
 </html>
+<?php
+} else {
+    // El usuario no tiene permisos, mostrar un mensaje de acceso denegado
+    echo 'Tu puta madre';
+}

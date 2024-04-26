@@ -28,7 +28,8 @@ USE `projecte`;
 -- Estructura de tabla para la tabla `activitat`
 --
 
-CREATE TABLE `activitat` (
+DROP TABLE IF EXISTS `activitat`;
+CREATE TABLE IF NOT EXISTS `activitat` (
   `id` int(11) NOT NULL,
   `id_usuari` int(11) NOT NULL,
   `tipus` varchar(50) NOT NULL COMMENT 'Tipo de actividad (por ejemplo, ''creación de tarea'', ''edición de proyecto'')',

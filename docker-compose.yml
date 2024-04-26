@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.1-apache
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - OAUTH_REDIRECT_URI=http://localhost/index.php
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_NAME=projecte
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./docs/projecte.sql:/docker-entrypoint-initdb.d/projecte.sql
+    ports:
+      - 3306:3306

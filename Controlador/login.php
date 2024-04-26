@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../Model/mainfunction.php';
+require '../Model/mainfunction.php';
 include '../Vista/login.vista.php';
 
 function verificarCredenciales($email, $password) {
@@ -32,10 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($rol !== false) {
         if ($rol === 'admin') {
             $_SESSION['email'] = $email;
+            $_SESSION['usuario'] = encontrarPorEmail($email);
             header("Location: ../Vista/creacio_projecte.vista.php");
             exit();
         } else {
             $_SESSION['email'] = $email;
+            $_SESSION['usuario'] = encontrarPorEmail($email);
             header("Location: ./mostrar.projectes.php");
             exit();
         }
