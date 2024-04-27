@@ -68,7 +68,7 @@
 <h1>Lista de Proyectos</h1>
 <ul>
     <?php foreach($proyectos as $proyecto): ?>
-        <li><a href="http://localhost/projecteFinal/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
+        <li><a href="http://localhost/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
           <?php echo $proyecto['nom']; ?>
           <?php echo $proyecto['descripcio']; ?>
           <?php echo $proyecto['data_fi']; ?>
