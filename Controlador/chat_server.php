@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
     $message = $_POST['message'];
     
     // Obtener el nombre de usuario de la sesión
-    $username = isset($_SESSION['email']) ? $_SESSION['email'] : 'Usuario Desconocido';
+    $username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario Desconocido';
 
     try {
         $pdo = connexio(); // Conectar a la base de datos

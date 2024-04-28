@@ -60,7 +60,7 @@
         <a class="nav-link" href="#">Servicios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contacto</a>
+        <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
     </ul>
   </div>
