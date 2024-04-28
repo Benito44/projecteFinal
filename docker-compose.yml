@@ -18,7 +18,6 @@ services:
 
   db:
     image: mariadb:10.2
-    restart: always
     environment:
       - MARIADB_ROOT_PASSWORD=cohesio
     volumes:

@@ -38,7 +38,9 @@ projectes, tasques i usuaris.
 
 - Una vegada inicies la sessió amb un usuari normal, no admin, és mostraran els teus projectes personals i si intentes entrar en un projecte on no ets propietari o no tens permissos és mostrarà un altre pantalla d'error
 
-
+- Desplegament del projecte amb docker 
+docker build . -t proj-act-cohesio
+docker-compose up -d
 ## Cosses per fer
 
 - Aplicar a cada projecte la seva pàgina de tasques
