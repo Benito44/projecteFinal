@@ -201,6 +201,18 @@ function comprovarEmail($email){
     }
     return $email_registrat;
 }
+function encontrarContrasenya($email){
+    $contrasenya = "";
+    $connexio = "";
+    $connexio = connexio();
+    $statement = $connexio->prepare("SELECT contrasenya FROM usuaris WHERE email = ?");
+    $statement->bindParam(1, $email);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $contrasenya = $row["contrasenya"];
+    }
+    return $contrasenya;
+}
 /**
  * comprovarNom
  * Retornem el nom de l'usuari de la base de dades
@@ -258,11 +270,10 @@ function actualitzarUsuari($contra, $usuari){
  * @param  mixed $usuari_id
  * @return void
  */
-function borrarArticles($id, $usuari_id){
+function borrarCompte($email){
     $connexio = connexio();
-    $statement = $connexio->prepare("DELETE FROM articles WHERE id = ? AND usuari_id = ?");
-    $statement->bindParam(1,$id);
-    $statement->bindParam(2,$usuari_id);
+    $statement = $connexio->prepare("DELETE FROM usuaris WHERE email = ?");
+    $statement->bindParam(1,$email);
     $statement->execute();
 }
 /**
