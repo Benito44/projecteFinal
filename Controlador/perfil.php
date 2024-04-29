@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
         if ($_POST['email_eliminar'] == $_SESSION['email']) {
         $connexio = connexio();
         borrarCompte($_POST['email_eliminar']);
-        header("Location: ./login.php");
+        header("Location: ../Vista/login.vista.php");
         } else {
             echo "Error";
             include '../Vista/perfil.vista.php';

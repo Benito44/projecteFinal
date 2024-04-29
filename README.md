@@ -46,4 +46,4 @@ docker-compose up -d
 - Aplicar a cada projecte la seva pàgina de tasques
 - Afeguir la part de permissos de només lectura, edició i només comentari
 - Fer que l'administrador pugui veure en tots els projectes
-- Perfils dels usuaris
+- ~~ Perfils dels usuaris~~

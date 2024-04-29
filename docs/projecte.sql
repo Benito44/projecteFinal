@@ -154,14 +154,7 @@ INSERT INTO `proyecto_usuario` (`id`, `id_proyecto`, `id_usuario`) VALUES
 --
 -- Filtros para la tabla `proyecto_usuario`
 --
-ALTER TABLE `proyecto_usuario`
-  ADD CONSTRAINT `id_projecto__id` FOREIGN KEY (`id_proyecto`) REFERENCES `projectes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `id_usuario__id` FOREIGN KEY (`id_usuario`) REFERENCES `usuaris` (`id`) ON DELETE CASCADE;
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 -- --------------------------------------------------------
 
@@ -202,8 +195,8 @@ ALTER TABLE `comentaris`
 -- Filtros para la tabla `proyecto_usuario`
 --
 ALTER TABLE `proyecto_usuario`
-  ADD CONSTRAINT `id_projecto__id` FOREIGN KEY (`id_proyecto`) REFERENCES `projectes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `id_usuario__id` FOREIGN KEY (`id_usuario`) REFERENCES `usuaris` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `id_projecto__id` FOREIGN KEY (`id_proyecto`) REFERENCES `projectes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `id_usuario__id` FOREIGN KEY (`id_usuario`) REFERENCES `usuaris` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `tasques`
