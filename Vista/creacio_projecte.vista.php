@@ -30,6 +30,9 @@
         
         <input type="submit" value="Compartir">
     </form>
+    <div>
+        <a href="../Controlador/mostrar.projectes.php" >Mostrar projectes</a>
+    </div>
         </div>
     </div>
 </body>

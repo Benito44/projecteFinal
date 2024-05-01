@@ -42,9 +42,14 @@ projectes, tasques i usuaris.
 - Desplegament del projecte amb docker 
 docker build . -t proj-act-cohesio
 docker-compose up -d
+
+- Usuaris per probar
+b.martinez2@sapalomera.cat 1234 - Admin
+d.vallmanya@gmail.com 123 - Usuari
 ## Cosses per fer
 
 - Aplicar a cada projecte la seva pàgina de tasques
 - ~~Afeguir la part de permissos de només lectura, edició i només comentari~~
-- Fer que l'administrador pugui veure en tots els projectes
+- ~~ Fer que l'administrador pugui veure en tots els projectes~~
 - ~~ Perfils dels usuaris~~
+- Creació de usuaris per part de l'administrador
