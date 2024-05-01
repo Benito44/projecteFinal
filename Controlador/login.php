@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($rol === 'admin') {
             $_SESSION['email'] = $email;
             $_SESSION['usuario'] = encontrarPorEmail($email);
-            header("Location: ../Vista/creacio_projecte.vista.php");
+            header("Location: ./crear_proyecte.php");
             exit();
         } else {
             $_SESSION['email'] = $email;

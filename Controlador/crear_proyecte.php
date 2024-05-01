@@ -1,9 +1,10 @@
 <?php
+
+session_start(); // Iniciar sesión si aún no está iniciada
 include '../Vista/creacio_projecte.vista.php';
 include '../Model/mainfunction.php';
 
 $conn = connexio();
-
 
 
 if (isset($_POST['nombre_proyecto'])) {
@@ -14,7 +15,7 @@ $data_inici = date("Y-m-d");
 $data_fi = $_POST['data_fi'];
 $email_usuario = 'b.martinez2@sapalomera.cat'; 
 //$id_usuari = idUsuariPerEmail($email_usuario);
-$id_usuari = 2;
+
     $statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi) VALUES (?,?,?,?)");
     $statement->bindParam(1,$nombre_proyecto);
     $statement->bindParam(2,$descripcion);
@@ -22,6 +23,30 @@ $id_usuari = 2;
     $statement->bindParam(4,$data_fi);
     $statement->execute();
     
+    $id_usuari = "";
+    $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
+    $statement->bindParam(1,$_SESSION['email']);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $id_usuari = $row["id"];
+    }
+
+
+    $id_projecte = "";
+    $statement = $conn->prepare("SELECT id FROM projectes WHERE nom = ?");
+    $statement->bindParam(1,$nombre_proyecto);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $id_projecte = $row["id"];
+    }
+
+    $permissos = 'editar';
+    $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
+    $statement->bindParam(1,$id_projecte);
+    $statement->bindParam(2,$id_usuari);
+    $statement->bindParam(3,$permissos);
+    $statement->execute();
+
 }
 
 
@@ -39,7 +64,8 @@ if (isset($_POST['email_compartido'])) {
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         $id_projecte = $row["id"];
     }
-echo $id_projecte;
+
+
     $email_compartido = $_POST['email_compartido'];
     $id_usuari = "";
     $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
@@ -48,7 +74,8 @@ echo $id_projecte;
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         $id_usuari = $row["id"];
     }
-    echo $id_usuari;
+
+
     $permissos = 'editar';
     $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
     $statement->bindParam(1,$id_projecte);
@@ -57,6 +84,7 @@ echo $id_projecte;
     $statement->execute();
 }
 
+/*
 
 if ($conn) {
     $last_id = $conn->lastInsertId(); // Obtener el ID del proyecto recién insertado
@@ -76,4 +104,5 @@ if ($conn) {
 } else {
     echo "Error: " . $sql . "<br>" . $conn->errorInfo()[2]; 
 }
+*/
 ?>

@@ -26,6 +26,7 @@ projectes, tasques i usuaris.
 
 ## Fet: 
 - Inici de sessió amb administrador i usuari
+
 - Creació de projecte i compartir un projecte amb un usuarai per la part d'administrador amb correu electronic enviant el link.
 
 - Escriure en el projecte amb la possibilitat de veure que està escribint l'altre persona (en viu)
@@ -44,6 +45,6 @@ docker-compose up -d
 ## Cosses per fer
 
 - Aplicar a cada projecte la seva pàgina de tasques
-- Afeguir la part de permissos de només lectura, edició i només comentari
+- ~~Afeguir la part de permissos de només lectura, edició i només comentari~~
 - Fer que l'administrador pugui veure en tots els projectes
 - ~~ Perfils dels usuaris~~
