@@ -1,1 +1,1 @@
-SELECT * FROM projecte.comentaris;
+SELECT * FROM projecte.tasques;
