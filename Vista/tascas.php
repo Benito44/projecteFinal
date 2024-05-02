@@ -44,49 +44,49 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
         <button type="submit">Crear tarea</button>
     </form>
 
-    <div class="column" id="todo">
+    <div class="column" id="Por hacer">
         <h2>Por hacer</h2>
         <?php
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'Por hacer') {
-            echo "<div id='task{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
         }
     }
     ?>
     </div>
 
-    <div class="column" id="progres">
+    <div class="column" id="En progres">
         <h2>En progreso</h2>
         <?php
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
-        if ($tarea['estat'] === 'En progrés') {
-            echo "<div id='task{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+        if ($tarea['estat'] === 'En progres') {
+            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
         }
     }
     ?>
     </div>
 
-    <div class="column" id="revisio">
+    <div class="column" id="En revisio">
         <h2>En revisio</h2>
         <?php
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
-        if ($tarea['estat'] === 'En revisió') {
-            echo "<div id='task{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+        if ($tarea['estat'] === 'En revisio') {
+            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
         }
     }
     ?>
     </div>
 
-    <div class="column" id="complet">
+    <div class="column" id="Completades">
         <h2>Completadas</h2>
         <?php
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'Completades') {
-            echo "<div id='task{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
         }
     }
     ?>
@@ -97,8 +97,8 @@ foreach ($tareas as $tarea) {
     // Dependiendo del estado de la tarea, decide en qué columna mostrarla
     $columnId = '';
     switch ($tarea['estat']) {
-        case 'por_hacer':
-            $columnId = 'todo';
+        case 'Por hacer':
+            $columnId = 'Por hacer';
             break;
         case 'en_progreso':
             $columnId = 'progres';
@@ -111,7 +111,7 @@ foreach ($tareas as $tarea) {
             break;
         default:
             // Por defecto, colocamos las tareas en la columna "Por hacer"
-            $columnId = 'todo';
+            $columnId = 'Por hacer';
     }
 }
 ?>

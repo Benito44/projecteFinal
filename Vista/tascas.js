@@ -19,7 +19,7 @@ $(document).ready(function(){
 
     function updateTaskStatus(taskId, newState) {
         $.ajax({
-            url: 'actualizar_tarea.php',
+            url: '../Controlador/actualizar_tarea.php',
             method: 'POST',
             data: { taskId: taskId, newState: newState }, // Pasar el nuevo estado de la tarea
             success: function(response) {
@@ -36,9 +36,10 @@ $(document).ready(function(){
         event.preventDefault(); // Evitar que el formulario se envíe de forma convencional
 
         // Obtener la descripción de la nueva tarea y el ID del proyecto
-        var newTaskName = $("#newTaskInput").val();
-        var projectId = 31; // Obtener el ID del proyecto de la URL
-
+        let newTaskName = $("#newTaskInput").val();
+        
+    let urlParams = new URLSearchParams(window.location.search);
+    let projectId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
         // Verificar que la descripción no esté vacía
         if (newTaskName.trim() !== "") {
             // Enviar una solicitud AJAX para insertar la tarea en la base de datos
@@ -51,7 +52,7 @@ $(document).ready(function(){
                     console.log("Nueva tarea creada exitosamente con ID:", response);
                     // Actualizar la interfaz de usuario si es necesario
                     var newTask = $("<div class='task' draggable='true' id='" + response + "'>" + newTaskName + "</div>");
-                    $("#todo").append(newTask);
+                    $("#Por hacer").append(newTask);
                     // Limpiar el campo de entrada
                     $("#newTaskInput").val(""); 
                 },
