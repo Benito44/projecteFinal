@@ -51,7 +51,7 @@
         <a class="nav-link" href="#">Acerca de</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Servicios</a>
+        <a class="nav-link" href="../Controlador/crear_usuari.php">crear_usuari</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
@@ -81,6 +81,13 @@
         <label for="email_compartido">email:</label><br>
         <input type="text" id="email_compartido" name="email_compartido" required><br><br>
         
+
+        <label for="permissos">Permissos:</label>
+        <select id="permissos" name="permissos">
+            <option value="editar">editar</option>
+            <option value="comentar">comentar</option>
+            <option value="visualitzar">visualitzar</option>
+        </select>
         <input type="submit" value="Compartir">
     </form>
     <div>

@@ -13,7 +13,9 @@ $connexio = connexio();
 
 // Verificar si el usuario tiene permisos para acceder al proyecto
 $proyectoId = $_GET['id']; // Obtener el ID del proyecto de la URL
+//echo $proyectoId;
 $usuarioActual = encontrarPorUsuario($_SESSION['usuario']); // Obtener el ID del usuario de la sesión
+//echo $usuarioActual;
 $sql = "SELECT * FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?";
 $statement = $connexio->prepare($sql);
 $statement->execute([$usuarioActual, $proyectoId]);
@@ -183,7 +185,7 @@ if ($row) {
         <a class="nav-link" href="./tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="../Controlador/login.php">login</a>
+        <a class="nav-link" href="#">Servicios</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
@@ -597,7 +599,7 @@ if ($row) {
       <a class="nav-link" href="./tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="../Controlador/login.php">login</a>
+        <a class="nav-link" href="../Controlador/login.php">login</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>

@@ -76,7 +76,7 @@ if (isset($_POST['email_compartido'])) {
     }
 
 
-    $permissos = 'editar';
+    $permissos = $_POST['permissos'];
     $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
     $statement->bindParam(1,$id_projecte);
     $statement->bindParam(2,$id_usuari);

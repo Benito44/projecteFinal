@@ -19,9 +19,10 @@ $statement = $connexio->prepare($sql);
 $statement->execute([$row['id']]);
 $proyectos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-if (!$proyectos) {
-    exit("Error: No se encontraron proyectos para este usuario");
-}
+
 
 include '../Vista/mostrar.projectes.vista.php'; 
+if (!$proyectos) {
+    echo ("Error: No se encontraron proyectos para este usuario");
+}
 ?>
