@@ -52,5 +52,5 @@ d.vallmanya@gmail.com 123 - Usuari
 - ~~Afeguir la part de permissos de només lectura, edició i només comentari~~
 - ~~ Fer que l'administrador pugui veure en tots els projectes~~
 - ~~ Perfils dels usuaris~~
-- Creació de usuaris per part de l'administrador
-- Calendari amb les dates de cada projecte9
+- ~~ Creació de usuaris per part de l'administrador ~~
+- ~~ Calendari amb les dates de cada projecte ~~
