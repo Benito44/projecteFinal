@@ -8,11 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             require '../Model/mainfunction.php';
             $connection = connexio();
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $id_usuario = encontrarPorUsuario($_SESSION["usuario"]);
 
-
-            $sql = "DELETE FROM calendari WHERE id = :id";
+            $sql = "DELETE FROM calendari WHERE id = :id AND usuari_id = :usuari_id";
             $statement = $connection->prepare($sql);
             $statement->bindParam(':id', $_POST["id"], PDO::PARAM_INT);
+            $statement->bindParam(':usuari_id', $id_usuario, PDO::PARAM_INT);
             $statement->execute();
 
             if ($statement->rowCount() > 0) {
