@@ -127,9 +127,8 @@ $(document).ready(function() {
         }).join(',');
         $('#correos-ocultos').val(correosOcultos);
     });
-        // Cuando se envía el formulario
-        $('#share-form').submit(function(event) {
-        // Obtener los correos electrónicos del div
+
+    $('#share-form').submit(function(event) {
         var correos = [];
         $('#emails-list li').each(function() {
             correos.push($(this).text());
@@ -138,10 +137,15 @@ $(document).ready(function() {
         // Almacenar los correos electrónicos en el campo oculto
         $('#correos-ocultos').val(correos.join(','));
 
-        // Continuar enviando el formulario
-        return true;
+        // Verificar si el campo de correos electrónicos está vacío
+        if (correos.length === 0) {
+            // Mostrar un mensaje de error o realizar alguna acción
+            alert('Por favor, agregue al menos un correo electrónico.');
+            event.preventDefault();
+        }
     });
 });
+
 
 </script>
 </body>
