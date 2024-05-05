@@ -7,7 +7,7 @@ try {
 
     $content = $_POST['content'];
     $nombre_proyecto = $_POST['nombre_proyecto'];
-
+    echo $content;
     // Actualizamos el contenido de la base de datos 
     $statement = $pdo->prepare("UPDATE projectes SET text = :content WHERE nom = :nombre_proyecto");
     $statement->bindParam(':content', $content);

@@ -50,39 +50,43 @@ $email_usuario = 'b.martinez2@sapalomera.cat';
 }
 
 
+if (isset($_POST['nombre_proyectos_compartidos']) && isset($_POST['correos_ocultos'])) {
+    $nombre_proyecto_compartido = $_POST['nombre_proyectos_compartidos'];
 
-
-
-if (isset($_POST['email_compartido'])) {
-
-    $nombre_proyecto_compartido = $_POST['nombre_proyecto_compartido'];
-
-    $id_projecte = "";
+    $id_proyecto = "";
     $statement = $conn->prepare("SELECT id FROM projectes WHERE nom = ?");
-    $statement->bindParam(1,$nombre_proyecto_compartido);
+    $statement->bindParam(1, $nombre_proyecto_compartido);
     $statement->execute();
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $id_projecte = $row["id"];
+        $id_proyecto = $row["id"];
     }
 
+    $emails_compartidos = explode(',', $_POST['correos_ocultos']);
 
-    $email_compartido = $_POST['email_compartido'];
-    $id_usuari = "";
-    $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
-    $statement->bindParam(1,$email_compartido);
-    $statement->execute();
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $id_usuari = $row["id"];
+    foreach ($emails_compartidos as $email) {
+        $email = trim($email);
+
+        $id_usuario = "";
+        $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
+        $statement->bindParam(1, $email);
+        $statement->execute();
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $id_usuario = $row["id"];
+        }
+
+        if ($id_usuario !== "") {
+            $permisos = $_POST['permisos'];
+            $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
+            $statement->bindParam(1, $id_proyecto);
+            $statement->bindParam(2, $id_usuario);
+            $statement->bindParam(3, $permisos);
+            $statement->execute();
+        }
     }
-
-
-    $permissos = $_POST['permissos'];
-    $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
-    $statement->bindParam(1,$id_projecte);
-    $statement->bindParam(2,$id_usuari);
-    $statement->bindParam(3,$permissos);
-    $statement->execute();
 }
+
+
+
 
 /*
 

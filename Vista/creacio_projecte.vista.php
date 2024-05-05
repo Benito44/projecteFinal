@@ -74,22 +74,32 @@
 
         <input type="submit" value="Crear Proyecto">
     </form>
-    <form id="second-form" action="../Controlador/crear_proyecte.php" method="post">
-        <label for="nombre_proyecto_compartido">Nombre del Proyecto:</label><br>
-        <input type="text" id="nombre_proyecto_compartido" name="nombre_proyecto_compartido" required><br><br>
-        
-        <label for="email_compartido">email:</label><br>
-        <input type="text" id="email_compartido" name="email_compartido" required><br><br>
-        
+    <form id="share-form" action="../Controlador/crear_proyecte.php" method="post">
+    <label for="nombre_proyectos_compartidos">Nombre del Proyecto:</label><br>
+    <input type="text" id="nombre_proyectos_compartidos" name="nombre_proyectos_compartidos" required><br><br>
 
-        <label for="permissos">Permissos:</label>
-        <select id="permissos" name="permissos">
-            <option value="editar">editar</option>
-            <option value="comentar">comentar</option>
-            <option value="visualitzar">visualitzar</option>
-        </select>
-        <input type="submit" value="Compartir">
-    </form>
+    <div id="emails-container">
+        <p>Correos añadidos:</p>
+        <ul id="emails-list"></ul>
+        <!-- Campo oculto para almacenar correos electrónicos -->
+        <input type="hidden" id="correos-ocultos" name="correos_ocultos">
+    </div>
+
+    <label for="emails_compartidos">Correos Electrónicos:</label><br>
+    <textarea id="emails_compartidos" name="emails_compartidos" rows="4"></textarea><br><br>
+
+    <button type="button" id="agregar-correos">Agregar Correos</button><br><br>
+
+    <label for="permisos">Permisos:</label>
+    <select id="permisos" name="permisos">
+        <option value="editar">Editar</option>
+        <option value="comentar">Comentar</option>
+        <option value="visualizar">Visualizar</option>
+    </select><br><br>
+
+    <button type="submit">Enviar Correos</button>
+</form>
+
     <div>
         <a href="../Controlador/mostrar.projectes.php" >Mostrar projectes</a>
     </div>
@@ -98,6 +108,41 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#agregar-correos').click(function() {
+        var correos = $('#emails_compartidos').val().split('\n');
 
+        // Agregar correos al div y al campo oculto
+        correos.forEach(function(correo) {
+            correo = correo.trim();
+            if (correo !== "") {
+                $('#emails-list').append('<li>' + correo + '</li>');
+            }
+        });
+
+        // Actualizar campo oculto con los correos
+        var correosOcultos = correos.filter(function(correo) {
+            return correo.trim() !== "";
+        }).join(',');
+        $('#correos-ocultos').val(correosOcultos);
+    });
+        // Cuando se envía el formulario
+        $('#share-form').submit(function(event) {
+        // Obtener los correos electrónicos del div
+        var correos = [];
+        $('#emails-list li').each(function() {
+            correos.push($(this).text());
+        });
+
+        // Almacenar los correos electrónicos en el campo oculto
+        $('#correos-ocultos').val(correos.join(','));
+
+        // Continuar enviando el formulario
+        return true;
+    });
+});
+
+</script>
 </body>
 </html>
