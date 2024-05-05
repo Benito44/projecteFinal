@@ -1,3 +1,26 @@
+<?php
+
+session_start(); // Iniciar sesión si aún no está iniciada
+
+if (!isset($_SESSION['email'])) {
+    exit("Error: No se ha iniciado sesión");
+} else {
+    $connexio = connexio(); 
+    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
+    $statement = $connexio->prepare($sql);
+    $statement->execute([$_SESSION['email']]);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+$connexio = connexio(); 
+$sql = "SELECT p.* FROM proyecto_usuario pu INNER JOIN projectes p ON pu.id_proyecto = p.id WHERE pu.id_usuario = ?";
+$statement = $connexio->prepare($sql);
+$statement->execute([$row['id']]);
+$proyectos = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$es_admin = $row['rol'] === 'admin';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,6 +81,11 @@
       <li class="nav-item">
         <a class="nav-link" href="../Vista/calendari.php">calendario</a>
       </li>
+      <?php if ($es_admin): ?>
+        <li class="nav-item">
+          <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
+        </li>
+      <?php endif; ?>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
