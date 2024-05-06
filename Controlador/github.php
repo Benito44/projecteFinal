@@ -1,11 +1,14 @@
 <?php
+
+
+ob_start(); // Start output buffering
 require '../vendor/autoload.php';
 require '../Model/mainfunction.php'; 
 
 $config = [
     'callback' => 'http://localhost/Controlador/github.php',
 
-    'keys' => ['id' => '4afd805888fe944555b4', 'secret' => '5f1bf41dab685bc91c09a51cffaae3d3dc05e074'],
+    'keys' => ['id' => 'Ov23lijKPpfqthUlYDif', 'secret' => '2d95dbbe576f6cf5b52c2f134443bf6a21525141'],
 ];
 
 try {
@@ -19,17 +22,19 @@ try {
     $email = $userProfile->email;
 
      try {
-     if (comprovarEmail($email)){
-        echo "L'email ja està registrat";
-        $error =  "L'email ja està registrat";
+      if (comprovarEmail($email)) {
+        $error = "L'email ja està registrat";
         $usuari = encontrarPorEmail($email);
-        $_SESSION['usuari'] = $usuari;
-        header('Location: index.logat.php');
-
+        $_SESSION['usuario'] = $usuari;
+        $_SESSION['email'] = $email;
+        header("Location: ./mostrar.projectes.php");
+        exit; // Ensure script stops after redirection
       }else{
         insertar_usuari_Oauth2($usuari, $email);
-        $_SESSION['usuari'] = $usuari;
-        header('Location: index.logat.php');
+        $_SESSION['usuario'] = $usuari;
+        $_SESSION['email'] = $email;
+        header("Location: ./mostrar.projectes.php");
+        exit; // Ensure script stops after redirection
       }
       }catch(Exception $e) {
         echo "Error: " . $e->getMessage();
@@ -39,4 +44,5 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage();
 }
+ob_end_flush(); // Flush the output buffer
 ?>
