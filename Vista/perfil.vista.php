@@ -117,20 +117,11 @@
     </div>
 </div>
 <script>
-            const createEventDialog = document.getElementById('createEventDialog');
-            const openCreateEventFormButton = document.getElementById('eliminarCompte');
-            const cerrar_boton = document.getElementById('closeCreateEventDialog');
 
-            openCreateEventFormButton.addEventListener('click', function() {
-                createEventDialog.showModal();
-            });
-            cerrar_boton.addEventListener('click', function() {
-                createEventDialog.close();
-            });
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="../js/perfil.js"></script>
 </body>
 </html>

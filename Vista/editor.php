@@ -213,7 +213,7 @@ if ($row) {
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
     </form>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 
 </body>
 
@@ -408,7 +408,7 @@ if ($row) {
         <input type="text" id="message-input" placeholder="Escribe un mensaje..." readonly>
         <button type="submit">Enviar</button>
     </form>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 </html>
 <?php
@@ -625,7 +625,7 @@ if ($row) {
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
     </form>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
     
 </body>
 </html>
