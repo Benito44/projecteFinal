@@ -1,9 +1,9 @@
 <?php
 
   require '../vendor/autoload.php';
-  $clientID = '212855023826-2h5jq7reovdeva6m6e6ourdlbc067c4t.apps.googleusercontent.com';
-  $clientSecret = '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';
-  $redirectUri = 'http://localhost/Backend/UF2/pt05/Controlador/controlargoogle.php';
+  $clientID = '344337029532-s0h7j1ph9le0h5gdp8thm2435k01e8ag.apps.googleusercontent.com';
+  $clientSecret = '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';
+  $redirectUri = 'http://localhost/Controlador/controlargoogle.php';
 
   // create Client Request to access Google API
   $client = new Google\Client();
