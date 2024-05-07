@@ -76,6 +76,14 @@ $(document).ready(function(){
             data: {content: content, nombre_proyecto: $('#nombre_proyecto').text().trim()},
             success: function(response){
                 console.log(response);
+                // Después de realizar la actualización del proyecto, mostrar el mensaje de actualización
+$('#actualizacion').show();
+
+// Ocultar el mensaje de actualización después de 3 segundos (3000 milisegundos)
+setTimeout(function() {
+  $('#actualizacion').hide();
+}, 3000);
+
             },
             error: function(xhr, status, error){
                 console.error(xhr.responseText);

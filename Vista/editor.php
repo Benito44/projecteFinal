@@ -4,8 +4,8 @@ session_start();
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     // Si no ha iniciado sesión, mostrar un mensaje de error
-    echo "Acceso denegado. Por favor, inicia sesión para acceder a este proyecto.";
-    exit; // Detener la ejecución del script después de mostrar el mensaje de error
+        header('Location: ./login.vista.php');
+    exit(); // Detener la ejecución del script después de mostrar el mensaje de error
 }
 
 require '../Model/mainfunction.php';
@@ -200,6 +200,10 @@ if ($row) {
     <form id="editorForm">
         <button type="submit">Enviar</button>
     </form>
+    <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
+  El proyecto se ha actualizado.
+</div>
+
             <a href="../Controlador/login.php" target="_blank">Login</a>
     
 

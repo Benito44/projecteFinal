@@ -4,7 +4,7 @@ require '../Model/mainfunction.php';
 
 function verificarCredenciales($email, $password) {
     $conn = connexio();
-    // Sel·leccionar els usuaris corresponents a l'email
+    // Selección de los usuarios correspondientes al email
     $query = "SELECT * FROM usuaris WHERE email = :email";
     $statement = $conn->prepare($query);
     $statement->bindParam(':email', $email);
@@ -34,8 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $_SESSION['email'] = $email;
             $_SESSION['usuario'] = encontrarPorEmail($email);
-            header("Location: ./mostrar.projectes.php");
-            exit();
+            // Redirigir al proyecto si se proporciona un ID de proyecto válido
+            if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                $proyectoId = $_GET['id'];
+                header("Location: ./editor.php?id=$proyectoId");
+                exit();
+            } else {
+                header("Location: ./mostrar.projectes.php");
+                exit();
+            }
         }
     } else {
         echo "Credenciales incorrectas";

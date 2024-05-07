@@ -81,32 +81,24 @@ if (isset($_POST['nombre_proyectos_compartidos']) && isset($_POST['correos_ocult
             $statement->bindParam(2, $id_usuario);
             $statement->bindParam(3, $permisos);
             $statement->execute();
+        } else {
+            echo "Error:";
         }
+        $last_id = $id_proyecto;
+
+        $link_proyecto = "http://localhost/Vista/editor.php?id=" . $last_id;
+    
+        $usuari = encontrarPorEmail($email); 
+    
+        $text = 'Hola ' . $usuari . ',<br><br>';
+        $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';
+        $text .= '<a href="' . $link_proyecto . '">' . $link_proyecto . '</a>';
+        
+        // Enviar el correo electrónico
+        phphmailer($usuari, $email, $text);
+    
+        echo "El proyecto se ha creado y compartido correctamente.";
     }
 }
 
-
-
-
-/*
-
-if ($conn) {
-    $last_id = $conn->lastInsertId(); // Obtener el ID del proyecto recién insertado
-
-    $link_proyecto = "http://localhost/projecteFinal/editor.php?id=" . $last_id;
-
-    $usuari = encontrarPorEmail($email_usuario); 
-
-    $text = 'Hola ' . $usuari . ',<br><br>';
-    $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';
-    $text .= '<a href="' . $link_proyecto . '">' . $link_proyecto . '</a>';
-    
-    // Enviar el correo electrónico
-    phphmailer($usuari, $email_usuario, $text);
-
-    echo "El proyecto se ha creado y compartido correctamente.";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->errorInfo()[2]; 
-}
-*/
 ?>

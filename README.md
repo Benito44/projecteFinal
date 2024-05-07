@@ -25,32 +25,86 @@ Es farà ús d'una base de dades relacional com MySQL per emmagatzemar la inform
 projectes, tasques i usuaris.
 
 ## Fet: 
-- Inici de sessió amb administrador i usuari
 
-- Creació de projecte i compartir un projecte amb un usuarai per la part d'administrador amb correu electronic enviant el link.
-
-- Escriure en el projecte amb la possibilitat de veure que està escribint l'altre persona (en viu)
-
-- Xat en viu on és mostra l'usuari que està enviant missatges
-
-- Guardar totes aquestes dades en la base de dades (comentaris, contingut del projecte, usuaris compartits en el projecte...)
-
-- Tasques on pots crear o moure en els diferents apartats
-
-- Una vegada inicies la sessió amb un usuari normal, no admin, és mostraran els teus projectes personals i si intentes entrar en un projecte on no ets propietari o no tens permissos és mostrarà un altre pantalla d'error
-
-- Desplegament del projecte amb docker 
-docker build . -t proj-final
-docker-compose up -d
+### Login
+- Inici de sessió normal i per Google i Github
 
 - Usuaris per probar
 b.martinez2@sapalomera.cat 1234 - Admin
 d.vallmanya@gmail.com 123 - Usuari
-## Cosses per fer
+### Crear Usuaris
+- Per part de l'administrador crear usuaris i assignar-li el seu rol (Admin o Usuari)
 
-- ~~Aplicar a cada projecte la seva pàgina de tasques~~
-- ~~Afeguir la part de permissos de només lectura, edició i només comentari~~
-- ~~ Fer que l'administrador pugui veure en tots els projectes~~
-- ~~ Perfils dels usuaris~~
-- ~~ Creació de usuaris per part de l'administrador ~~
-- ~~ Calendari amb les dates de cada projecte ~~
+
+### Crear Projecte
+- Creació de projecte i compartir un projecte amb varis usuaris a la vegada  per la part d'administrador amb correu electronic enviant el link a tots els usuaris.
+
+- Al compartir poder possar permissos específics (Edició total, només comentar o Visualitzar)
+### Mostrar Projecte
+- Mostrar els projectes de cada propi usuari, l'administrador té permissos totals 
+### Calendari
+- Calendari per mostrar events dels usuaris
+
+- Eliminar nomès el nostre event sense possibilitat d'eliminar altres que no siguin nostres
+### Tascas d'usuaris
+- Tasques on pots crear o moure en els diferents apartats
+
+- Actulitzar en la base de dades en el moment que és canvia una tasca de lloc
+### Projecte
+- Escriure en el projecte amb la possibilitat de veure que està escribint l'altre persona (en viu)
+
+- Xat en viu on és mostra l'usuari que està enviant missatges
+
+- Aplicar a cada projecte la seva pàgina de tasques
+
+- Guardar totes aquestes dades en la base de dades (comentaris, contingut del projecte, usuaris compartits en el projecte...)
+
+- Mostrar per pantalla quanes guarden les dades
+
+- Una vegada inicies la sessió amb un usuari normal, no admin, és mostraran els teus projectes personals i si intentes entrar en un projecte on no ets propietari o no tens permissos és mostrarà un altre pantalla d'error
+### Perfil
+- Poder canviar el teu nom , email, contrasenya o eliminar el teu usuari
+### Desplegament
+- Desplegament del projecte amb docker 
+    - docker build . -t proj-final
+    - docker-compose up -d
+
+## Cosses per fer
+- Menu perfecto 
+- Boton de cerrar session !!
+# Mostrar  projectos 
+Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega, los usuarios con sus permissos
+Boton de cerrar session !!
+# Perfil 
+Estilos y mensaje si estas seguro de que quieres eliminar la cuenta (Contraseña)
+Poner una imagen
+Boton de cerrar session !!
+# Login
+Boton de cerrar session !!
+Estilos, Textos incorrectos, Recuperar Contrasenya y quitar registro
+Encriptar contraseña
+# Candelario
+Mejorar el calendario con estilos y posicionamiento
+Cambiar el idioma
+Poner color a los eventos
+¿¿ Enviar email cuando pase el evento  ??
+Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover 
+Poner el menu
+Boton de cerrar session !!
+# Crear Projecto 
+Mejorar el formulario de permisos
+Mejorar el email que se manda al compartir
+Boton de cerrar session !!
+# Tareas
+Dar acceso a las tareas desde cualquier projecto (comentar i visualizar)
+Estilos
+Implementar eliminar tareas (simple)
+Que se muestren las tareas cuando las creas sin tener que actualizar
+Boton de cerrar session !!
+# Projecto
+Eliminar boton de enviar, link de login i que el administrador pueda eliminar projectos
+Poner el texto del projecto en vertical
+Poner el chat en pequeño en una esquina, hacer que si se envia un mensaje cuando esta lleno que vaya directo al mensaje
+Mostrar los usuarios que tienen permisos en el projecto por la imagen 
+Boton de cerrar session !!
+Mostrar les tasques que estiguin en progrès per part de l'usuari i per part de l'administrador que es mostrin les tasques en progrès i per revisar
