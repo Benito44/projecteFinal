@@ -11,7 +11,7 @@ function verificarCredenciales($email, $password) {
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);
     if ($user) {
-        if ($password == $user['contrasenya']) {
+        if (password_verify($password,$user["contrasenya"])) {
             return $user['rol'];
         }
     }

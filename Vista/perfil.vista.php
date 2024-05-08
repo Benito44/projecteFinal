@@ -64,6 +64,20 @@
   </div>
 </nav>
 <div>
+          <!-- Mostrar la imagen de perfil del usuario -->
+          <div style="position: absolute; top: 20px; right: 20px;">
+            <?php
+            // Obtener la imagen de perfil del usuario
+            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+            if($imagen_perfil) {
+                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
+            } else {
+                // Si no hay imagen de perfil, mostrar una imagen por defecto
+                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
+            }
+            ?>
+        </div>
+
     <div name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Perfil
@@ -83,7 +97,15 @@
                 </form>
                 </div>
             </div>
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                <form action="../Controlador/perfil.php" id="form" method="post" enctype="multipart/form-data">
+                  Imagen de perfil: <input type="file" name="imagen"><br><br>
+                  <input type="submit" value="Guardar cambios">
+              </form>
 
+                </div>
+            </div>
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                 <form action="../Controlador/perfil.php" id="form2" method="post">

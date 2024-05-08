@@ -80,9 +80,8 @@ Estilos y mensaje si estas seguro de que quieres eliminar la cuenta (Contraseña
 Poner una imagen
 Boton de cerrar session !!
 # Login
-Boton de cerrar session !!
-Estilos, Textos incorrectos, Recuperar Contrasenya y quitar registro
-Encriptar contraseña
+Estilos, Textos incorrectos, Recuperar Contrasenya y ~~quitar registro~~
+~~Encriptar contraseña~~
 # Candelario
 Mejorar el calendario con estilos y posicionamiento
 Cambiar el idioma

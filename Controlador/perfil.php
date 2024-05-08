@@ -2,6 +2,23 @@
 session_start(); // Iniciar la sesión
 require '../Model/mainfunction.php';
 $connexio = connexio();    
+function obtenerImagenPerfil($email) {
+    $connexio = connexio();
+    
+    $statement = $connexio->prepare("SELECT imatge FROM usuaris WHERE email = ?");
+    $statement->bindParam(1, $email);
+    $statement->execute();
+    
+    $resultado = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    // Verificar si se encontró la imagen de perfil
+    if ($resultado && isset($resultado['imatge']) && !empty($resultado['imatge'])) {
+        return $resultado['imatge'];
+    } else {
+        return null;
+    }
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
 
@@ -36,7 +53,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
 
  
 
- } elseif ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+ }  elseif(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    $imagen_tmp = $_FILES['imagen']['tmp_name'];
+    $nombre_imagen = $_FILES['imagen']['name'];
+    
+    // Mueve la imagen a una carpeta en el servidor
+    // Verifica si la carpeta 'uploads' existe, si no, créala
+$carpeta_destino = '../uploads/';
+if (!file_exists($carpeta_destino)) {
+    if (!mkdir($carpeta_destino, 0777, true)) { // Intenta crear la carpeta con permisos de escritura
+        die('Error al crear la carpeta de destino');
+    }
+}
+
+    $ruta_imagen = '../uploads/' . $nombre_imagen;
+    move_uploaded_file($imagen_tmp, $ruta_imagen);
+    
+    // Actualiza la ruta de la imagen en la base de datos
+    $connexio = connexio();
+    $statement = $connexio->prepare("UPDATE usuaris SET imatge=? WHERE email= ?");
+    $statement->bindParam(1, $ruta_imagen);
+    $statement->bindParam(2, $_SESSION['email']);
+    $statement->execute();
+} elseif ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 
     $nom_canviat = $_POST['usuario'];
