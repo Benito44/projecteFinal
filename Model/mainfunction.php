@@ -74,7 +74,7 @@ function obtenerNombreProyecto($id) {
 function connexio(){
     $dbname = 'projecte';
     $username = 'root';
-    $password = 'cohesio';
+    $password = 'final';
     $connexio = new PDO("mysql:host=db;dbname=$dbname", $username, $password);
     return $connexio;
 }
