@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Iniciar sesión si aún no está iniciada
 
 if (!isset($_SESSION['email'])) {
@@ -47,7 +46,7 @@ $es_admin = $row['rol'] === 'admin';
     li {
       margin-bottom: 10px;
     }
-    li a {
+    li button {
       text-decoration: none;
       color: #333;
       display: block;
@@ -55,9 +54,15 @@ $es_admin = $row['rol'] === 'admin';
       border: 1px solid #ccc;
       border-radius: 5px;
       transition: background-color 0.3s ease;
+      cursor: pointer;
     }
-    li a:hover {
+    li button:hover {
       background-color: #f0f0f0;
+    }
+    dialog {
+      border: none;
+      padding: 10px;
+      margin: 0;
     }
   </style>
 
@@ -65,57 +70,63 @@ $es_admin = $row['rol'] === 'admin';
 <body>    
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Mi Sitio Web</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+      <a class="navbar-brand" href="#">Mi Sitio Web</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Acerca de</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Vista/calendari.php">calendario</a>
-      </li>
-      <?php if ($es_admin): ?>
-        <li class="nav-item">
-          <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
-        </li>
-      <?php endif; ?>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
-      </li>
-      <div style="position: absolute; top: 20px; right: 20px;">
-            <?php
-            // Obtener la imagen de perfil del usuario
-            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
-            if($imagen_perfil) {
-                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
-            } else {
-                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
-            }
-            ?>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Acerca de</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Vista/calendari.php">calendario</a>
+          </li>
+          <?php if ($es_admin): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
+            </li>
+          <?php endif; ?>
+          <li class="nav-item">
+            <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <h1>Lista de Proyectos</h1>
+    <ul>
+        <?php foreach($proyectos as $proyecto): ?>
+          <li>
+            <button id="<?php echo $proyecto['id']; ?>">
+              <?php echo $proyecto['nom']; ?>
+            </button>
+          </li>
+          <dialog id="dialog_<?php echo $proyecto['id']; ?>">
+            <li>
+              <a href="http://localhost/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
+                <?php echo $proyecto['nom']; ?>
+              </a>
+            </li>
+          </dialog>
+        <?php endforeach; ?>
     </ul>
-  </div>
-</nav>
-<h1>Lista de Proyectos</h1>
 
-<ul>
+    <script>
     <?php foreach($proyectos as $proyecto): ?>
-        <li><a href="http://localhost/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
-          <?php echo $proyecto['nom']; ?>
-          <?php echo $proyecto['descripcio']; ?>
-          <?php echo $proyecto['data_fi']; ?>
-        </a></li>
+      const button_<?php echo $proyecto['id']; ?> = document.getElementById('<?php echo $proyecto['id']; ?>');
+      const dialog_<?php echo $proyecto['id']; ?> = document.getElementById('dialog_<?php echo $proyecto['id']; ?>');
+
+      button_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
+          dialog_<?php echo $proyecto['id']; ?>.showModal();
+      });
     <?php endforeach; ?>
-</ul>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

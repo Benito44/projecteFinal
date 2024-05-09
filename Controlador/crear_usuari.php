@@ -1,8 +1,8 @@
 <?php
 session_start();
-
-include '../Vista/crear_usuari.php';
 require '../Model/mainfunction.php';
+include '../Vista/crear_usuari.php';
+
 
 if (isset($_POST['usuari']) && isset($_POST['email'])) {
 $conn = connexio();

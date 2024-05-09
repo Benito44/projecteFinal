@@ -2,23 +2,6 @@
 session_start(); // Iniciar la sesión
 require '../Model/mainfunction.php';
 $connexio = connexio();    
-function obtenerImagenPerfil($email) {
-    $connexio = connexio();
-    
-    $statement = $connexio->prepare("SELECT imatge FROM usuaris WHERE email = ?");
-    $statement->bindParam(1, $email);
-    $statement->execute();
-    
-    $resultado = $statement->fetch(PDO::FETCH_ASSOC);
-    
-    // Verificar si se encontró la imagen de perfil
-    if ($resultado && isset($resultado['imatge']) && !empty($resultado['imatge'])) {
-        return $resultado['imatge'];
-    } else {
-        return null;
-    }
-}
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
 

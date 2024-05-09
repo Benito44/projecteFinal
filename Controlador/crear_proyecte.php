@@ -1,9 +1,9 @@
 <?php
 
 session_start(); // Iniciar sesión si aún no está iniciada
-include '../Vista/creacio_projecte.vista.php';
-include '../Model/mainfunction.php';
 
+require '../Model/mainfunction.php';
+include '../Vista/creacio_projecte.vista.php';
 $conn = connexio();
 
 
