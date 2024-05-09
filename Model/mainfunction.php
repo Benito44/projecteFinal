@@ -183,6 +183,23 @@ function insertar_usuari_Oauth2($usuari, $email){
     $statement->bindParam(2, $email);
     $statement->execute();
 }
+function obtenerImagenPerfil($email) {
+    $connexio = connexio();
+    
+    $statement = $connexio->prepare("SELECT imatge FROM usuaris WHERE email = ?");
+    $statement->bindParam(1, $email);
+    $statement->execute();
+    
+    $resultado = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    // Verificar si se encontró la imagen de perfil
+    if ($resultado && isset($resultado['imatge']) && !empty($resultado['imatge'])) {
+        return $resultado['imatge'];
+    } else {
+        return null;
+    }
+}
+
 /**
  * comprovarEmail
  * Retornem l'email de l'usuari de la base de dades

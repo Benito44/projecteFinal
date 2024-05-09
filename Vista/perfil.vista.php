@@ -64,7 +64,6 @@
   </div>
 </nav>
 <div>
-          <!-- Mostrar la imagen de perfil del usuario -->
           <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario
@@ -72,7 +71,6 @@
             if($imagen_perfil) {
                 echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
             } else {
-                // Si no hay imagen de perfil, mostrar una imagen por defecto
                 echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
             }
             ?>

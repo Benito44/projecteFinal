@@ -53,6 +53,17 @@
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
+      <div style="position: absolute; top: 20px; right: 20px;">
+            <?php
+            // Obtener la imagen de perfil del usuario
+            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+            if($imagen_perfil) {
+                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
+            } else {
+                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
+            }
+            ?>
+        </div>
     </ul>
   </div>
 </nav>

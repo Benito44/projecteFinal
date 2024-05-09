@@ -75,6 +75,8 @@ if (!file_exists($carpeta_destino)) {
     $statement->bindParam(1, $ruta_imagen);
     $statement->bindParam(2, $_SESSION['email']);
     $statement->execute();
+
+    include '../Vista/perfil.vista.php';
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 

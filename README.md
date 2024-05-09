@@ -74,10 +74,11 @@ d.vallmanya@gmail.com 123 - Usuari
 - Boton de cerrar session !!
 # Mostrar  projectos 
 Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega, los usuarios con sus permissos
+Poner una imagen
 Boton de cerrar session !!
 # Perfil 
 Estilos y mensaje si estas seguro de que quieres eliminar la cuenta (Contraseña)
-Poner una imagen
+~~Poner una imagen i cambiar la imagen~~
 Boton de cerrar session !!
 # Login
 Estilos, Textos incorrectos, Recuperar Contrasenya y ~~quitar registro~~
@@ -89,13 +90,16 @@ Poner color a los eventos
 ¿¿ Enviar email cuando pase el evento  ??
 Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover 
 Poner el menu
+Poner una imagen
 Boton de cerrar session !!
 # Crear Projecto 
 Mejorar el formulario de permisos
+Poner una imagen
 Mejorar el email que se manda al compartir
 Boton de cerrar session !!
 # Tareas
 Dar acceso a las tareas desde cualquier projecto (comentar i visualizar)
+Poner una imagen
 Estilos
 Implementar eliminar tareas (simple)
 Que se muestren las tareas cuando las creas sin tener que actualizar
@@ -107,3 +111,4 @@ Poner el chat en pequeño en una esquina, hacer que si se envia un mensaje cuand
 Mostrar los usuarios que tienen permisos en el projecto por la imagen 
 Boton de cerrar session !!
 Mostrar les tasques que estiguin en progrès per part de l'usuari i per part de l'administrador que es mostrin les tasques en progrès i per revisar
+Poner una imagen
