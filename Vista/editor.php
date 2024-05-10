@@ -206,7 +206,7 @@ if ($row) {
 </nav>
     <h1 id="nombre_proyecto"></h1>
     <a href="./tascas.php?id=<?php echo $proyectoId; ?>">Ver tareas</a>
-
+    <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     <textarea id="editor" rows="10" cols="50"></textarea>
     <form id="editorForm">
         <button type="submit">Enviar</button>
@@ -668,8 +668,7 @@ if ($row) {
 </html>
 <?php
     }
-    
-
+  
 } else {
     // El usuario no tiene permisos, mostrar un mensaje de acceso denegado
     echo 'No tienes permisos';

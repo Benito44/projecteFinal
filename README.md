@@ -69,15 +69,21 @@ d.vallmanya@gmail.com 123 - Usuari
     - docker build . -t proj-final
     - docker-compose up -d
 
+
+
+
+
+
 ## Cosses per fer
 - Menu perfecto 
 - Boton de cerrar session !!
 # Mostrar  projectos 
-Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega, los usuarios con sus permissos
+Cambiar la vista a card por projecto
+~~Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega,~~ los usuarios con sus permissos
 ~~Poner una imagen~~
 Boton de cerrar session !!
 # Perfil 
-Estilos y mensaje si estas seguro de que quieres eliminar la cuenta (Contraseña)
+~~Estilos y mensaje si estas seguro de que quieres eliminar la cuenta (Contraseña)~~
 ~~Poner una imagen i cambiar la imagen~~
 Boton de cerrar session !!
 # Login

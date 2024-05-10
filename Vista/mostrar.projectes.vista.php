@@ -28,6 +28,18 @@ $es_admin = $row['rol'] === 'admin';
     <title>Lista de Proyectos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <style>
+              .dialeg {
+            position: absolute;
+            margin: 0;
+            padding: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32.5rem;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
+        }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -68,7 +80,6 @@ $es_admin = $row['rol'] === 'admin';
 
 </head>
 <body>    
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Mi Sitio Web</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,12 +116,16 @@ $es_admin = $row['rol'] === 'admin';
               <?php echo $proyecto['nom']; ?>
             </button>
           </li>
-          <dialog id="dialog_<?php echo $proyecto['id']; ?>">
+          <dialog id="dialog_<?php echo $proyecto['id']; ?>" class="dialeg">
             <li>
+            Nom: 
               <a href="http://localhost/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
-                <?php echo $proyecto['nom']; ?>
+              <?php echo $proyecto['nom']; ?><br>
               </a>
+              Descripció de projecte: <?php echo $proyecto['descripcio']; ?><br><br>
+              Data de finalització: <?php echo $proyecto['data_fi']; ?><br>
             </li>
+            <button id="tancar_<?php echo $proyecto['id']; ?>">Cerrar</button>
           </dialog>
         <?php endforeach; ?>
     </ul>
@@ -119,9 +134,13 @@ $es_admin = $row['rol'] === 'admin';
     <?php foreach($proyectos as $proyecto): ?>
       const button_<?php echo $proyecto['id']; ?> = document.getElementById('<?php echo $proyecto['id']; ?>');
       const dialog_<?php echo $proyecto['id']; ?> = document.getElementById('dialog_<?php echo $proyecto['id']; ?>');
+      const tancar_<?php echo $proyecto['id']; ?> = document.getElementById('tancar_<?php echo $proyecto['id']; ?>');
 
       button_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
           dialog_<?php echo $proyecto['id']; ?>.showModal();
+      });
+      tancar_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
+          dialog_<?php echo $proyecto['id']; ?>.close();
       });
     <?php endforeach; ?>
     </script>

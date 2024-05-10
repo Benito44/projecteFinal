@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $_SESSION['email'] = $email;
             $_SESSION['usuario'] = encontrarPorEmail($email);
-            // Redirigir al proyecto si se proporciona un ID de proyecto válido
             if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 $proyectoId = $_GET['id'];
                 header("Location: ./editor.php?id=$proyectoId");

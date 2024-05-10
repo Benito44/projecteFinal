@@ -37,11 +37,23 @@
     li a:hover {
       background-color: #f0f0f0;
     }
+    .dialeg {
+            position: absolute;
+            margin: 0;
+            padding: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32.5rem;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Mi Sitio Web</a>
+  <a class="navbar-brand" href="../Controlador/mostrar.projectes.php">Mi Sitio Web</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -126,9 +138,10 @@
                 </div>
             </div>
             <dialog id="createEventDialog" class="dialeg">
+              <p>Estas segur que vols eliminar permanentment el teu compte?</p>
                 <form action="../Controlador/perfil.php" id="form2" method="post">
-                    Email
-                    <input type="email" name="email_eliminar" id="email_eliminar"><br><br>
+                    Contrasenya
+                    <input type="password" name="contrasenya_eliminar" id="contrasenya_eliminar"><br><br>
                     <input type="submit" value="Login">
                 </form>
                     <button id="closeCreateEventDialog">Cerrar</button>
@@ -136,12 +149,10 @@
         </div>
     </div>
 </div>
-<script>
 
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/perfil.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../js/perfil.js"></script>
 </body>
 </html>
