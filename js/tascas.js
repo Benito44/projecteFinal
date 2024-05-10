@@ -1,8 +1,15 @@
 $(document).ready(function(){
-    $(".task").draggable({
-        revert: "invalid",
-        containment: "document",
-        helper: "clone",
+    // Función para hacer que los elementos sean draggable
+    function makeTaskDraggable(task) {
+        task.draggable({
+            revert: "invalid",
+            containment: "document",
+            helper: "clone",
+        });
+    }
+
+    $(".task").each(function() {
+        makeTaskDraggable($(this));
     });
 
     $(".column").droppable({
@@ -30,18 +37,32 @@ $(document).ready(function(){
             }
         });
     }
+    $(document).on('click', '.deleteTaskBtn', function() {
+        let taskId = $(this).data('task-id');
     
-
+        // Envía una solicitud AJAX para eliminar la tarea
+        $.ajax({
+            url: '../Controlador/eliminar_tarea.php',
+            method: 'POST',
+            data: { taskId: taskId },
+            success: function(response) {
+                console.log("Tarea eliminada exitosamente:", response);
+                // Recargar la página para reflejar los cambios
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al eliminar la tarea:", taskId);
+            }
+        });
+    });
+    
     $('#newTaskForm').submit(function(event) {
-        event.preventDefault(); // Evitar que el formulario se envíe de forma convencional
-    
-        // Obtener la descripción de la nueva tarea y el ID del proyecto
+        event.preventDefault();
         let newTaskName = $("#newTaskInput").val();
         
         let urlParams = new URLSearchParams(window.location.search);
-        let projectId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
-    
-        // Verificar que la descripción no esté vacía
+        let projectId = urlParams.get('id');
+
         if (newTaskName.trim() !== "") {
             // Enviar una solicitud AJAX para insertar la tarea en la base de datos
             $.ajax({
@@ -49,22 +70,10 @@ $(document).ready(function(){
                 method: 'POST',
                 data: { taskName: newTaskName, projectId: projectId },
                 success: function(response) {
-                    // Tarea creada exitosamente
                     console.log("Nueva tarea creada exitosamente con ID:", response);
-                    // Actualizar la interfaz de usuario si es necesario
-                    var newTask = $("<div class='task' draggable='true' id='" + response + "'>" + newTaskName + "</div>");
-                    $("#Por hacer").append(newTask); // Añadir la nueva tarea al área "Por hacer"
-                    // Limpiar el campo de entrada
-                    $("#newTaskInput").val(""); 
-    
-                    // Actualizar el estado de la tarea en la base de datos
-                    updateTaskStatus(response, "Por hacer");
-    
-                    // Agregar la siguiente línea para hacer que la tarea sea draggable después de ser creada
-                    newTask.draggable({ revert: "invalid", containment: "document", helper: "clone" });
+                    location.reload(); // Recargar la página para reflejar los cambios
                 },
                 error: function(xhr, status, error) {
-                    // Error al crear la tarea
                     console.error("Error al crear la nueva tarea:", error);
                 }
             });
@@ -73,5 +82,4 @@ $(document).ready(function(){
             alert("Por favor ingrese una descripción para la tarea.");
         }
     });
-        
 });

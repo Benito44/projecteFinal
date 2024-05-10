@@ -107,8 +107,8 @@ Boton de cerrar session !!
 Dar acceso a las tareas desde cualquier projecto (comentar i visualizar)
 ~~Poner una imagen~~
 Estilos
-Implementar eliminar tareas (simple)
-Que se muestren las tareas cuando las creas sin tener que actualizar
+~~Implementar eliminar tareas (simple)~~
+~~Que se muestren las tareas cuando las creas sin tener que actualizar~~
 Boton de cerrar session !!
 # Projecto
 Eliminar boton de enviar, link de login i que el administrador pueda eliminar projectos

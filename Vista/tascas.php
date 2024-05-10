@@ -110,7 +110,10 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'Por hacer') {
-            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+                echo "<div id='{$tarea['id']}' class='task' draggable='true'>
+            <span>{$tarea['descripcio']}</span>
+            <button class='deleteTaskBtn' data-task-id='{$tarea['id']}'>&times;</button>
+          </div>";
         }
     }
     ?>
@@ -122,7 +125,10 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'En progres') {
-            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+                echo "<div id='{$tarea['id']}' class='task' draggable='true'>
+            <span>{$tarea['descripcio']}</span>
+            <button class='deleteTaskBtn' data-task-id='{$tarea['id']}'>&times;</button>
+          </div>";
         }
     }
     ?>
@@ -134,7 +140,10 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'En revisio') {
-            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+                echo "<div id='{$tarea['id']}' class='task' draggable='true'>
+            <span>{$tarea['descripcio']}</span>
+            <button class='deleteTaskBtn' data-task-id='{$tarea['id']}'>&times;</button>
+          </div>";
         }
     }
     ?>
@@ -146,7 +155,10 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     // Iterar sobre las tareas y mostrarlas en la columna "Completadas"
     foreach ($tareas as $tarea) {
         if ($tarea['estat'] === 'Completades') {
-            echo "<div id='{$tarea['id']}' class='task' draggable='true'>{$tarea['descripcio']}</div>";
+                echo "<div id='{$tarea['id']}' class='task' draggable='true'>
+            <span>{$tarea['descripcio']}</span>
+            <button class='deleteTaskBtn' data-task-id='{$tarea['id']}'>&times;</button>
+          </div>";
         }
     }
     ?>
