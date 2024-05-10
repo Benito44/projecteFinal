@@ -34,12 +34,13 @@ $(document).ready(function(){
 
     $('#newTaskForm').submit(function(event) {
         event.preventDefault(); // Evitar que el formulario se envíe de forma convencional
-
+    
         // Obtener la descripción de la nueva tarea y el ID del proyecto
         let newTaskName = $("#newTaskInput").val();
         
-    let urlParams = new URLSearchParams(window.location.search);
-    let projectId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+        let urlParams = new URLSearchParams(window.location.search);
+        let projectId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
+    
         // Verificar que la descripción no esté vacía
         if (newTaskName.trim() !== "") {
             // Enviar una solicitud AJAX para insertar la tarea en la base de datos
@@ -52,9 +53,15 @@ $(document).ready(function(){
                     console.log("Nueva tarea creada exitosamente con ID:", response);
                     // Actualizar la interfaz de usuario si es necesario
                     var newTask = $("<div class='task' draggable='true' id='" + response + "'>" + newTaskName + "</div>");
-                    $("#Por hacer").append(newTask);
+                    $("#Por hacer").append(newTask); // Añadir la nueva tarea al área "Por hacer"
                     // Limpiar el campo de entrada
                     $("#newTaskInput").val(""); 
+    
+                    // Actualizar el estado de la tarea en la base de datos
+                    updateTaskStatus(response, "Por hacer");
+    
+                    // Agregar la siguiente línea para hacer que la tarea sea draggable después de ser creada
+                    newTask.draggable({ revert: "invalid", containment: "document", helper: "clone" });
                 },
                 error: function(xhr, status, error) {
                     // Error al crear la tarea
@@ -66,4 +73,5 @@ $(document).ready(function(){
             alert("Por favor ingrese una descripción para la tarea.");
         }
     });
+        
 });

@@ -90,11 +90,11 @@ Boton de cerrar session !!
 Estilos, Textos incorrectos, Recuperar Contrasenya y ~~quitar registro~~
 ~~Encriptar contraseña~~
 # Candelario
-Mejorar el calendario con estilos y posicionamiento
-Cambiar el idioma
+Mejorar el calendario con estilos y ~~posicionamiento~~
+~~Cambiar el idioma~~
 Poner color a los eventos
 ¿¿ Enviar email cuando pase el evento  ??
-Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover 
+~~Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover ~~
 Poner el menu
 ~~Poner una imagen~~
 Boton de cerrar session !!

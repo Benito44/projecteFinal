@@ -14,25 +14,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Establecer el valor del campo oculto eventIdToDelete
     $('#eventIdToDelete').val(info.event.id);
     
-    }
+    },
+    headerToolbar: {
+      left: 'prev,today,next',
+      center: 'title',
+      right: 'dayGridDay,dayGridMonth,dayGridWeek,dayGridYear'
+    },
+    locale: 'es',
   });
   calendar.render();
 
   $('#saveEvent').click(function() {
-  var formData = $('#eventForm').serialize(); // Obtener datos del formulario
-  $.ajax({
-    url: '../Controlador/guardar_evento.php', 
-    type: 'POST',
-    data: formData,
-    success: function(response) {
-      console.log(response); 
-      $('#exampleModal').modal('hide'); 
-    },
-    error: function(xhr, status, error) {
-      console.error(xhr.responseText); 
-    }
+    var formData = $('#eventForm').serialize(); // Obtener datos del formulario
+    $.ajax({
+      url: '../Controlador/guardar_evento.php', 
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+        console.log(response); 
+        $('#exampleModal').modal('hide'); 
+  
+        // Después de guardar el evento, recargar los eventos en el calendario
+        calendar.refetchEvents();
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText); 
+      }
+    });
   });
-});
+  
 $('#deleteEvent').click(function() {
   // Obtener el ID del evento a eliminar
   var eventId = $('#eventIdToDelete').val();

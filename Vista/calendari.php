@@ -23,12 +23,14 @@
             }
             ?>
         </div>
-  <div id='calendar'></div>
 
-  <!-- Botón para abrir el modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Agregar Evento
-  </button>
+        <div id='calendar'>        
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Agregar Evento
+          </button>
+        </div>
+
+
 
   <!-- Modal para ingresar nuevo evento -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
