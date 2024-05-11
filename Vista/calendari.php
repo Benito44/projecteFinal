@@ -10,6 +10,8 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../js/calendari.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -86,6 +88,14 @@
               <label for="end">Fecha de fin</label>
               <input type="datetime-local" class="form-control" id="end" name="end">
             </div>
+            <div class="form-group">
+              <label for="color">Color:</label>
+              <input type="color" name="color" id="color" required><br>
+            </div>
+            <div class="form-group">
+              <label for="desc">Descripcion:</label>
+              <input type="text" name="desc" id="desc"><br>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -109,6 +119,7 @@
         <div class="modal-body">
           <p id="eventStart"></p>
           <p id="eventEnd"></p>
+          <p id="eventDesc"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -118,6 +129,5 @@
     </div>
   </div>
   <input type="hidden" id="eventIdToDelete">
-  <script src="../js/calendari.js"></script>
 </body>
 </html>

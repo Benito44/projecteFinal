@@ -87,19 +87,19 @@ Boton de cerrar session !!
 ~~Poner una imagen i cambiar la imagen~~
 Boton de cerrar session !!
 # Login
-Estilos, Textos incorrectos, Recuperar Contrasenya y ~~quitar registro~~
+Estilos,  ~~Textos incorrectos ~~, ~~Recuperar Contrasenya y ~~ ~~quitar registro~~
 ~~Encriptar contraseña~~
 # Candelario
 Mejorar el calendario con estilos y ~~posicionamiento~~
 ~~Cambiar el idioma~~
-Poner color a los eventos
+Poner color a los eventos y descripcion
 ¿¿ Enviar email cuando pase el evento  ??
 ~~Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover ~~
 Poner el menu
 ~~Poner una imagen~~
 Boton de cerrar session !!
 # Crear Projecto 
-Mejorar el formulario de permisos
+~~Mejorar el formulario de permisos~~
 ~~Poner una imagen~~
 Mejorar el email que se manda al compartir
 Boton de cerrar session !!

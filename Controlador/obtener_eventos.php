@@ -6,7 +6,7 @@ require '../Model/mainfunction.php';
 $connection = connexio();
 
 try {
-    $statement = $connection->query("SELECT id, titol, inici, final FROM calendari");
+    $statement = $connection->query("SELECT id, titol, inici, final, descripcio, color FROM calendari");
 
     $events = array();
 
@@ -15,7 +15,9 @@ try {
             'id' => $row['id'], 
             'title' => $row['titol'],
             'start' => date('Y-m-d\TH:i:s', strtotime($row['inici'])),
-            'end' => date('Y-m-d\TH:i:s', strtotime($row['final']))
+            'end' => date('Y-m-d\TH:i:s', strtotime($row['final'])),
+            'desc' => $row['descripcio'], 
+            'color' => $row['color']
         );
         array_push($events, $event);
     }

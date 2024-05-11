@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         require '../Model/mainfunction.php';
         $connection = connexio();
 
-        $sql = "INSERT INTO calendari (titol, inici, final, usuari_id) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO calendari (titol, inici, final, usuari_id, color, descripcio) VALUES (?, ?, ?, ?, ?, ?)";
         $statement = $connection->prepare($sql);
 
         if (isset($_SESSION["usuario"])) {
@@ -18,11 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $title = $_POST["title"];
         $start = $_POST["start"];
         $end = $_POST["end"];
+        $color = $_POST["color"];
+        $descripcio = $_POST["desc"];
         
         $statement->bindParam(1, $title);
         $statement->bindParam(2, $start);
         $statement->bindParam(3, $end);
         $statement->bindParam(4, $usuari_id);
+        $statement->bindParam(5, $color);
+        $statement->bindParam(6, $descripcio);
         
         $statement->execute();
 
