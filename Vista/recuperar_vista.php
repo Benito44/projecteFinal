@@ -9,12 +9,9 @@
 </head>
 <body>
     <h1>Recuperar contrasenya</h1>
-    <form action="../Controlador/canviar_contra.php" id="form" method="post">
-        Contrasenya
-        <input type="password" id="contra" name="contra" placeholder="Usuari1@1234"><br><br>
-        Torna a posar la contrasenya
-        <input type="password" id="contra2" name="contra2" placeholder="Usuari1@1234"><br><br>
-
+    <form action="../Controlador/recupera_contra.php" id="form" method="post">
+        Email
+        <input type="email" id="contra" name="contra" placeholder="Email"><br><br>
         <input type="submit" value="Registrat">
         <a href="../Controlador/index.logat.php">Torna</a>
 

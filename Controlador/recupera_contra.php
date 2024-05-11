@@ -1,23 +1,33 @@
 <?php
 require '../Model/mainfunction.php';
-session_start();
-$token = bin2hex(random_bytes(16)); // Genera un token aleatorio
-// Temps d'expiració del token
-$expiration = time() + 4 * 3600;
+include '../Vista/recuperar_vista.php';
 
-$connexio = connexio();
-$email = $_POST['email'];
-$_SESSION['email'] = $email;
+if (isset($_POST['contra'])) {
+    $connexio = connexio();
 
-$usuari = encontrarPorEmail($email);
-$insertat_token = insertar_token($token, $email, $expiration);
+    $email = $_POST['contra'];
+    $nova_contra = '4E5u46\4M';
+    
+    $usuari = encontrarPorEmail($email);
 
-$text = 'Hola '. $usuari . '<br>' . 'Per restablir la teva contrasenya només clica al següent link: ' . 
-'http://localhost/Controlador/canviar_contra.php?token=' . $insertat_token . '&usuari=' . $usuari;
-// Enviem el correu a l'email enviat
-phphmailer($usuari, $email, $text);
-$error = "";
-$error = "Emal enviat";
-include '../Vista/login.vista.php';
+    //Encriptem la contrasenya
+    $encriptada = password_hash($nova_contra, PASSWORD_BCRYPT);
+
+    $statement = $connexio->prepare("UPDATE usuaris SET contrasenya = ? WHERE email = ?");
+    $statement->bindParam(1,$encriptada);
+    $statement->bindParam(2,$email);
+    $statement->execute();
+
+    $text = 'Hola '. $usuari . '<br>' . 'Nova contrasenya: ' . $nova_contra . '<br>' .
+    'http://localhost';
+    
+    
+    // Enviem el correu a l'email enviat
+    phphmailer($usuari, $email, $text);
+    $error = "";
+    $error = "Emal enviat";
+    header("Location: ../Vista/login.vista.php");
+}
+
 
 ?>

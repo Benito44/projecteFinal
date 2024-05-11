@@ -12,6 +12,35 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Mi Sitio Web</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Acerca de</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Controlador/calendari.php">calendario</a>
+          </li>
+          <?php if ($es_admin): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
+            </li>
+          <?php endif; ?>
+          <li class="nav-item">
+            <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
 <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario

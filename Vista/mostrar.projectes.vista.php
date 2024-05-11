@@ -95,7 +95,7 @@ $es_admin = $row['rol'] === 'admin';
             <a class="nav-link" href="#">Acerca de</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Vista/calendari.php">calendario</a>
+            <a class="nav-link" href="../Controlador/calendari.php">calendario</a>
           </li>
           <?php if ($es_admin): ?>
             <li class="nav-item">

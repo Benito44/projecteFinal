@@ -30,9 +30,9 @@
     <h1>Login</h1>
     <form action="../Controlador/login.php" id="form" method="post">
         Usuari
-        <input type="text"  id="email" name="email" placeholder="Usuari1"><br><br>
+        <input type="text"  id="email" name="email" placeholder="Email"><br><br>
         Contrasenya
-        <input type="password" id="contra" name="contra" placeholder="Usuari1@1234"><br><br>
+        <input type="password" id="contra" name="contra" placeholder="Contrasenya"><br><br>
         <input type="submit" value="Login">
         <a href="../Controlador/index.php">Torna</a>
         <span class="error">
@@ -46,12 +46,12 @@
             <a href="<?php echo $client->createAuthUrl(); ?>" class="btn btn-danger btn-login text-uppercase fw-bold"><i class="fab fa-google"></i> Google</a>
             </div>
     <div class="enlace">
-            <a href="../Controlador/github.php" class="btn btn-primary btn-login text-uppercase fw-bold"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="../Controlador/github.php" class="btn btn-primary btn-login text-uppercase fw-bold"><i class="fab fa-facebook-f"></i> Github</a>
     </div>
         </div>
     </div>
-    <form method="POST" action="../Controlador/recupera_contra.php">
-        <a href="<?php echo $client->createAuthUrl(); ?>" class="btn btn-danger btn-login text-uppercase fw-bold"><i class="fab fa-google"></i> Recupera la contrasenya</a>
-    </form>
+    <div>
+        <a href="../Controlador/recupera_contra.php" class="btn btn-danger btn-login text-uppercase fw-bold"> Recupera la contrasenya</a>
+    </div>
 </body>
 </html>
