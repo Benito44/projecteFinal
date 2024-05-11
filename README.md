@@ -92,7 +92,7 @@ Estilos,  ~~Textos incorrectos ~~, ~~Recuperar Contrasenya y ~~ ~~quitar registr
 # Candelario
 Mejorar el calendario con estilos y ~~posicionamiento~~
 ~~Cambiar el idioma~~
-Poner color a los eventos y descripcion
+~~Poner color a los eventos y descripcion~~
 ¿¿ Enviar email cuando pase el evento  ??
 ~~Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover ~~
 Poner el menu
