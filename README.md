@@ -78,7 +78,7 @@ d.vallmanya@gmail.com 123 - Usuari
 - Menu perfecto 
 - Boton de cerrar session !!
 # Mostrar  projectos 
-Cambiar la vista a card por projecto
+~~Cambiar la vista a card por projecto~~
 ~~Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega,~~ los usuarios con sus permissos
 ~~Poner una imagen~~
 Boton de cerrar session !!
@@ -95,7 +95,7 @@ Mejorar el calendario con estilos y ~~posicionamiento~~
 ~~Poner color a los eventos y descripcion~~
 ¿¿ Enviar email cuando pase el evento  ??
 ~~Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover ~~
-Poner el menu
+Poner el menu (bien)
 ~~Poner una imagen~~
 Boton de cerrar session !!
 # Crear Projecto 
@@ -104,7 +104,7 @@ Boton de cerrar session !!
 Mejorar el email que se manda al compartir
 Boton de cerrar session !!
 # Tareas
-Dar acceso a las tareas desde cualquier projecto (comentar i visualizar)
+~~Dar acceso a las tareas desde cualquier projecto (comentar i visualizar)~~
 ~~Poner una imagen~~
 Estilos
 ~~Implementar eliminar tareas (simple)~~

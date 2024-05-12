@@ -1,25 +1,3 @@
-<?php
-session_start(); // Iniciar sesión si aún no está iniciada
-
-if (!isset($_SESSION['email'])) {
-    exit("Error: No se ha iniciado sesión");
-} else {
-    $connexio = connexio(); 
-    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
-    $statement = $connexio->prepare($sql);
-    $statement->execute([$_SESSION['email']]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
-}
-
-$connexio = connexio(); 
-$sql = "SELECT p.* FROM proyecto_usuario pu INNER JOIN projectes p ON pu.id_proyecto = p.id WHERE pu.id_usuario = ?";
-$statement = $connexio->prepare($sql);
-$statement->execute([$row['id']]);
-$proyectos = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-$es_admin = $row['rol'] === 'admin';
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +6,7 @@ $es_admin = $row['rol'] === 'admin';
     <title>Lista de Proyectos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <style>
-              .dialeg {
+        .dialeg {
             position: absolute;
             margin: 0;
             padding: 2rem;
@@ -40,44 +18,7 @@ $es_admin = $row['rol'] === 'admin';
             border-radius: 1.5rem;
             box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
         }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li button {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-    }
-    li button:hover {
-      background-color: #f0f0f0;
-    }
-    dialog {
-      border: none;
-      padding: 10px;
-      margin: 0;
-    }
-  </style>
-
+    </style>
 </head>
 <body>    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -108,27 +49,47 @@ $es_admin = $row['rol'] === 'admin';
         </ul>
       </div>
     </nav>
-    <h1>Lista de Proyectos</h1>
-    <ul>
+    <h1 class="text-center mt-5">Lista de Proyectos</h1>
+    <div class="container mt-5">
+        <div class="row">
         <?php foreach($proyectos as $proyecto): ?>
-          <li>
-            <button id="<?php echo $proyecto['id']; ?>">
-              <?php echo $proyecto['nom']; ?>
-            </button>
-          </li>
-          <dialog id="dialog_<?php echo $proyecto['id']; ?>" class="dialeg">
-            <li>
-            Nom: 
-              <a href="http://localhost/Vista/editor.php?id=<?php echo $proyecto['id']; ?>">
-              <?php echo $proyecto['nom']; ?><br>
-              </a>
-              Descripció de projecte: <?php echo $proyecto['descripcio']; ?><br><br>
-              Data de finalització: <?php echo $proyecto['data_fi']; ?><br>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $proyecto['nom']; ?></h5>
+                <p class="card-text"><?php echo $proyecto['descripcio']; ?></p>
+                <button class="btn btn-primary" id="<?php echo $proyecto['id']; ?>">
+                    <?php echo $proyecto['nom']; ?>
+                </button>
+            </div>
+        </div>
+    </div>
+    <dialog id="dialog_<?php echo $proyecto['id']; ?>" class="dialeg">
+        <ul>
+            <li><strong>Nombre del proyecto:</strong> <?php echo $proyecto['nom']; ?></li>
+            <li><strong>Descripción del proyecto:</strong> <?php echo $proyecto['descripcio']; ?></li>
+            <li><strong>Fecha de finalización:</strong> <?php echo $proyecto['data_fi']; ?></li>
+            <li><strong>Usuarios con permiso:</strong>
+                <ul>
+                    <?php
+                        // Obtener los nombres de los usuarios con permiso en el proyecto actual
+                        foreach ($usuarios_proyectos as $usuario_proyecto) {
+                            if ($usuario_proyecto['id_proyecto'] == $proyecto['id']) {
+                                $usuarios_con_permisos = explode(", ", $usuario_proyecto['usuarios_con_permisos']);
+                                foreach ($usuarios_con_permisos as $usuario) {
+                                    echo "<li>$usuario</li>";
+                                }
+                            }
+                        }
+                    ?>
+                </ul>
             </li>
-            <button id="tancar_<?php echo $proyecto['id']; ?>">Cerrar</button>
-          </dialog>
-        <?php endforeach; ?>
-    </ul>
+        </ul>
+        <button id="tancar_<?php echo $proyecto['id']; ?>">Cerrar</button>
+    </dialog>
+<?php endforeach; ?>
+        </div>
+    </div>
 
     <script>
     <?php foreach($proyectos as $proyecto): ?>

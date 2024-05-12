@@ -1,5 +1,5 @@
 <?php
-include '../Model/mainfunction.php';
+require '../Model/mainfunction.php';
 
 session_start(); // Iniciar sesión si aún no está iniciada
 
@@ -7,19 +7,34 @@ if (!isset($_SESSION['email'])) {
     exit("Error: No se ha iniciado sesión");
 } else {
     $connexio = connexio(); 
-    $sql = "SELECT id FROM usuaris WHERE email = ?";
+    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
     $statement = $connexio->prepare($sql);
     $statement->execute([$_SESSION['email']]);
     $row = $statement->fetch(PDO::FETCH_ASSOC);
 }
 
 $connexio = connexio(); 
-$sql = "SELECT p.* FROM proyecto_usuario pu INNER JOIN projectes p ON pu.id_proyecto = p.id WHERE pu.id_usuario = ?";
-$statement = $connexio->prepare($sql);
-$statement->execute([$row['id']]);
-$proyectos = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+// Consulta para obtener los proyectos del usuario actual
+$sql_proyectos = "SELECT p.*, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
+                 FROM proyecto_usuario pu 
+                 INNER JOIN projectes p ON pu.id_proyecto = p.id 
+                 INNER JOIN usuaris u ON pu.id_usuario = u.id 
+                 WHERE pu.id_usuario = ? 
+                 GROUP BY p.id";
+$statement_proyectos = $connexio->prepare($sql_proyectos);
+$statement_proyectos->execute([$row['id']]);
+$proyectos = $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);
 
+// Consulta para obtener todos los usuarios con permisos en cada proyecto
+$sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
+                 FROM proyecto_usuario pu 
+                 INNER JOIN usuaris u ON pu.id_usuario = u.id 
+                 GROUP BY pu.id_proyecto";
+$statement_usuarios = $connexio->query($sql_usuarios);
+$usuarios_proyectos = $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);
+
+$es_admin = $row['rol'] === 'admin';
 
 include '../Vista/mostrar.projectes.vista.php'; 
 if (!$proyectos) {

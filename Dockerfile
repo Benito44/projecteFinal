@@ -1,3 +1,4 @@
+
 # Use the official PHP 8.1 image as the base image
 FROM php:8.1-apache
 
