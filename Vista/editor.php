@@ -21,6 +21,15 @@ $statement = $connexio->prepare($sql);
 $statement->execute([$usuarioActual, $proyectoId]);
 $row = $statement->fetch(PDO::FETCH_ASSOC);
 
+// Consulta para obtener los usuarios con permisos en el proyecto
+$sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email 
+                          FROM usuaris u
+                          INNER JOIN proyecto_usuario pu ON u.id = pu.id_usuario
+                          WHERE pu.id_proyecto = ?";
+$statement_usuarios_permisos = $connexio->prepare($sql_usuarios_permisos);
+$statement_usuarios_permisos->execute([$proyectoId]);
+$usuarios_permisos = $statement_usuarios_permisos->fetchAll(PDO::FETCH_ASSOC);
+
 if ($row) {
     if ($row['permissos'] === 'editar') {
 ?>
@@ -205,13 +214,23 @@ if ($row) {
   </div>
 </nav>
     <h1 id="nombre_proyecto"></h1>
+    <ul style="float: right;">
+        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
+            <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
+        <?php endforeach; ?>
+    </ul>
     <a href="./tascas.php?id=<?php echo $proyectoId; ?>">Ver tareas</a>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     <textarea id="editor" rows="10" cols="50"></textarea>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
   El proyecto se ha actualizado.
 </div>
-
+<h2>Usuarios con permisos en el proyecto:</h2>
+    <ul>
+        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
+            <li><?php echo $usuario_permiso['nombre'] . ' (' . $usuario_permiso['email'] . ')'; ?></li>
+        <?php endforeach; ?>
+    </ul>
             <a href="../Controlador/login.php" target="_blank">Login</a>
     
 
@@ -414,7 +433,11 @@ if ($row) {
 </nav>
 
     <h1 id="nombre_proyecto"></h1>
-
+    <ul style="float: right;">
+        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
+            <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
+        <?php endforeach; ?>
+    </ul>
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
     
 
@@ -422,7 +445,7 @@ if ($row) {
     <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
-    
+
 
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje..." readonly>
@@ -639,7 +662,11 @@ if ($row) {
   </div>
 </nav>
     <h1 id="nombre_proyecto"></h1>
-
+    <ul style="float: right;">
+        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
+            <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
+        <?php endforeach; ?>
+    </ul>
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
 
 

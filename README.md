@@ -114,7 +114,7 @@ Boton de cerrar session !!
 ~~Eliminar boton de enviar, link de login~~ i que el administrador pueda eliminar projectos
 Poner el texto del projecto en vertical
 Poner el chat en pequeño en una esquina, hacer que si se envia un mensaje cuando esta lleno que vaya directo al mensaje
-Mostrar los usuarios que tienen permisos en el projecto por la imagen 
+~~Mostrar los usuarios que tienen permisos en el projecto por la imagen ~~
 Boton de cerrar session !!
 Mostrar les tasques que estiguin en progrès per part de l'usuari i per part de l'administrador que es mostrin les tasques en progrès i per revisar
 ~~Poner una imagen~~
