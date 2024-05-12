@@ -208,9 +208,6 @@ if ($row) {
     <a href="./tascas.php?id=<?php echo $proyectoId; ?>">Ver tareas</a>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     <textarea id="editor" rows="10" cols="50"></textarea>
-    <form id="editorForm">
-        <button type="submit">Enviar</button>
-    </form>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
   El proyecto se ha actualizado.
 </div>
@@ -419,9 +416,6 @@ if ($row) {
     <h1 id="nombre_proyecto"></h1>
 
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
-    <form id="editorForm">
-        <button type="submit">Enviar</button>
-    </form>
     
 
 
@@ -647,10 +641,6 @@ if ($row) {
     <h1 id="nombre_proyecto"></h1>
 
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
-    <form id="editorForm">
-        <button type="submit">Enviar</button>
-    </form>
-    
 
 
     <div id="chat-container">

@@ -79,7 +79,7 @@ d.vallmanya@gmail.com 123 - Usuari
 - Boton de cerrar session !!
 # Mostrar  projectos 
 ~~Cambiar la vista a card por projecto~~
-~~Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega,~~ los usuarios con sus permissos
+~~Se canviarà como se muestra el projecto: De primeras solo se mostrara el nombre, pero una vez que se haga clic encima se mostraran todos los datos como el nombre, su descripcion, su fecha de entrega,~~ ~~los usuarios con sus permissos~~
 ~~Poner una imagen~~
 Boton de cerrar session !!
 # Perfil 
@@ -111,7 +111,7 @@ Estilos
 ~~Que se muestren las tareas cuando las creas sin tener que actualizar~~
 Boton de cerrar session !!
 # Projecto
-Eliminar boton de enviar, link de login i que el administrador pueda eliminar projectos
+~~Eliminar boton de enviar, link de login~~ i que el administrador pueda eliminar projectos
 Poner el texto del projecto en vertical
 Poner el chat en pequeño en una esquina, hacer que si se envia un mensaje cuando esta lleno que vaya directo al mensaje
 Mostrar los usuarios que tienen permisos en el projecto por la imagen 
