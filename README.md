@@ -112,7 +112,7 @@ Estilos
 Boton de cerrar session !!
 # Projecto
 ~~Eliminar boton de enviar, link de login~~ i que el administrador pueda eliminar projectos
-Poner el texto del projecto en vertical
+~~Poner el texto del projecto en vertical~~
 Poner el chat en pequeño en una esquina, hacer que si se envia un mensaje cuando esta lleno que vaya directo al mensaje
 ~~Mostrar los usuarios que tienen permisos en el projecto por la imagen ~~
 Boton de cerrar session !!

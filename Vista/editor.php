@@ -20,7 +20,6 @@ $sql = "SELECT * FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?"
 $statement = $connexio->prepare($sql);
 $statement->execute([$usuarioActual, $proyectoId]);
 $row = $statement->fetch(PDO::FETCH_ASSOC);
-
 // Consulta para obtener los usuarios con permisos en el proyecto
 $sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email 
                           FROM usuaris u
@@ -29,7 +28,6 @@ $sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email
 $statement_usuarios_permisos = $connexio->prepare($sql_usuarios_permisos);
 $statement_usuarios_permisos->execute([$proyectoId]);
 $usuarios_permisos = $statement_usuarios_permisos->fetchAll(PDO::FETCH_ASSOC);
-
 if ($row) {
     if ($row['permissos'] === 'editar') {
 ?>
@@ -76,28 +74,15 @@ if ($row) {
     li a:hover {
       background-color: #f0f0f0;
     }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            margin-top: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-
         #editor {
-            width: 100%;
+          width: 100%;
             padding: 10px;
-            margin: 10px auto;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
             resize: none;
+            box-sizing: border-box;
+            background-color: #fff;
+            overflow-y: auto;
         }
 
         #editorForm {
@@ -213,37 +198,30 @@ if ($row) {
     </ul>
   </div>
 </nav>
-    <h1 id="nombre_proyecto"></h1>
-    <ul style="float: right;">
+<ul style="float: right;">
         <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
             <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
         <?php endforeach; ?>
     </ul>
-    <a href="./tascas.php?id=<?php echo $proyectoId; ?>">Ver tareas</a>
+    <h1 id="nombre_proyecto"></h1>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
-    <textarea id="editor" rows="10" cols="50"></textarea>
-    <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
-  El proyecto se ha actualizado.
-</div>
-<h2>Usuarios con permisos en el proyecto:</h2>
-    <ul>
-        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
-            <li><?php echo $usuario_permiso['nombre'] . ' (' . $usuario_permiso['email'] . ')'; ?></li>
-        <?php endforeach; ?>
-    </ul>
-            <a href="../Controlador/login.php" target="_blank">Login</a>
     
-
-
     <div id="chat-container">
+      <textarea id="editor" rows="10" cols="50"></textarea>
+    </div>
+
+    <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
+      El proyecto se ha actualizado.
+    </div>    
+  <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
     
-
+  <!-- 
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
-    </form>
+    </form> -->
     <script src="../js/script.js"></script>
 
 </body>
@@ -310,13 +288,14 @@ if ($row) {
         }
 
         #editor {
-            width: 100%;
+          width: 100%;
             padding: 10px;
-            margin: 10px auto;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
             resize: none;
+            box-sizing: border-box;
+            background-color: #fff;
+            overflow-y: auto;
         }
 
         #editorForm {
@@ -433,19 +412,21 @@ if ($row) {
 </nav>
 
     <h1 id="nombre_proyecto"></h1>
-    <ul style="float: right;">
-        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
-            <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
-        <?php endforeach; ?>
-    </ul>
+
+    <div id="chat-container">
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
+    </div>
+
+    <form id="editorForm">
+        <button type="submit">Enviar</button>
+    </form>
     
 
 
     <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
-
+    
 
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje..." readonly>
@@ -662,12 +643,12 @@ if ($row) {
   </div>
 </nav>
     <h1 id="nombre_proyecto"></h1>
-    <ul style="float: right;">
-        <?php foreach ($usuarios_permisos as $usuario_permiso): ?>
-            <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
-        <?php endforeach; ?>
-    </ul>
+
     <textarea id="editor" rows="10" cols="50" readonly></textarea>
+    <form id="editorForm">
+        <button type="submit">Enviar</button>
+    </form>
+    
 
 
     <div id="chat-container">
