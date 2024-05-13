@@ -6,7 +6,14 @@ if (isset($_POST['contra'])) {
     $connexio = connexio();
 
     $email = $_POST['contra'];
-    $nova_contra = '4E5u46\4M';
+
+    $nova_contra = "";
+    //$pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+    $pattern = "1234567890abcdefghijklmñnopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ.-_*/=[]{}#@|~¬&()?¿";
+    $max = strlen($pattern)-1;
+    for($i = 0; $i < 9; $i++){
+        $nova_contra .= substr($pattern, mt_rand(0,$max), 1);
+    }
     
     $usuari = encontrarPorEmail($email);
 

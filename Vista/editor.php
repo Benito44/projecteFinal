@@ -20,6 +20,7 @@ $sql = "SELECT * FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?"
 $statement = $connexio->prepare($sql);
 $statement->execute([$usuarioActual, $proyectoId]);
 $row = $statement->fetch(PDO::FETCH_ASSOC);
+
 // Consulta para obtener los usuarios con permisos en el proyecto
 $sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email 
                           FROM usuaris u
@@ -28,6 +29,12 @@ $sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email
 $statement_usuarios_permisos = $connexio->prepare($sql_usuarios_permisos);
 $statement_usuarios_permisos->execute([$proyectoId]);
 $usuarios_permisos = $statement_usuarios_permisos->fetchAll(PDO::FETCH_ASSOC);
+
+$sql_tasca = "SELECT descripcio FROM tasques WHERE estat = 'Completades' AND id_projecte = ?";
+$statement_tasques = $connexio->prepare($sql_tasca);
+$statement_tasques->execute([$proyectoId]);
+$tasca = $statement_tasques->fetchAll(PDO::FETCH_ASSOC);
+$es_admin = true;
 if ($row) {
     if ($row['permissos'] === 'editar') {
 ?>
@@ -40,128 +47,9 @@ if ($row) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    li a:hover {
-      background-color: #f0f0f0;
-    }
-        #editor {
-          width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            box-sizing: border-box;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-
-        #editorForm {
-            text-align: center;
-        }
-
-        #editorForm button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #editorForm button:hover {
-            background-color: #0056b3;
-        }
-
-        #chat-container {
-            margin: 20px auto;
-            width: 80%;
-        }
-
-        #chat-messages {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            box-sizing: border-box;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-
-        #chat-form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #chat-form input[type="text"] {
-            padding: 10px;
-            width: 70%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-right: 10px;
-        }
-
-        #chat-form button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #chat-form button:hover {
-            background-color: #0056b3;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -203,6 +91,15 @@ if ($row) {
             <?php echo '<img src="' . $usuario_permiso['imatge'] . '" title="'. $usuario_permiso['usuari'] . '" style="width: 50px; height: 50px; border-radius: 50%;">'; ?>
         <?php endforeach; ?>
     </ul>
+
+    <?php if ($es_admin): ?>
+      <ul style="float: right;">
+        <?php foreach ($tasca as $usuario_tasca): ?>
+            <?php echo $usuario_tasca['descripcio']; ?>
+        <?php endforeach; ?>
+    </ul>
+          <?php endif; ?>
+
     <h1 id="nombre_proyecto"></h1>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     
@@ -212,12 +109,13 @@ if ($row) {
 
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
       El proyecto se ha actualizado.
-    </div>    
+    </div> 
+     <!--     
   <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
     
-  <!-- 
+
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
@@ -235,145 +133,13 @@ if ($row) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
+    <title>Collaborative Editor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-
-    <title>Collaborative Editor</title>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    li a:hover {
-      background-color: #f0f0f0;
-    }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            margin-top: 20px;
-            color: #333;
-            text-align: center;
-        }
-
-        #editor {
-          width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            box-sizing: border-box;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-
-        #editorForm {
-            text-align: center;
-        }
-
-        #editorForm button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #editorForm button:hover {
-            background-color: #0056b3;
-        }
-
-        #chat-container {
-            margin: 20px auto;
-            width: 80%;
-        }
-
-        #chat-messages {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            box-sizing: border-box;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-
-        #chat-form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #chat-form input[type="text"] {
-            padding: 10px;
-            width: 70%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-right: 10px;
-        }
-
-        #chat-form button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #chat-form button:hover {
-            background-color: #0056b3;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-    </style>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -445,167 +211,11 @@ if ($row) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collaborative Editor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    li a:hover {
-      background-color: #f0f0f0;
-    }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            margin-top: 20px;
-            color: #333;
-            text-align: center;
-        }
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    li a:hover {
-      background-color: #f0f0f0;
-    }
-
-        #editor {
-            width: 100%;
-            padding: 10px;
-            margin: 10px auto;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            resize: none;
-        }
-
-        #editorForm {
-            text-align: center;
-        }
-
-        #editorForm button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #editorForm button:hover {
-            background-color: #0056b3;
-        }
-
-        #chat-container {
-            margin: 20px auto;
-            width: 80%;
-        }
-
-        #chat-messages {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            box-sizing: border-box;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-
-        #chat-form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #chat-form input[type="text"] {
-            padding: 10px;
-            width: 70%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            margin-right: 10px;
-        }
-
-        #chat-form button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #chat-form button:hover {
-            background-color: #0056b3;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
