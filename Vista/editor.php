@@ -34,6 +34,13 @@ $sql_tasca = "SELECT descripcio FROM tasques WHERE estat = 'Completades' AND id_
 $statement_tasques = $connexio->prepare($sql_tasca);
 $statement_tasques->execute([$proyectoId]);
 $tasca = $statement_tasques->fetchAll(PDO::FETCH_ASSOC);
+
+
+$sql_progres = "SELECT descripcio FROM tasques WHERE estat = 'Por hacer' AND id_projecte = ?";
+$statement_tasques_2 = $connexio->prepare($sql_progres);
+$statement_tasques_2->execute([$proyectoId]);
+$tasca_progres = $statement_tasques_2->fetchAll(PDO::FETCH_ASSOC);
+
 $es_admin = true;
 if ($row) {
     if ($row['permissos'] === 'editar') {
@@ -99,6 +106,12 @@ if ($row) {
         <?php endforeach; ?>
     </ul>
           <?php endif; ?>
+
+      <ul style="float: right;">
+        <?php foreach ($tasca_progres as $usuario_tasca_2): ?>
+            <?php echo $usuario_tasca_2['descripcio']; ?>
+        <?php endforeach; ?>
+    </ul>
 
     <h1 id="nombre_proyecto"></h1>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
@@ -276,8 +289,8 @@ if ($row) {
 </html>
 <?php
     }
-  
-} else {
-    // El usuario no tiene permisos, mostrar un mensaje de acceso denegado
-    echo 'No tienes permisos';
-}
+        
+      } else {
+          // El usuario no tiene permisos, mostrar un mensaje de acceso denegado
+          echo 'No tienes permisos';
+      }
