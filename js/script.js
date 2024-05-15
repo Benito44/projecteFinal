@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    
+    
     let urlParams = new URLSearchParams(window.location.search);
     let proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
     
@@ -61,6 +63,15 @@ $(document).ready(function(){
         timeout = setTimeout(escribir, 1000); // Establecer un temporizador para llamar a la función escribir() después de 1 segundo de inactividad
     });
 
+    function toggleDropdown() {
+        var dropdown = document.getElementById("tareasDropdown");
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+
     function escribir(){
         estaEscribint = false;
         let content = $('#editor').val();
@@ -107,7 +118,8 @@ setTimeout(function() {
         }
     }
 
-    setInterval(obtenirDades, 1000); // Obtener contenido cada 1 segundo
+    setInterval(obtenirDades, 1000); 
+    
 // Función para cargar los comentarios del chat para un proyecto específico
 function loadChatComments(projectId) {
     $.ajax({
@@ -115,7 +127,8 @@ function loadChatComments(projectId) {
         method: 'GET',
         data: { projectId: projectId }, // Pasar el ID del proyecto al servidor
         success: function(response) {
-            $('#chat-messages').val(response); 
+            $('#chat-messages').val(response);
+            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
         },
         error: function(xhr, status, error) {
             console.error('Error al cargar comentarios del chat:', error);
@@ -123,14 +136,12 @@ function loadChatComments(projectId) {
     });
 }
 
-
 function checkForNewMessages(projectId) {
     loadChatComments(projectId); 
 }
 
 let projectId = urlParams.get('id'); 
 loadChatComments(projectId); 
-
 
 setInterval(function() {
     checkForNewMessages(projectId);
@@ -147,6 +158,8 @@ $('#chat-form').submit(function(event) {
             success: function(response) {
                 loadChatComments(projectId); 
                 $('#message-input').val(''); 
+                            // Enfocar el último mensaje recibido
+            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
             },
             error: function(xhr, status, error) {
                 console.error('Error al enviar comentario:', error);
@@ -154,4 +167,5 @@ $('#chat-form').submit(function(event) {
         });
     }
 });
+
 });

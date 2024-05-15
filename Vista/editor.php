@@ -7,9 +7,22 @@ if (!isset($_SESSION['usuario'])) {
         header('Location: ./login.vista.php');
     exit(); // Detener la ejecución del script después de mostrar el mensaje de error
 }
-
 require '../Model/mainfunction.php';
 $connexio = connexio();
+
+$sql = "SELECT rol FROM usuaris WHERE email = ?";
+$statement = $connexio->prepare($sql);
+$statement->execute([$_SESSION['email']]);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+$es_admin = false; // Inicializa como falso por defecto
+
+if ($row && isset($row['rol'])) {
+    $es_admin = ($row['rol'] === 'admin');
+}
+if (!$es_admin){
+  echo "false";
+}
 
 // Verificar si el usuario tiene permisos para acceder al proyecto
 $proyectoId = $_GET['id']; // Obtener el ID del proyecto de la URL
@@ -21,6 +34,8 @@ $statement = $connexio->prepare($sql);
 $statement->execute([$usuarioActual, $proyectoId]);
 $row = $statement->fetch(PDO::FETCH_ASSOC);
 
+
+
 // Consulta para obtener los usuarios con permisos en el proyecto
 $sql_usuarios_permisos = "SELECT u.usuari, u.imatge, u.email 
                           FROM usuaris u
@@ -30,18 +45,17 @@ $statement_usuarios_permisos = $connexio->prepare($sql_usuarios_permisos);
 $statement_usuarios_permisos->execute([$proyectoId]);
 $usuarios_permisos = $statement_usuarios_permisos->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_tasca = "SELECT descripcio FROM tasques WHERE estat = 'Completades' AND id_projecte = ?";
+$sql_tasca = "SELECT descripcio FROM tasques WHERE estat = 'En revisio' AND id_projecte = ?";
 $statement_tasques = $connexio->prepare($sql_tasca);
 $statement_tasques->execute([$proyectoId]);
 $tasca = $statement_tasques->fetchAll(PDO::FETCH_ASSOC);
 
 
-$sql_progres = "SELECT descripcio FROM tasques WHERE estat = 'Por hacer' AND id_projecte = ?";
+$sql_progres = "SELECT descripcio FROM tasques WHERE estat = 'En progres' AND id_projecte = ?";
 $statement_tasques_2 = $connexio->prepare($sql_progres);
 $statement_tasques_2->execute([$proyectoId]);
 $tasca_progres = $statement_tasques_2->fetchAll(PDO::FETCH_ASSOC);
 
-$es_admin = true;
 if ($row) {
     if ($row['permissos'] === 'editar') {
 ?>
@@ -57,6 +71,25 @@ if ($row) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/editor.css">
+    <script src="../js/script.js"></script>
+    <script>
+          function toggleDropdown() {
+        var dropdown = document.getElementById("tareasDropdown");
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+    function toggleDropdown2() {
+        var dropdown = document.getElementById("tareasDropdown2");
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -100,18 +133,25 @@ if ($row) {
     </ul>
 
     <?php if ($es_admin): ?>
-      <ul style="float: right;">
-        <?php foreach ($tasca as $usuario_tasca): ?>
-            <?php echo $usuario_tasca['descripcio']; ?>
-        <?php endforeach; ?>
-    </ul>
-          <?php endif; ?>
+    <div style="float: right;">
+        <button onclick="toggleDropdown()">Mostrar Tareas</button>
+        <ul id="tareasDropdown" style="display: none;">
+            <?php foreach ($tasca as $usuario_tasca): ?>
+                <li><?php echo $usuario_tasca['descripcio']; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
 
-      <ul style="float: right;">
-        <?php foreach ($tasca_progres as $usuario_tasca_2): ?>
-            <?php echo $usuario_tasca_2['descripcio']; ?>
-        <?php endforeach; ?>
-    </ul>
+
+<div style="float: right;">
+        <button onclick="toggleDropdown2()">Mostrar Tareas</button>
+        <ul id="tareasDropdown2" style="display: none;">
+            <?php foreach ($tasca_progres as $usuario_tasca_2): ?>
+                <li><?php echo $usuario_tasca_2['descripcio']; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
 
     <h1 id="nombre_proyecto"></h1>
     <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
@@ -123,7 +163,7 @@ if ($row) {
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
       El proyecto se ha actualizado.
     </div> 
-     <!--     
+
   <div id="chat-container">
         <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
@@ -132,8 +172,8 @@ if ($row) {
     <form id="chat-form">
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">
         <button type="submit">Enviar</button>
-    </form> -->
-    <script src="../js/script.js"></script>
+    </form> 
+
 
 </body>
 
