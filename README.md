@@ -117,4 +117,5 @@ Poner el chat en pequeño en una esquina, ~~hacer que si se envia un mensaje cua
 ~~Mostrar los usuarios que tienen permisos en el projecto por la imagen ~~
 Boton de cerrar session !!
 ~~Mostrar les tasques que estiguin en progrès per part de l'usuari i per part de l'administrador que es mostrin les tasques en progrès i per revisar~~
+Tasques: Popover, Offcanva
 ~~Poner una imagen~~
