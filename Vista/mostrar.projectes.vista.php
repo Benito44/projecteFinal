@@ -86,7 +86,7 @@
             </li>
         </ul>
         <button id="tancar_<?php echo $proyecto['id']; ?>">Cerrar</button>
-        <a href="../Vista/editor.php?id=<?php echo $proyecto['id']; ?>">Projecte</a>
+        <a href="../Controlador/editor.php?id=<?php echo $proyecto['id']; ?>">Projecte</a>
     </dialog>
 <?php endforeach; ?>
         </div>
