@@ -11,39 +11,35 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="../js/calendari.js"></script>
+  <link rel="stylesheet" href="../css/calendari.css">
 
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Mi Sitio Web</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Acerca de</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../Controlador/calendari.php">calendario</a>
+            <a class="nav-link" href="../Controlador/mostrar.projectes.php">Projectes Propis</a>
           </li>
           <?php if ($es_admin): ?>
             <li class="nav-item">
               <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+            </li>
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
           </li>
-        </ul>
-      </div>
-    </nav>
-
-<div style="position: absolute; top: 20px; right: 20px;">
+          <li class="nav-item">
+            <a class="nav-link" href="../Controlador/cerrar_session.php">Perfil</a>
+          </li>
+          <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario
             $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
@@ -54,12 +50,14 @@
             }
             ?>
         </div>
+        </ul>
+      </div>
+    </nav>
 
-        <div id='calendar'>        
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Agregar Evento
-          </button>
-        </div>
+      <div id='calendar'>      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Afegir Event
+      </button>
+      </div>
 
 
 
@@ -81,20 +79,20 @@
               <input type="text" class="form-control" id="title" name="title">
             </div>
             <div class="form-group">
-              <label for="start">Fecha de inicio</label>
+              <label for="desc">Descripcio:</label>
+              <input type="text" name="desc" id="desc"><br>
+            </div>
+            <div class="form-group">
+              <label for="start">Data d'inici</label>
               <input type="datetime-local" class="form-control" id="start" name="start">
             </div>
             <div class="form-group">
-              <label for="end">Fecha de fin</label>
+              <label for="end">Data final</label>
               <input type="datetime-local" class="form-control" id="end" name="end">
             </div>
             <div class="form-group">
-              <label for="color">Color:</label>
+              <label for="color">Color: </label>
               <input type="color" name="color" id="color" required><br>
-            </div>
-            <div class="form-group">
-              <label for="desc">Descripcion:</label>
-              <input type="text" name="desc" id="desc"><br>
             </div>
           </form>
         </div>
@@ -108,26 +106,29 @@
 
   <!-- Modal para mostrar los detalles del evento y el botón de eliminar -->
   <div class="modal fade" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="eventTitle"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p id="eventStart"></p>
-          <p id="eventEnd"></p>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="eventStart"></p>
+        <p id="eventEnd"></p>
+        <div id="eventDescContainer">
           <p id="eventDesc"></p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-danger" id="deleteEvent">Eliminar</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger" id="deleteEvent">Eliminar</button>
       </div>
     </div>
   </div>
+</div>
+
   <input type="hidden" id="eventIdToDelete">
 </body>
 </html>

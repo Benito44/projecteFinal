@@ -22,25 +22,18 @@
 </head>
 <body>    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Mi Sitio Web</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Acerca de</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../Controlador/calendari.php">calendario</a>
+            <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
           </li>
           <?php if ($es_admin): ?>
             <li class="nav-item">
-              <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Proyecto</a>
+              <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
             </li>
           <?php endif; ?>
           <li class="nav-item">
@@ -49,7 +42,7 @@
         </ul>
       </div>
     </nav>
-    <h1 class="text-center mt-5">Lista de Proyectos</h1>
+    <h1 class="text-center mt-5">Llista de projectes</h1>
     <div class="container mt-5">
         <div class="row">
         <?php foreach($proyectos as $proyecto): ?>
@@ -57,7 +50,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title"><?php echo $proyecto['nom']; ?></h5>
-                <p class="card-text"><?php echo $proyecto['descripcio']; ?></p>
+                Descripció:<p class="card-text"><?php echo $proyecto['descripcio']; ?></p>
                 <button class="btn btn-primary" id="<?php echo $proyecto['id']; ?>">
                     <?php echo $proyecto['nom']; ?>
                 </button>
@@ -66,10 +59,10 @@
     </div>
     <dialog id="dialog_<?php echo $proyecto['id']; ?>" class="dialeg">
         <ul>
-            <li><strong>Nombre del proyecto:</strong> <?php echo $proyecto['nom']; ?></li>
-            <li><strong>Descripción del proyecto:</strong> <?php echo $proyecto['descripcio']; ?></li>
-            <li><strong>Fecha de finalización:</strong> <?php echo $proyecto['data_fi']; ?></li>
-            <li><strong>Usuarios con permiso:</strong>
+            <li><strong>Nom del Projecte:</strong> <?php echo $proyecto['nom']; ?></li>
+            <li><strong>Descripció del projecte:</strong> <?php echo $proyecto['descripcio']; ?></li>
+            <li><strong>Data de finalizació:</strong> <?php echo $proyecto['data_fi']; ?></li>
+            <li><strong>Usuaris amb permis:</strong>
                 <ul>
                     <?php
                         // Obtener los nombres de los usuarios con permiso en el proyecto actual
@@ -92,20 +85,7 @@
         </div>
     </div>
 
-    <script>
-    <?php foreach($proyectos as $proyecto): ?>
-      const button_<?php echo $proyecto['id']; ?> = document.getElementById('<?php echo $proyecto['id']; ?>');
-      const dialog_<?php echo $proyecto['id']; ?> = document.getElementById('dialog_<?php echo $proyecto['id']; ?>');
-      const tancar_<?php echo $proyecto['id']; ?> = document.getElementById('tancar_<?php echo $proyecto['id']; ?>');
 
-      button_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
-          dialog_<?php echo $proyecto['id']; ?>.showModal();
-      });
-      tancar_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
-          dialog_<?php echo $proyecto['id']; ?>.close();
-      });
-    <?php endforeach; ?>
-    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

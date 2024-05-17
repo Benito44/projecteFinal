@@ -20,9 +20,6 @@ $es_admin = false;
 if ($row && isset($row['rol'])) {
     $es_admin = ($row['rol'] === 'admin');
 }
-if (!$es_admin){
-  echo "false";
-}
 
 // Verificar si el usuario tiene permisos para acceder al proyecto
 $proyectoId = $_GET['id']; // Obtener el ID del proyecto de la URL

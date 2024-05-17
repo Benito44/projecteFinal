@@ -10,16 +10,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $id_usuario = encontrarPorUsuario($_SESSION["usuario"]);
 
-            $sql = "DELETE FROM calendari WHERE id = :id AND usuari_id = :usuari_id";
-            $statement = $connection->prepare($sql);
-            $statement->bindParam(':id', $_POST["id"], PDO::PARAM_INT);
-            $statement->bindParam(':usuari_id', $id_usuario, PDO::PARAM_INT);
+            // Función para verificar si el usuario es administrador
+            function esAdmin($usuario){
+                $connexio = connexio();
+                $statement = $connexio->prepare("SELECT rol FROM usuaris WHERE usuari = ?");
+                $statement->bindParam(1, $usuario);
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+                return $result['rol'] ?? '';
+            }
+
+            // Verificar si el usuario es administrador
+            $esAdmin = esAdmin($_SESSION["usuario"]);
+
+            // Construir la consulta SQL
+            if ($esAdmin === 'admin') {
+                $sql = "DELETE FROM calendari WHERE id = :id";
+                $statement = $connection->prepare($sql);
+                $statement->bindParam(':id', $_POST["id"], PDO::PARAM_INT);
+            } else {
+                $sql = "DELETE FROM calendari WHERE id = :id AND usuari_id = :usuari_id";
+                $statement = $connection->prepare($sql);
+                $statement->bindParam(':id', $_POST["id"], PDO::PARAM_INT);
+                $statement->bindParam(':usuari_id', $id_usuario, PDO::PARAM_INT);
+            }
+
+            // Ejecutar la consulta
             $statement->execute();
 
             if ($statement->rowCount() > 0) {
                 echo "Evento eliminado exitosamente";
             } else {
-                echo "Error: No se encontró el evento en la base de datos";
+                echo "Error: No se encontró el evento en la base de datos o no tienes permiso para eliminarlo.";
             }
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();

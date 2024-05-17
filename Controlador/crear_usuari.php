@@ -1,9 +1,13 @@
 <?php
 session_start();
 require '../Model/mainfunction.php';
+
+
+if (!isset($_SESSION['email'])) {
+    exit("Error: No se ha iniciado sesión");
+} 
+
 include '../Vista/crear_usuari.php';
-
-
 if (isset($_POST['usuari']) && isset($_POST['email'])) {
 $conn = connexio();
 

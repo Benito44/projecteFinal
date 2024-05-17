@@ -1,0 +1,7 @@
+#eventDescContainer {
+    max-height: 200px; /* Ajusta esta altura según sea necesario */
+    overflow-y: auto;
+    white-space: pre-wrap; /* Asegura que el texto se envuelva dentro del contenedor */
+    word-wrap: break-word; /* Permite la rotura de palabras largas para evitar desbordamientos horizontales */
+  }
+  

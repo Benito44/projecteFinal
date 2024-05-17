@@ -37,7 +37,23 @@ $usuarios_proyectos = $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);
 $es_admin = $row['rol'] === 'admin';
 
 include '../Vista/mostrar.projectes.vista.php'; 
+
+
 if (!$proyectos) {
     echo ("Error: No se encontraron proyectos para este usuario");
 }
 ?>
+    <script>
+    <?php foreach($proyectos as $proyecto): ?>
+      const button_<?php echo $proyecto['id']; ?> = document.getElementById('<?php echo $proyecto['id']; ?>');
+      const dialog_<?php echo $proyecto['id']; ?> = document.getElementById('dialog_<?php echo $proyecto['id']; ?>');
+      const tancar_<?php echo $proyecto['id']; ?> = document.getElementById('tancar_<?php echo $proyecto['id']; ?>');
+
+      button_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
+          dialog_<?php echo $proyecto['id']; ?>.showModal();
+      });
+      tancar_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
+          dialog_<?php echo $proyecto['id']; ?>.close();
+      });
+    <?php endforeach; ?>
+    </script>
