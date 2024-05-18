@@ -25,7 +25,7 @@ if ($row) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="./tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
+      <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -111,7 +111,6 @@ if ($row) {
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
       El proyecto se ha actualizado.
     </div>
-    <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     
     <div id="chat-container">
       <textarea id="editor" rows="10" cols="50"></textarea>
@@ -148,7 +147,7 @@ if ($row) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="./tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
+        <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -234,7 +233,6 @@ if ($row) {
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
       El proyecto se ha actualizado.
     </div>
-    <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
     
     <div id="chat-container">
       <textarea id="editor" rows="10" cols="50"></textarea>
@@ -272,7 +270,7 @@ if ($row) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="./tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
+      <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -357,9 +355,7 @@ if ($row) {
     <h1 id="nombre_proyecto"></h1>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
       El proyecto se ha actualizado.
-    </div>
-    <a href="../Controlador/cerrar_session.php">Cerrar sesión</a>
-    
+    </div>    
     <div id="chat-container">
       <textarea id="editor" rows="10" cols="50" readonly></textarea>
     </div>
