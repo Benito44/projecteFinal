@@ -37,22 +37,28 @@
   </style></head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Mi Sitio Web</a>
+  <a class="navbar-brand">Gestió de Projectes</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" href="../Controlador/login.php">login</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
+      <li class="nav-item">
+      <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
+          </li>
       <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario
@@ -68,7 +74,7 @@
   </div>
 </nav>
 <div class="container">
-        <h2>Crear Nuevo Usuario</h2>
+        <h2>Crear Nou Usuari</h2>
         <div class="forms-container">
     <form id="second-form" action="../Controlador/crear_usuari.php" method="post">
         <label for="usuari">Nombre del usuario:</label><br>
@@ -85,10 +91,10 @@
         <label for="contrasenya_2">Nova Contrasenya</label><br>
         <input type="password" id="contrasenya_2" name="contrasenya_2" required><br><br>
 
-        <label for="rol">ROL:</label>
+        <label for="rol">Rol:</label>
         <select id="rol" name="rol">
-            <option value="admin">admin</option>
-            <option value="membre">membre</option>
+            <option value="admin">Administrador</option>
+            <option value="membre">Usuari</option>
         </select>
 
         <input type="submit" value="Crear">

@@ -8,8 +8,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            align-items: center;
             margin: 0;
             padding: 0;
+            
         }
         h1 {
             text-align: center;
@@ -48,6 +50,9 @@
         .full-width {
             width: 100%;
         }
+        button {
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -58,18 +63,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/mostrar.projectes.php" >Mostrar projectes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Controlador/crear_usuari.php">crear_usuari</a>
+                    <a class="nav-link" href="../Controlador/calendari.php" >Calendari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_usuari.php">Crear usuari</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
-                </li>
+                </li>´
+                <li class="nav-item">
+            <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
+          </li>
                 <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario
@@ -86,6 +94,7 @@
     </nav>
     <div class="container">
         <h2>Crear Nuevo Proyecto</h2>
+        
         <form action="../Controlador/crear_proyecte.php" method="post" id="crearProyectoForm">
             <label for="nombre_proyecto">Nombre del Proyecto:</label><br>
             <input type="text" id="nombre_proyecto" name="nombre_proyecto" required class="form-control"><br>
@@ -98,11 +107,16 @@
 
             <button type="submit" class="btn btn-primary">Crear Proyecto</button>
         </form>
+        <div class="d-flex justify-content-between">
+    <div></div> <!-- Este div vacío es usa para ocupar el espacio antes del botón -->
+    <button type="button" class="btn btn-primary text-center ms-auto" data-toggle="modal" data-target="#modalCompartirProyecto">
+        Compartir Proyecto
+    </button>
+</div>
+
+
+
     </div>
-            <!-- Botón para abrir el modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCompartirProyecto">
-            Compartir Proyecto
-        </button>
 
         <!-- Modal -->
         <div class="modal fade" id="modalCompartirProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

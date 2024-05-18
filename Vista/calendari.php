@@ -37,7 +37,7 @@
             <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Controlador/cerrar_session.php">Perfil</a>
+            <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
           </li>
           <div style="position: absolute; top: 20px; right: 20px;">
             <?php

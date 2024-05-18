@@ -93,7 +93,6 @@ Estilos,  ~~Textos incorrectos ~~, ~~Recuperar Contrasenya y ~~ ~~quitar registr
 Mejorar el calendario con estilos y ~~posicionamiento~~
 ~~Cambiar el idioma~~
 ~~Poner color a los eventos y descripcion~~
-¿¿ Enviar email cuando pase el evento  ??
 ~~Reposicionamiento de botones: Crear (Mostrar el calendario a dias y semanas) y mover ~~
 Poner el menu (bien)
 ~~Poner una imagen~~
@@ -117,5 +116,11 @@ Poner el chat en pequeño en una esquina, ~~hacer que si se envia un mensaje cua
 ~~Mostrar los usuarios que tienen permisos en el projecto por la imagen ~~
 Boton de cerrar session !!
 ~~Mostrar les tasques que estiguin en progrès per part de l'usuari i per part de l'administrador que es mostrin les tasques en progrès i per revisar~~
-Tasques: Popover, Offcanva
+~~Tasques: Popover, Offcanva~~
 ~~Poner una imagen~~
+
+# Revisar
+Imagen que no interfiera con calendario
+No se pueden poner dos projectos con el mismo nombre
+actualizar los permissos de un usuario
+No se puede crear usuarios con el mismo nombre o email

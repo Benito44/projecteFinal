@@ -35,9 +35,15 @@
             <li class="nav-item">
               <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+            </li>
           <?php endif; ?>
           <li class="nav-item">
             <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
           </li>
         </ul>
       </div>

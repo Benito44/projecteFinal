@@ -73,18 +73,27 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Acerca de</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Servicios</a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
+      <?php if ($es_admin): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+            </li>
+        <?php endif; ?>
+      <li class="nav-item">
+              <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
+            </li>
+
       <div style="position: absolute; top: 20px; right: 20px;">
             <?php
             // Obtener la imagen de perfil del usuario
