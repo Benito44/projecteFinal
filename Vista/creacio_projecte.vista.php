@@ -10,7 +10,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    <script src="../js/crear_projecte.js"></script>
+    <!-- <script src="../js/crear_projecte.js"></script> -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -115,55 +115,6 @@
                 </div>
             </form>
             <div class="btn-center-right mt-3">
-
-            <button type="button" class="btn btn-primary text-center ms-auto" data-toggle="modal" data-target="#modalCompartirProyecto">
-        Compartir Projecte
-    </button>
-            </div>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalCompartirProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Compartir Projecte</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                    <div class="modal-body">
-                        <!-- Formulario de compartir proyecto -->
-                        <form action="../Controlador/crear_proyecte.php" method="post">
-                            <div class="mb-3">
-                                <label for="nombre_proyectos_compartidos" class="form-label">Nom del Projecte:</label>
-                                <input type="text" id="nombre_proyectos_compartidos" name="nombre_proyectos_compartidos" required class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="emails_compartidos" class="form-label">Correus Electronics:</label>
-                                <textarea id="emails_compartidos" name="emails_compartidos" rows="4" class="form-control"></textarea>
-                                <div id="emails-container">
-                                    <label for="emails_compartidos" class="form-label">Correus Afegits:</label>
-                                    <ul id="emails-list" class="list-group"></ul>
-                                    <input type="hidden" id="correos-ocultos" name="correos_ocultos">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button type="button" id="agregar-correos" class="btn btn-info">Afegir Correus</button>
-                            </div>
-                            <div class="mb-3">
-                                <label for="permisos" class="form-label">Permissos:</label>
-                                <select id="permisos" name="permisos" class="form-select">
-                                    <option value="editar">Editar</option>
-                                    <option value="comentar">Comentar</option>
-                                    <option value="visualitzar">Visualitzar</option>
-                                </select>
-                            </div>
-                            <div class="btn-center-right">
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

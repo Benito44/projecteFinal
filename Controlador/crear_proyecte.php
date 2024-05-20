@@ -9,12 +9,12 @@ if (!isset($_SESSION['email'])) {
     header('Location: ../Vista/login.vista.php');
 } 
 
-include '../Vista/creacio_projecte.vista.php';
+
 $conn = connexio();
 
 
 if (isset($_POST['nombre_proyecto'])) {
-
+    include '../Vista/creacio_projecte.vista.php';
     $nombre_proyecto = $_POST['nombre_proyecto'];
 $descripcion = $_POST['descripcion'];
 $data_inici = date("Y-m-d");
@@ -102,7 +102,9 @@ if (isset($_POST['nombre_proyectos_compartidos']) && isset($_POST['correos_ocult
         
         // Enviar el correo electrónico
         phphmailer($usuari, $email, $text);
-    
+
+        header("Location: ./mostrar.projectes.php");
+
         echo "El proyecto se ha creado y compartido correctamente.";
     }
 }
