@@ -64,7 +64,7 @@ $(document).ready(function(){
     });
 
     function toggleDropdown() {
-        var dropdown = document.getElementById("tareasDropdown");
+        let dropdown = document.getElementById("tareasDropdown");
         if (dropdown.style.display === "none") {
             dropdown.style.display = "block";
         } else {

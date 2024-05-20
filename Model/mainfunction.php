@@ -146,6 +146,16 @@ function usuari($usuari){
     }
     return $usuari_id;
 }
+
+function usuariCompartit($usuari, $projecte) {
+    $connexio = connexio();
+    $statement = $connexio->prepare("SELECT id FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?");
+    $statement->bindParam(1, $usuari);
+    $statement->bindParam(2, $projecte);
+    $statement->execute();
+    return $statement->fetch(PDO::FETCH_ASSOC) !== false;
+}
+
 /**
  * insertar_token
  * Retornem el token actualitzat a la base de dades filtrant amb l'email 

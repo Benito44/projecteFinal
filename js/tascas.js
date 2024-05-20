@@ -15,8 +15,8 @@ $(document).ready(function(){
     $(".column").droppable({
         accept: ".task",
         drop: function(event, ui) {
-            var draggable = ui.draggable;
-            var droppable = $(this);
+            let draggable = ui.draggable;
+            let droppable = $(this);
 
             draggable.detach().appendTo(droppable);
 
