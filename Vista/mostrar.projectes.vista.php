@@ -86,9 +86,11 @@
                         </li>
                     </ul>
                     <div class="d-flex justify-content-between">
+                    <?php if ($es_admin): ?>
                         <button type="button" class="btn btn-primary" onclick="showShareModal('<?php echo $proyecto['id']; ?>')">
                             Compartir Projecte
                         </button>
+                    <?php endif; ?>
                         <button id="tancar_<?php echo $proyecto['id']; ?>" class="btn btn-secondary" onclick="document.getElementById('dialog_<?php echo $proyecto['id']; ?>').close();">Cerrar</button>
                         <a href="../Controlador/editor.php?id=<?php echo $proyecto['id']; ?>" class="btn btn-success">Entrar</a>
                     </div>
