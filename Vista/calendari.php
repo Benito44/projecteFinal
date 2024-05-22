@@ -16,6 +16,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand">Gestió de Projectes</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -124,6 +125,50 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-danger" id="deleteEvent">Eliminar</button>
+        <button type="button" class="btn btn-primary" id="modificarEvent">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal para modificar evento -->
+<div class="modal fade" id="modifyEventModal" tabindex="-1" role="dialog" aria-labelledby="modifyEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifyEventModalLabel">Modificar Evento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario para modificar evento -->
+        <form id="modifyEventForm">
+          <input type="hidden" id="modifyEventId" name="eventId">
+          <div class="form-group">
+            <label for="modifyTitle">Título</label>
+            <input type="text" class="form-control" id="modifyTitle" name="title">
+          </div>
+          <div class="form-group">
+            <label for="modifyDesc">Descripcio:</label>
+            <input type="text" name="desc" id="modifyDesc"><br>
+          </div>
+          <div class="form-group">
+            <label for="modifyStart">Data d'inici</label>
+            <input type="datetime-local" class="form-control" id="modifyStart" name="start">
+          </div>
+          <div class="form-group">
+            <label for="modifyEnd">Data final</label>
+            <input type="datetime-local" class="form-control" id="modifyEnd" name="end">
+          </div>
+          <div class="form-group">
+            <label for="modifyColor">Color: </label>
+            <input type="color" name="color" id="modifyColor" required><br>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="saveModifiedEvent">Guardar cambios</button>
       </div>
     </div>
   </div>

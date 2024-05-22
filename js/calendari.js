@@ -62,4 +62,68 @@ $('#deleteEvent').click(function() {
     }
   });
 });
+
+$('#modificarEvent').click(function() {
+    var eventId = $('#eventIdToDelete').val();
+    var event = calendar.getEventById(eventId);
+
+    $('#modifyEventId').val(event.id);
+    $('#modifyTitle').val(event.title);
+    $('#modifyDesc').val(event.extendedProps.desc);
+    $('#modifyStart').val(event.start.toISOString().slice(0, 16));
+    $('#modifyEnd').val(event.end ? event.end.toISOString().slice(0, 16) : '');
+    $('#modifyColor').val(event.backgroundColor);
+
+    $('#eventDetailsModal').modal('hide');
+    $('#modifyEventModal').modal('show');
+});
+
+// Guardar los cambios del evento modificado
+$('#saveModifiedEvent').click(function() {
+    var eventId = $('#modifyEventId').val();
+    var title = $('#modifyTitle').val();
+    var desc = $('#modifyDesc').val();
+    var start = $('#modifyStart').val();
+    var end = $('#modifyEnd').val();
+    var color = $('#modifyColor').val();
+
+    $.ajax({
+        url: '/path/to/update/event', // URL para actualizar el evento
+        method: 'POST',
+        data: {
+            eventId: eventId,
+            title: title,
+            desc: desc,
+            start: start,
+            end: end,
+            color: color
+        },
+        success: function(response) {
+            if (response.success) {
+                var event = calendar.getEventById(eventId);
+                event.setProp('title', title);
+                event.setStart(start);
+                event.setEnd(end);
+                event.setExtendedProp('desc', desc);
+                event.setProp('backgroundColor', color);
+                event.setProp('borderColor', color);
+
+                $('#modifyEventModal').modal('hide');
+                alert('Evento modificado exitosamente.');
+            } else {
+                alert('Error al modificar el evento.');
+            }
+        },
+        error: function() {
+            alert('Error al modificar el evento.');
+        }
+    });
+});
+
+
+
+
+
+
+
 });

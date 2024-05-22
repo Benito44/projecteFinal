@@ -10,7 +10,7 @@ if (!isset($_SESSION['email'])) {
 } 
 
 $conn = connexio();
-
+include '../Vista/creacio_projecte.vista.php';
 if (isset($_POST['nombre_proyecto'])) {
     include '../Vista/creacio_projecte.vista.php';
     $nombre_proyecto = $_POST['nombre_proyecto'];
