@@ -9,25 +9,26 @@
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #e0ffe0;
-            background-image: url(../uploads//WhatsApp\ Image\ 2024-05-10\ at\ 13.00.12.jpeg);
+            background-color: #f0f0f0; /* Fondo blanco */
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
         .form-container {
-            width: 300px;
+            width: 400px; /* Aumentar el ancho del formulario */
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 2px solid #333; /* Borde oscuro para coherencia con el menú */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Fondo claro */
             text-align: center;
         }
 
@@ -47,7 +48,6 @@
             margin: 5px 0;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Asegura que el padding no afecte al ancho total */
         }
 
         input[type="submit"] {
@@ -59,7 +59,6 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            box-sizing: border-box; /* Asegura que el padding no afecte al ancho total */
         }
 
         input[type="submit"]:hover {
@@ -79,27 +78,26 @@
             font-weight: bold;
         }
 
-        /* Estilos para el contenedor .enlace */
         .enlace {
-            margin-bottom: 15px; /* Espacio entre los contenedores */
+            margin-bottom: 15px;
         }
 
-        /* Estilos para los enlaces dentro de .enlace */
         .enlace a {
-            display: block; /* Hace que los enlaces ocupen todo el ancho del contenedor */
-            padding: 10px; /* Espaciado interno */
-            background-color: #f0f0f0; /* Color de fondo */
-            text-decoration: none; /* Quita el subrayado predeterminado del enlace */
-            border-radius: 5px; /* Bordes redondeados */
-            margin-bottom: 5px; /* Espacio entre enlaces */
-            text-align: center; /* Centrar el texto */
-            color: #333; /* Color del texto */
+            display: block;
+            padding: 10px;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            text-align: center;
+            color: #333;
         }
 
         .enlace a:hover {
-            background-color: #e0e0e0; /* Cambia el color de fondo al pasar el cursor sobre el enlace */
+            background-color: #e0e0e0;
         }
-    </style></head>
+    </style>
+</head>
 <body>
     <div class="form-container">
         <h1>Login</h1>
@@ -109,7 +107,7 @@
             <input type="submit" value="Login">
             <span class="error">
                 <?php if(isset($error)) { echo $error; } ?>
-            </span> 
+            </span>
             <div class="d-grid text-center">
                 <div class="btn-group-vertical">
                     <div class="enlace">

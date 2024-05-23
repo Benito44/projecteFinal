@@ -44,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     } else {
-        echo "Credenciales incorrectas";
-        exit();
+        $error = "Credenciales incorrectas";
+        include '../Vista/login.vista.php';
     }
 }
 ?>
