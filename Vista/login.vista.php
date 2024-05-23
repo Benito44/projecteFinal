@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #f0f0f0; /* Fondo blanco */
+            background-image: url(../uploads/fondo.gif); /* Fondo blanco */
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;

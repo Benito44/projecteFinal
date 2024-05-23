@@ -1,7 +1,6 @@
-
 document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+  let calendarEl = document.getElementById('calendar');
+  let calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     events: '../Controlador/obtener_eventos.php',
     eventClick: function(info) {
@@ -12,9 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       $('#eventDetailsModal').modal('show');
       
-    // Establecer el valor del campo oculto eventIdToDelete
-    $('#eventIdToDelete').val(info.event.id);
-    
+      $('#eventIdToDelete').val(info.event.id);
     },
     headerToolbar: {
       left: 'prev,today,next',
@@ -26,46 +23,42 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 
   $('#saveEvent').click(function() {
-    var formData = $('#eventForm').serialize(); // Obtener datos del formulario
+    let formData = $('#eventForm').serialize();
     $.ajax({
-      url: '../Controlador/guardar_evento.php', 
+      url: '../Controlador/guardar_evento.php',
       type: 'POST',
       data: formData,
       success: function(response) {
-        console.log(response); 
-        $('#exampleModal').modal('hide'); 
-  
-        // Después de guardar el evento, recargar los eventos en el calendario
+        console.log(response);
+        $('#exampleModal').modal('hide');
         calendar.refetchEvents();
       },
       error: function(xhr, status, error) {
-        console.error(xhr.responseText); 
+        console.error(xhr.responseText);
       }
     });
   });
-  
-$('#deleteEvent').click(function() {
-  // Obtener el ID del evento a eliminar
-  var eventId = $('#eventIdToDelete').val();
 
-  $.ajax({
-    url: '../Controlador/eliminar_evento.php',
-    type: 'POST',
-    data: { id: eventId },
-    success: function(response) {
-      console.log(response);
-      $('#eventDetailsModal').modal('hide');
-      calendar.refetchEvents();
-    },
-    error: function(xhr, status, error) {
-      console.error(xhr.responseText);
-    }
+  $('#deleteEvent').click(function() {
+    let eventId = $('#eventIdToDelete').val();
+    $.ajax({
+      url: '../Controlador/eliminar_evento.php',
+      type: 'POST',
+      data: { id: eventId },
+      success: function(response) {
+        console.log(response);
+        $('#eventDetailsModal').modal('hide');
+        calendar.refetchEvents();
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr.responseText);
+      }
+    });
   });
-});
 
-$('#modificarEvent').click(function() {
-    var eventId = $('#eventIdToDelete').val();
-    var event = calendar.getEventById(eventId);
+  $('#modificarEvent').click(function() {
+    let eventId = $('#eventIdToDelete').val();
+    let event = calendar.getEventById(eventId);
 
     $('#modifyEventId').val(event.id);
     $('#modifyTitle').val(event.title);
@@ -76,54 +69,44 @@ $('#modificarEvent').click(function() {
 
     $('#eventDetailsModal').modal('hide');
     $('#modifyEventModal').modal('show');
-});
+  });
 
-// Guardar los cambios del evento modificado
-$('#saveModifiedEvent').click(function() {
-    var eventId = $('#modifyEventId').val();
-    var title = $('#modifyTitle').val();
-    var desc = $('#modifyDesc').val();
-    var start = $('#modifyStart').val();
-    var end = $('#modifyEnd').val();
-    var color = $('#modifyColor').val();
+  $('#saveModifiedEvent').click(function() {
+    let eventId = $('#modifyEventId').val();
+    let title = $('#modifyTitle').val();
+    let desc = $('#modifyDesc').val();
+    let start = $('#modifyStart').val();
+    let end = $('#modifyEnd').val();
+    let color = $('#modifyColor').val();
 
     $.ajax({
-        url: '/path/to/update/event', // URL para actualizar el evento
-        method: 'POST',
-        data: {
-            eventId: eventId,
-            title: title,
-            desc: desc,
-            start: start,
-            end: end,
-            color: color
-        },
-        success: function(response) {
-            if (response.success) {
-                var event = calendar.getEventById(eventId);
-                event.setProp('title', title);
-                event.setStart(start);
-                event.setEnd(end);
-                event.setExtendedProp('desc', desc);
-                event.setProp('backgroundColor', color);
-                event.setProp('borderColor', color);
-
-                $('#modifyEventModal').modal('hide');
-                alert('Evento modificado exitosamente.');
-            } else {
-                alert('Error al modificar el evento.');
-            }
-        },
-        error: function() {
-            alert('Error al modificar el evento.');
+      url: '../Controlador/modificar_event.php',
+      method: 'POST',
+      data: {
+        modifyEventId: eventId,
+        modifyTitle: title,
+        modifyDesc: desc,
+        modifyStart: start,
+        modifyEnd: end,
+        modifyColor: color
+      },
+      success: function(response) {
+        if (response.success) {
+          let event = calendar.getEventById(eventId);
+          event.setProp('title', title);
+          event.setStart(start);
+          event.setEnd(end);
+          event.setExtendedProp('desc', desc);
+          event.setProp('backgroundColor', color);
+          $('#modifyEventModal').modal('hide');
+          alert('Evento modificado exitosamente.');
+        } else {
+          alert('Error al modificar el evento: ' + response.message);
         }
+      },
+      error: function(xhr, status, error) {
+        alert('Error al modificar el evento: ' + xhr.responseText);
+      }
     });
-});
-
-
-
-
-
-
-
+  });
 });
