@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
 
     <style>
- body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    li a:hover {
-      background-color: #f0f0f0;
-    }
-    .dialeg {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        li a:hover {
+            background-color: #f0f0f0;
+        }
+        .dialeg {
             position: absolute;
             margin: 0;
             padding: 2rem;
@@ -80,84 +80,98 @@
     </ul>
   </div>
 </nav>
-<div>
-          <div style="position: absolute; top: 20px; right: 20px;">
-            <?php
-            // Obtener la imagen de perfil del usuario
-            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
-            if($imagen_perfil) {
-                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
-            } else {
-                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
-            }
-            ?>
-        </div>
 
-    <div name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Perfil
-        </h2>
-    </div>
-
+<div class="container">
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                <form action="../Controlador/perfil.php" id="form" method="post">
-                    Usuari
-                    <input type="text" id="usuario" name="usuario" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>"><br><br>
-                    Email
-                    <input type="email" id="email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>"><br><br>
-                    <input type="submit" value="Login">
-                </form>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            <form action="../Controlador/perfil.php" id="form" method="post" enctype="multipart/form-data">
+                                <h3>Imagen de perfil</h3>
+                                <div class="profile-picture text-center mt-4">
+                                    <?php
+                                    // Obtener la imagen de perfil del usuario
+                                    $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+                                    if($imagen_perfil) {
+                                        echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 250px; height: 250px; border-radius: 50%;">';
+                                    }
+                                    ?>
+                                </div>
+                                <input type="file" name="imagen" class="form-control mb-3">
+                                <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg mb-4">
+                        <div class="max-w-xl">
+                            <form action="../Controlador/perfil.php" id="form" method="post">
+                                <h3>Información de usuario</h3>
+                                <div class="mb-3">
+                                    <label for="usuario" class="form-label">Usuari</label>
+                                    <input type="text" id="usuario" name="usuario" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" class="form-control">
+                                </div>
+                                <input type="submit" value="Actualizar información" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
+            <div class="row">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                <form action="../Controlador/perfil.php" id="form" method="post" enctype="multipart/form-data">
-                  Imagen de perfil: <input type="file" name="imagen"><br><br>
-                  <input type="submit" value="Guardar cambios">
-              </form>
-
-                </div>
-            </div>
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                <form action="../Controlador/perfil.php" id="form2" method="post">
-                    Contrasenya actual
-                    <input type="password" name="actual" id="actual"><br><br>
-
-                    Nova Contrasenya
-                    <input type="password" name="nova_contrasenya" id="nova_contrasenya"><br><br>
-
-                    Torna a posar la contrasenya
-                    <input type="password" name="nova_contrasenya2" id="nova_contrasenya2"><br><br>
-                    <input type="submit" value="Login">
-                </form>
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                <button id="eliminarCompte">Eliminar Compte</button>
+                        <div class="max-w-xl">
+                            <form action="../Controlador/perfil.php" id="form" method="post">
+                                <h3>Cambiar contraseña</h3>
+                                <div class="mb-3">
+                                    <label for="actual" class="form-label">Contrasenya actual</label>
+                                    <input type="password" name="actual" id="actual" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nova_contrasenya" class="form-label">Nova Contrasenya</label>
+                                    <input type="password" name="nova_contrasenya" id="nova_contrasenya" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nova_contrasenya2" class="form-label">Torna a posar la contrasenya</label>
+                                    <input type="password" name="nova_contrasenya2" id="nova_contrasenya2" class="form-control">
+                                </div>
+                                <input type="submit" value="Actualizar contraseña" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                <div class="col-md-12">
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            <h3>Eliminar cuenta</h3>
+                            <button id="eliminarCompte" class="btn btn-danger">Eliminar Compte</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <dialog id="createEventDialog" class="dialeg">
-              <p>Estas segur que vols eliminar permanentment el teu compte?</p>
+                <p>Estas segur que vols eliminar permanentment el teu compte?</p>
                 <form action="../Controlador/perfil.php" id="form2" method="post">
                     Contrasenya
-                    <input type="password" name="contrasenya_eliminar" id="contrasenya_eliminar"><br><br>
-                    <input type="submit" value="Login">
+                    <input type="password" name="contrasenya_eliminar" id="contrasenya_eliminar" class="form-control mb-3">
+                    <input type="submit" value="Confirmar eliminación" class="btn btn-danger">
                 </form>
-                    <button id="closeCreateEventDialog">Cerrar</button>
-                </dialog>
+                <button id="closeCreateEventDialog" class="btn btn-secondary">Cerrar</button>
+            </dialog>
         </div>
     </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="../js/perfil.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../js/perfil.js"></script>
 </body>
 </html>

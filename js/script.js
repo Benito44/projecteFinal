@@ -88,12 +88,12 @@ $(document).ready(function(){
             success: function(response){
                 console.log(response);
                 // Después de realizar la actualización del proyecto, mostrar el mensaje de actualización
-$('#actualizacion').show();
+                $('#actualizacion').show();
 
-// Ocultar el mensaje de actualización después de 3 segundos (3000 milisegundos)
-setTimeout(function() {
-  $('#actualizacion').hide();
-}, 3000);
+                // Ocultar el mensaje de actualización después de 3 segundos (3000 milisegundos)
+                setTimeout(function() {
+                $('#actualizacion').hide();
+                }, 3000);
 
             },
             error: function(xhr, status, error){

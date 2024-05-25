@@ -1,6 +1,18 @@
 <?php
-session_start(); // Iniciar la sesión
 require '../Model/mainfunction.php';
+
+session_start(); // Iniciar sesión si aún no está iniciada
+
+if (!isset($_SESSION['email'])) {
+    header ('Location: ../Vista/login.vista.php');
+} else {
+    $connexio = connexio(); 
+    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
+    $statement = $connexio->prepare($sql);
+    $statement->execute([$_SESSION['email']]);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+}
+$es_admin = $row['rol'] === 'admin';
 $connexio = connexio();    
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {

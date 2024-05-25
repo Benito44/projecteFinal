@@ -22,11 +22,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand">Gestió de Projectes</a>
+        <a class="navbar-brand">Gestió de Projectes</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -57,10 +56,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $proyecto['nom']; ?></h5>
-                            Descripció:<p class="card-text"><?php echo $proyecto['descripcio']; ?></p>
-                            <button class="btn btn-primary" onclick="document.getElementById('dialog_<?php echo $proyecto['id']; ?>').showModal();">
+                            <p class="card-text">Descripció: <?php echo $proyecto['descripcio']; ?></p>
+                            <button class="btn btn-primary open-dialog" data-project-id="<?php echo $proyecto['id']; ?>">
                                Informació
                             </button>
+                            <?php if ($es_admin): ?>
+                                <button class="btn btn-danger float-end delete-project" data-project-id="<?php echo $proyecto['id']; ?>">X</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -86,12 +88,12 @@
                         </li>
                     </ul>
                     <div class="d-flex justify-content-between">
-                    <?php if ($es_admin): ?>
-                        <button type="button" class="btn btn-primary" onclick="showShareModal('<?php echo $proyecto['id']; ?>')">
-                            Compartir Projecte
-                        </button>
-                    <?php endif; ?>
-                        <button id="tancar_<?php echo $proyecto['id']; ?>" class="btn btn-secondary" onclick="document.getElementById('dialog_<?php echo $proyecto['id']; ?>').close();">Cerrar</button>
+                        <?php if ($es_admin): ?>
+                            <button type="button" class="btn btn-primary share-project" data-project-id="<?php echo $proyecto['id']; ?>">
+                                Compartir Projecte
+                            </button>
+                        <?php endif; ?>
+                        <button class="btn btn-secondary close-dialog" data-project-id="<?php echo $proyecto['id']; ?>">Cerrar</button>
                         <a href="../Controlador/editor.php?id=<?php echo $proyecto['id']; ?>" class="btn btn-success">Entrar</a>
                     </div>
                 </dialog>
@@ -145,5 +147,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 </html>

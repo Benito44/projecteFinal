@@ -26,7 +26,6 @@ $statement_proyectos = $connexio->prepare($sql_proyectos);
 $statement_proyectos->execute([$row['id']]);
 $proyectos = $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);
 
-// Consulta para obtener todos los usuarios con permisos en cada proyecto
 $sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
                  FROM proyecto_usuario pu 
                  INNER JOIN usuaris u ON pu.id_usuario = u.id 
@@ -44,75 +43,81 @@ if (!$proyectos) {
 }
 ?>
     <script>
-    <?php foreach($proyectos as $proyecto): ?>
-      const button_<?php echo $proyecto['id']; ?> = document.getElementById('<?php echo $proyecto['id']; ?>');
-      const dialog_<?php echo $proyecto['id']; ?> = document.getElementById('dialog_<?php echo $proyecto['id']; ?>');
-      const tancar_<?php echo $proyecto['id']; ?> = document.getElementById('tancar_<?php echo $proyecto['id']; ?>');
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.delete-project').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project-id');
+                    if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
+                        window.location.href = '../Controlador/eliminar_proyecto.php?id=' + projectId;
+                    }
+                });
+            });
 
-      button_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
-          dialog_<?php echo $proyecto['id']; ?>.showModal();
-      });
-      tancar_<?php echo $proyecto['id']; ?>.addEventListener('click', function() {
-          dialog_<?php echo $proyecto['id']; ?>.close();
-      });
-    <?php endforeach; ?>
-    $(document).ready(function() {
-        <?php foreach($proyectos as $proyecto): ?>
-        $('#agregar-correos_<?php echo $proyecto['id']; ?>').click(function() {
-            var correos = $('#emails_compartidos_<?php echo $proyecto['id']; ?>').val().split('\n');
+            document.querySelectorAll('.open-dialog').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project-id');
+                    document.getElementById('dialog_' + projectId).showModal();
+                });
+            });
 
-            // Agregar correos al div y al campo oculto
-            correos.forEach(function(correo) {
-                correo = correo.trim();
-                if (correo !== "") {
-                    $('#emails-list_<?php echo $proyecto['id']; ?>').append('<li>' + correo + ' <button class="btn btn-danger btn-sm" onclick="removeEmail(this)">Eliminar</button></li>');
+            document.querySelectorAll('.close-dialog').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project-id');
+                    document.getElementById('dialog_' + projectId).close();
+                });
+            });
+
+            document.querySelectorAll('.share-project').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project-id');
+                    document.getElementById('dialog_' + projectId).close();
+                    $('#modalCompartirProyecto_' + projectId).modal('show');
+                });
+            });
+
+            <?php foreach($proyectos as $proyecto): ?>
+            $('#agregar-correos_<?php echo $proyecto['id']; ?>').click(function() {
+                let correos = $('#emails_compartidos_<?php echo $proyecto['id']; ?>').val().split('\n');
+
+                correos.forEach(function(correo) {
+                    correo = correo.trim();
+                    if (correo !== "") {
+                        $('#emails-list_<?php echo $proyecto['id']; ?>').append('<li>' + correo + ' <button class="btn btn-danger btn-sm" onclick="removeEmail(this)">Eliminar</button></li>');
+                    }
+                });
+
+                $('#emails_compartidos_<?php echo $proyecto['id']; ?>').val('');
+
+                updateHiddenEmails('<?php echo $proyecto['id']; ?>');
+            });
+
+            $('#share-form_<?php echo $proyecto['id']; ?>').submit(function(event) {
+                let correos = [];
+                $('#emails-list_<?php echo $proyecto['id']; ?> li').each(function() {
+                    correos.push($(this).text().replace(' Eliminar', ''));
+                });
+
+                $('#correos-ocultos_<?php echo $proyecto['id']; ?>').val(correos.join(','));
+
+                if (correos.length === 0) {
+                    alert('Por favor, agregue al menos un correo electrónico.');
+                    event.preventDefault();
                 }
             });
-
-            // Vaciar el textarea después de agregar los correos electrónicos
-            $('#emails_compartidos_<?php echo $proyecto['id']; ?>').val('');
-
-            // Actualizar campo oculto con los correos
-            updateHiddenEmails('<?php echo $proyecto['id']; ?>');
+            <?php endforeach; ?>
         });
 
-        $('#share-form_<?php echo $proyecto['id']; ?>').submit(function(event) {
-            var correos = [];
-            $('#emails-list_<?php echo $proyecto['id']; ?> li').each(function() {
+        function removeEmail(button) {
+            $(button).parent().remove();
+            let proyectoId = $(button).closest('ul').attr('id').split('_')[2];
+            updateHiddenEmails(proyectoId);
+        }
+
+        function updateHiddenEmails(proyectoId) {
+            let correos = [];
+            $('#emails-list_' + proyectoId + ' li').each(function() {
                 correos.push($(this).text().replace(' Eliminar', ''));
             });
-
-            // Almacenar los correos electrónicos en el campo oculto
-            $('#correos-ocultos_<?php echo $proyecto['id']; ?>').val(correos.join(','));
-
-            // Verificar si el campo de correos electrónicos está vacío
-            if (correos.length === 0) {
-                // Mostrar un mensaje de error o realizar alguna acción
-                alert('Por favor, agregue al menos un correo electrónico.');
-                event.preventDefault();
-            }
-        });
-        <?php endforeach; ?>
-    });
-
-    function showShareModal(proyectoId) {
-        // Cerrar el dialog de detalles del proyecto
-        document.getElementById('dialog_' + proyectoId).close();
-        // Mostrar el modal de compartir proyecto
-        $('#modalCompartirProyecto_' + proyectoId).modal('show');
-    }
-
-    function removeEmail(button) {
-        $(button).parent().remove();
-        var proyectoId = $(button).closest('ul').attr('id').split('_')[2];
-        updateHiddenEmails(proyectoId);
-    }
-
-    function updateHiddenEmails(proyectoId) {
-        var correos = [];
-        $('#emails-list_' + proyectoId + ' li').each(function() {
-            correos.push($(this).text().replace(' Eliminar', ''));
-        });
-        $('#correos-ocultos_' + proyectoId).val(correos.join(','));
-    }
+            $('#correos-ocultos_' + proyectoId).val(correos.join(','));
+        }
     </script>
