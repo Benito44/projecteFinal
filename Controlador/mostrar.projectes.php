@@ -48,7 +48,7 @@ if (!$proyectos) {
                 button.addEventListener('click', function() {
                     const projectId = this.getAttribute('data-project-id');
                     if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
-                        window.location.href = '../Controlador/eliminar_proyecto.php?id=' + projectId;
+                        window.location.href = '../Controlador/eliminar_projecte.php?id=' + projectId;
                     }
                 });
             });
