@@ -37,90 +37,89 @@ if ($row) {
         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
       </li>
       <li class="nav-item">
-            <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
-          </li>
-      <div style="position: absolute; top: 20px; right: 20px;">
-            <?php
-            // Obtener la imagen de perfil del usuario
-            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
-            if($imagen_perfil) {
-                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
-            } else {
-                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
-            }
-            ?>
-        </div>
+        <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
+      </li>
+      <div style="position: absolute; top: 20px; right: 140px;">
+        <?php
+        // Obtener la imagen de perfil del usuario
+        $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+        if($imagen_perfil) {
+            echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
+        } else {
+            echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
+        }
+        ?>
+      </div>
     </ul>
   </div>
 </nav>
 
+<div class="buttons-container">
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
+</div>
 
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
-
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Tasques pendents</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-  <?php if ($es_admin): ?>
+    <?php if ($es_admin): ?>
     <p>En revisió</p>
     <div>
-        <ul>
-            <?php foreach ($tasca as $usuario_tasca): ?>
-                <li><?php echo $usuario_tasca['descripcio']; ?></li>
-            <?php endforeach; ?>
-        </ul>
+      <ul>
+        <?php foreach ($tasca as $usuario_tasca): ?>
+          <li><?php echo $usuario_tasca['descripcio']; ?></li>
+        <?php endforeach; ?>
+      </ul>
     </div>
     <?php endif; ?>
 
+    <!-- Separador -->
+    <hr>
 
-
-  <div>
-  <p>Pendents:  </p>
+    <div>
+      <p>Pendents:</p>
       <ul>
-          <?php foreach ($tasca_progres as $usuario_tasca_2): ?>
-              <li><?php echo $usuario_tasca_2['descripcio']; ?></li>
-          <?php endforeach; ?>
+        <?php foreach ($tasca_progres as $usuario_tasca_2): ?>
+          <li><?php echo $usuario_tasca_2['descripcio']; ?></li>
+        <?php endforeach; ?>
       </ul>
-  </div>
+    </div>
   </div>
 </div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Chat</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div id="chat-container">
-        <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
+      <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
     </div>
-    
-
     <form id="chat-form">
-        <input type="text" id="message-input" placeholder="Escribe un mensaje...">
-        <button type="submit">Enviar</button>
+      <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+      <button type="submit">Enviar</button>
     </form> 
   </div>
 </div>
-    </div>
 
-    <h1 id="nombre_proyecto"></h1>
+<div class="title-container">
+    <h1 id="nombre_proyecto">Nombre del Proyecto</h1>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
-      El proyecto se ha actualizado.
+        El proyecto se ha actualizado.
     </div>
-    
-    <div id="chat-container">
-      <textarea id="editor" rows="10" cols="50"></textarea>
-    </div>
+</div>
 
-
-
+<div id="chat-container">
+  <textarea id="editor" rows="10" cols="50"></textarea>
+</div>
 </body>
-
 </html>
+
 <?php
     } elseif($row['permissos'] === 'visualitzar'){
         ?>
@@ -167,8 +166,6 @@ if ($row) {
             $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
             if($imagen_perfil) {
                 echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
-            } else {
-                echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
             }
             ?>
         </div>
@@ -181,7 +178,7 @@ if ($row) {
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Tasques pendents</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -210,7 +207,7 @@ if ($row) {
   </div>
   </div>
 </div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Chat</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -304,7 +301,7 @@ if ($row) {
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Tasques pendents</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -333,7 +330,7 @@ if ($row) {
   </div>
   </div>
 </div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Chat</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

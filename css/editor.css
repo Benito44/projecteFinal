@@ -5,8 +5,7 @@ body {
 }
 
 h1 {
-    text-align: center;
-    margin-top: 20px;
+    margin: 0; /* Remove default margin */
 }
 
 ul {
@@ -79,6 +78,18 @@ li a:hover {
     box-sizing: border-box;
     background-color: #fff;
     overflow-y: auto;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.alert {
+    margin-left: 20px;
+    margin-bottom: 0;
 }
 
 #chat-form {
