@@ -87,6 +87,10 @@ li a:hover {
     margin-top: 20px;
 }
 
+#actualizacion {
+    margin-top: 10px; /* Adjust the margin top as needed */
+}
+
 .alert {
     margin-left: 20px;
     margin-bottom: 0;

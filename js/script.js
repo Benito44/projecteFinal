@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    
-    
+
+
     let urlParams = new URLSearchParams(window.location.search);
     let proyectoId = urlParams.get('id'); // Obtener el ID del proyecto de la URL
     

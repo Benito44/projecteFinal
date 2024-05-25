@@ -83,6 +83,7 @@
 
 <div class="container">
     <div class="py-12">
+        <h1>Perfil de l'usuari</h1>
         <div class="container">
             <div class="row mb-4">
                 <div class="col-md-6">
@@ -100,7 +101,7 @@
                                     ?>
                                 </div>
                                 <input type="file" name="imagen" class="form-control mb-3">
-                                <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                                <input type="submit" value="Actualitzar informació" class="btn btn-primary">
                             </form>
                         </div>
                     </div>
@@ -110,7 +111,7 @@
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg mb-4">
                         <div class="max-w-xl">
                             <form action="../Controlador/perfil.php" id="form" method="post">
-                                <h3>Información de usuario</h3>
+                                <h3>Informació d'usuari</h3>
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuari</label>
                                     <input type="text" id="usuario" name="usuario" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>" class="form-control">
@@ -119,7 +120,7 @@
                                     <label for="email" class="form-label">Email</label>
                                     <input type="email" id="email" name="email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" class="form-control">
                                 </div>
-                                <input type="submit" value="Actualizar información" class="btn btn-primary">
+                                <input type="submit" value="Actualitzar informació" class="btn btn-primary">
                             </form>
                         </div>
                     </div>
@@ -127,7 +128,7 @@
                 </div>
             </div>
             <div class="row">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <div class="max-w-xl">
                             <form action="../Controlador/perfil.php" id="form" method="post">
                                 <h3>Cambiar contraseña</h3>
@@ -146,7 +147,9 @@
                                 <input type="submit" value="Actualizar contraseña" class="btn btn-primary">
                             </form>
                         </div>
-                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <div class="max-w-xl">
