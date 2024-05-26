@@ -33,6 +33,21 @@
         .table tr {
             cursor: pointer;
         }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            margin-bottom: 10px;
+        }
+        .fixed-profile-image {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        .fixed-profile-image img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -59,38 +74,44 @@
             <li class="nav-item">
                 <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
             </li>
-            <div style="position: absolute; top: 20px; right: 20px;">
-                <?php
-                // Obtener la imagen de perfil del usuario
-                $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
-                if($imagen_perfil) {
-                    echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
-                } else {
-                    echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
-                }
-                ?>
-            </div>
+
         </ul>
     </div>
 </nav>
+<div class="fixed-profile-image">
+    <?php
+    // Obtener la imagen de perfil del usuario
+    $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+    if($imagen_perfil) {
+        echo '<img src="' . htmlspecialchars($imagen_perfil) . '" alt="Imagen de perfil">';
+    } else {
+        echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto">';
+    }
+    ?>
+</div>
 <div class="content">
     <div class="container">
         <h2>Ver Usuarios</h2>
+        <a href='../Controlador/crear_usuari.php' class='btn btn-primary'>+</a>
+
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Nombre de Usuario</th>
-                    <th scope="col">Correo Electrónico</th>
+                    <th scope="col">Imatge</th>
+                    <th scope="col">Nom de l'Usuari</th>
+                    <th scope="col">Correu Electrónic</th>
                     <th scope="col">Rol</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col">Acció</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $usuarios = obtenerTodosUsuarios();
                 foreach ($usuarios as $usuario) {
+                    $imagenPerfil = !empty($usuario['imatge']) ? htmlspecialchars($usuario['imatge']) : '../uploads/default.webp';
                     echo "<tr>";
-                    echo "<td><a href='editar_usuaris.php?id={$usuario['id']}'>{$usuario['usuari']}</a></td>";
+                    echo "<td><img src='" . $imagenPerfil . "' alt='Imagen de Perfil' style='width: 50px; height: 50px; border-radius: 50%;'></td>";
+                    echo "<td>{$usuario['usuari']}</td>";
                     echo "<td>{$usuario['email']}</td>";
                     echo "<td>{$usuario['rol']}</td>";
                     echo "<td><a href='editar_usuaris.php?id={$usuario['id']}' class='btn btn-primary'>Editar</a></td>";

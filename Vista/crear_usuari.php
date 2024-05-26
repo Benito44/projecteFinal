@@ -46,6 +46,9 @@
             height: 50px;
             border-radius: 50%;
         }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
