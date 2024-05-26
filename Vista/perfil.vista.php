@@ -12,6 +12,10 @@
             margin: 0;
             padding: 0;
         }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -112,6 +116,7 @@
                         <div class="max-w-xl">
                             <form action="../Controlador/perfil.php" id="form" method="post">
                                 <h3>Informació d'usuari</h3>
+
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuari</label>
                                     <input type="text" id="usuario" name="usuario" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>" class="form-control">
@@ -144,6 +149,9 @@
                                     <label for="nova_contrasenya2" class="form-label">Torna a posar la contrasenya</label>
                                     <input type="password" name="nova_contrasenya2" id="nova_contrasenya2" class="form-control">
                                 </div>
+                                <span class="error">
+                                    <?php if(isset($error)) { echo $error; } ?>
+                                </span>
                                 <input type="submit" value="Actualizar contraseña" class="btn btn-primary">
                             </form>
                         </div>

@@ -1,8 +1,7 @@
 <?php
 
+require '../Model/mainfunction.php';
 $proyectoId = $_GET['id'];
-
-include '../Model/mainfunction.php';
 
 // Obtener el nombre del proyecto
 $nombreProyecto = obtenerNombreProyecto($proyectoId);

@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
     
     include '../Vista/perfil.vista.php';
     }else {
-        echo "Algo esta mal";
+        $error = "Algo esta mal";
         include '../Vista/perfil.vista.php';
     }
  } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['contrasenya_eliminar'])) {
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actual'])) {
         borrarCompte($_SESSION['email']);
         header("Location: ../Vista/login.vista.php");
         } else {
-            echo "Error";
+            $error = "Algo esta mal";
             include '../Vista/perfil.vista.php';
         }
         
@@ -71,6 +71,7 @@ if (!file_exists($carpeta_destino)) {
     $statement->execute();
 
     include '../Vista/perfil.vista.php';
+    
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 

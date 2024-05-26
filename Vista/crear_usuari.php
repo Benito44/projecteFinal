@@ -114,6 +114,9 @@
                         <option value="membre">Usuari</option>
                     </select>
                 </div>
+                <span class="error">
+                    <?php if(isset($error)) { echo $error; } ?>
+                </span>
                 <div class="btn-center-right">
                     <input type="submit" value="Crear Usuari" class="btn btn-primary">
                 </div>
