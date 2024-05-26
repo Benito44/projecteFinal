@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,6 +30,9 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .table tr {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -43,6 +45,7 @@
                     <th scope="col">Nombre de Usuario</th>
                     <th scope="col">Correo Electrónico</th>
                     <th scope="col">Rol</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +56,7 @@
                     echo "<td>{$usuario['usuari']}</td>";
                     echo "<td>{$usuario['email']}</td>";
                     echo "<td>{$usuario['rol']}</td>";
+                    echo "<td><a href='editar_usuaris.php?id={$usuario['id']}' class='btn btn-primary'>Editar</a></td>";
                     echo "</tr>";
                 }
                 ?>
@@ -60,5 +64,7 @@
         </table>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzBMVLOM04d64k1dXZktpM9w8a/tteS0P5c13p5lFvMd" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-9ndCyUaPLF5e1hYhLUy60mxuKc9K/DIpWkTxH01qjIcXNXxlfbsVRmZ4kfNtwC9g" crossorigin="anonymous"></script>
 </body>
 </html>
