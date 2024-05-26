@@ -36,6 +36,43 @@
     </style>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">Gestió de Projectes</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
+            </li>
+            <div style="position: absolute; top: 20px; right: 20px;">
+                <?php
+                // Obtener la imagen de perfil del usuario
+                $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+                if($imagen_perfil) {
+                    echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil" style="width: 100px; height: 100px; border-radius: 50%;">';
+                } else {
+                    echo '<img src="default_profile_image.jpg" alt="Imagen de perfil por defecto" style="width: 100px; height: 100px; border-radius: 50%;">';
+                }
+                ?>
+            </div>
+        </ul>
+    </div>
+</nav>
 <div class="content">
     <div class="container">
         <h2>Ver Usuarios</h2>
@@ -53,7 +90,7 @@
                 $usuarios = obtenerTodosUsuarios();
                 foreach ($usuarios as $usuario) {
                     echo "<tr>";
-                    echo "<td>{$usuario['usuari']}</td>";
+                    echo "<td><a href='editar_usuaris.php?id={$usuario['id']}'>{$usuario['usuari']}</a></td>";
                     echo "<td>{$usuario['email']}</td>";
                     echo "<td>{$usuario['rol']}</td>";
                     echo "<td><a href='editar_usuaris.php?id={$usuario['id']}' class='btn btn-primary'>Editar</a></td>";
@@ -64,7 +101,8 @@
         </table>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzBMVLOM04d64k1dXZktpM9w8a/tteS0P5c13p5lFvMd" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-9ndCyUaPLF5e1hYhLUy60mxuKc9K/DIpWkTxH01qjIcXNXxlfbsVRmZ4kfNtwC9g" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
