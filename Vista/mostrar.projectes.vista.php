@@ -79,7 +79,7 @@
                                         if ($usuario_proyecto['id_proyecto'] == $proyecto['id']) {
                                             $usuarios_con_permisos = explode(", ", $usuario_proyecto['usuarios_con_permisos']);
                                             foreach ($usuarios_con_permisos as $usuario) {
-                                                echo "<li>$usuario</li>";
+                                                echo "<li>$usuario</li> ($usuario)";
                                             }
                                         }
                                     }

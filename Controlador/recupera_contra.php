@@ -8,7 +8,6 @@ if (isset($_POST['contra'])) {
     $email = $_POST['contra'];
 
     $nova_contra = "";
-    //$pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
     $pattern = "1234567890abcdefghijklmñnopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ.-_*/=[]{}#@|~¬&()?¿";
     $max = strlen($pattern)-1;
     for($i = 0; $i < 9; $i++){
@@ -25,14 +24,15 @@ if (isset($_POST['contra'])) {
     $statement->bindParam(2,$email);
     $statement->execute();
 
-    $text = 'Hola '. $usuari . '<br>' . 'Nova contrasenya: ' . $nova_contra . '<br>' .
+    $text = 'Hola '. $usuari . '<br>' . 'L\' administrador ha proporcionat una contrasenya nova: ' . 
+    'Nova contrasenya: ' . $nova_contra . '<br>' . 'Inicia sessió amb la nova contrasenya i modifica-la en la teva pàgina de perfil'.
     'http://localhost';
     
     
     // Enviem el correu a l'email enviat
     phphmailer($usuari, $email, $text);
     $error = "";
-    $error = "Emal enviat";
+    $error = "Email enviat";
     header("Location: ../Vista/login.vista.php");
 }
 

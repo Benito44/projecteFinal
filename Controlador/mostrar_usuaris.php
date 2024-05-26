@@ -3,6 +3,7 @@ session_start();
 require '../Model/mainfunction.php';
 
 include '../Vista/mostrar_usuaris.php';
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $usuario = obtenerUsuarioPorId($id);
