@@ -71,7 +71,7 @@
                         <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Controlador/crear_usuari.php">Crear usuari</a>
+                        <a class="nav-link" href="../Controlador/mostrar_usuaris.php">Mostrar Usuaris</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>

@@ -91,7 +91,7 @@ if (isset($_POST['nombre_proyectos_compartidos']) && isset($_POST['correos_ocult
                 $statement->execute();
             }
 
-            $link_proyecto = "http://localhost/Vista/editor.php?id=" . $id_proyecto;
+            $link_proyecto = "http://localhost/Controlador/editor.php?id=" . $id_proyecto;
             $usuari = encontrarPorEmail($email); 
             $text = 'Hola ' . $usuari . ',<br><br>';
             $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';

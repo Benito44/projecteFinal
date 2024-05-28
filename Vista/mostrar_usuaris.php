@@ -101,7 +101,6 @@
                     <th scope="col">Nom de l'Usuari</th>
                     <th scope="col">Correu Electrónic</th>
                     <th scope="col">Rol</th>
-                    <th scope="col">Acció</th>
                 </tr>
             </thead>
             <tbody>
@@ -109,12 +108,11 @@
                 $usuarios = obtenerTodosUsuarios();
                 foreach ($usuarios as $usuario) {
                     $imagenPerfil = !empty($usuario['imatge']) ? htmlspecialchars($usuario['imatge']) : '../uploads/default.webp';
-                    echo "<tr>";
+                    echo "<tr data-id='{$usuario['id']}'>";
                     echo "<td><img src='" . $imagenPerfil . "' alt='Imagen de Perfil' style='width: 50px; height: 50px; border-radius: 50%;'></td>";
                     echo "<td>{$usuario['usuari']}</td>";
                     echo "<td>{$usuario['email']}</td>";
                     echo "<td>{$usuario['rol']}</td>";
-                    echo "<td><a href='editar_usuaris.php?id={$usuario['id']}' class='btn btn-primary'>Editar</a></td>";
                     echo "</tr>";
                 }
                 ?>
@@ -125,5 +123,16 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                const userId = row.getAttribute('data-id');
+                window.location.href = `editar_usuaris.php?id=${userId}`;
+            });
+        });
+    });
+</script>
 </body>
 </html>
