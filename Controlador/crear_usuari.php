@@ -4,7 +4,7 @@ session_start();
 require_once '../Model/mainfunction.php';
 
 if (!isset($_SESSION['email'])) {
-    exit("Error: No se ha iniciado sesión");
+    header('Location: ../Vista/login.vista.php');
 }
 
 // Verificar si se enviaron los datos del formulario

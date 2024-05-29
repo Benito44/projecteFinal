@@ -32,24 +32,26 @@ projectes, tasques i usuaris.
 - Usuaris per probar
 b.martinez2@sapalomera.cat 1234 - Admin
 d.vallmanya@gmail.com 123 - Usuari
-### Crear Usuaris
-- Per part de l'administrador crear usuaris i assignar-li el seu rol (Admin o Usuari)
 
+### Crear Usuaris
+- Per part de l'administrador podrà mostrar i crear usuaris , assignar-li el seu rol (Admin o Usuari) i modificar els existents
 
 ### Crear Projecte
-- Creació de projecte i compartir un projecte amb varis usuaris a la vegada  per la part d'administrador amb correu electronic enviant el link a tots els usuaris.
+- Crear el projecte donant permís total a l'administrador
 
-- Al compartir poder possar permissos específics (Edició total, només comentar o Visualitzar)
 ### Mostrar Projecte
-- Mostrar els projectes de cada propi usuari, l'administrador té permissos totals 
+- Mostrar els projectes de cada propi usuari amb la seva informació: El nom, descripció, data de finalització i usuaris amb permissos.
+
+- L'administrador és capaç de compartir el projecte amb varis usuaris alhora i s'envia un correu de notificació
+
 ### Calendari
 - Calendari per mostrar events dels usuaris
 
-- Eliminar nomès el nostre event sense possibilitat d'eliminar altres que no siguin nostres
-### Tascas d'usuaris
-- Tasques on pots crear o moure en els diferents apartats
+- Crear, modificar i eliminar events on nomès poden editar el seu propi, on l'administrador pot editar qualsevol
 
-- Actulitzar en la base de dades en el moment que és canvia una tasca de lloc
+### Tascas d'usuaris
+- Apartat on pots crear i moure les tasques del projecte
+
 ### Projecte
 - Escriure en el projecte amb la possibilitat de veure que està escribint l'altre persona (en viu)
 
@@ -59,11 +61,16 @@ d.vallmanya@gmail.com 123 - Usuari
 
 - Guardar totes aquestes dades en la base de dades (comentaris, contingut del projecte, usuaris compartits en el projecte...)
 
-- Mostrar per pantalla quanes guarden les dades
+- Mostrar per pantalla quan es guarden les dades
 
 - Una vegada inicies la sessió amb un usuari normal, no admin, és mostraran els teus projectes personals i si intentes entrar en un projecte on no ets propietari o no tens permissos és mostrarà un altre pantalla d'error
 ### Perfil
-- Poder canviar el teu nom , email, contrasenya o eliminar el teu usuari
+- Canviar el teu nom i email d'usuari
+
+- Canviar la contrasenya
+
+- Eliminar el teu compte
+
 ### Desplegament
 - Desplegament del projecte amb docker 
     - docker build . -t proj-final

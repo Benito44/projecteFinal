@@ -26,7 +26,7 @@
             background-color: #fff;
             margin-top: 20px;
         }
-        h2 {
+        h1 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -91,7 +91,7 @@
 </div>
 <div class="content">
     <div class="container">
-        <h2>Ver Usuarios</h2>
+        <h1>Ver Usuarios</h1>
         <a href='../Controlador/crear_usuari.php' class='btn btn-primary'>+</a>
 
         <table class="table table-striped">
@@ -109,7 +109,7 @@
                 foreach ($usuarios as $usuario) {
                     $imagenPerfil = !empty($usuario['imatge']) ? htmlspecialchars($usuario['imatge']) : '../uploads/default.webp';
                     echo "<tr data-id='{$usuario['id']}'>";
-                    echo "<td><img src='" . $imagenPerfil . "' alt='Imagen de Perfil' style='width: 50px; height: 50px; border-radius: 50%;'></td>";
+                    echo "<td><img src='" . $imagenPerfil . "' alt='Imatge de Perfil_{$usuario['id']}' style='width: 50px; height: 50px; border-radius: 50%;'></td>";
                     echo "<td>{$usuario['usuari']}</td>";
                     echo "<td>{$usuario['email']}</td>";
                     echo "<td>{$usuario['rol']}</td>";

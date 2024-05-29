@@ -26,7 +26,7 @@
             background-color: #fff;
             margin-top: 20px;
         }
-        h2 {
+        h1 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -77,7 +77,7 @@
 </nav>
 <div class="content">
     <div class="container">
-        <h2>Editar Usuario</h2>
+        <h1>Editar Usuario</h1>
         <form method="post" id="editUserForm" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id']); ?>">
             <div class="mb-3">

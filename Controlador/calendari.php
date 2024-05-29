@@ -3,7 +3,7 @@ session_start();
 require '../Model/mainfunction.php';
 
 if (!isset($_SESSION['email'])) {
-    exit("Error: No se ha iniciado sesión");
+    header('Location: ../Vista/login.vista.php');
 } 
 
 $connexio = connexio();

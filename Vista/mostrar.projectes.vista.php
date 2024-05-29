@@ -5,20 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Proyectos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .dialeg {
-            position: absolute;
-            margin: 0;
-            padding: 2rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 32.5rem;
-            background-color: white;
-            border-radius: 1.5rem;
-            box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/dialeg.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,7 +42,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $proyecto['nom']; ?></h5>
+                            <h2 class="card-title"><?php echo $proyecto['nom']; ?></h2>
                             <p class="card-text">Descripció: <?php echo $proyecto['descripcio']; ?></p>
                             <button class="btn btn-primary open-dialog" data-project-id="<?php echo $proyecto['id']; ?>">
                                Informació
@@ -103,7 +90,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Compartir Projecte</h5>
+                                <h3 class="modal-title" id="exampleModalLabel">Compartir Projecte</h3>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -114,11 +101,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="emails_compartidos_<?php echo $proyecto['id']; ?>" class="form-label">Correus Electronics:</label>
-                                        <textarea id="emails_compartidos_<?php echo $proyecto['id']; ?>" name="emails_compartidos" rows="4" class="form-control"></textarea>
+                                        <textarea id="emails_compartidos_<?php echo $proyecto['id']; ?>" name="emails_compartidos_<?php echo $proyecto['id']; ?>" rows="4" class="form-control"></textarea>
                                         <div id="emails-container_<?php echo $proyecto['id']; ?>">
-                                            <label for="emails_compartidos_<?php echo $proyecto['id']; ?>" class="form-label">Correus Afegits:</label>
                                             <ul id="emails-list_<?php echo $proyecto['id']; ?>" class="list-group"></ul>
-                                            <input type="hidden" id="correos-ocultos_<?php echo $proyecto['id']; ?>" name="correos_ocultos">
+                                            <label for="correos-ocultos_<?php echo $proyecto['id']; ?>" class="form-label">Correus Afegits:</label>
+                                            <input type="hidden" id="correos-ocultos_<?php echo $proyecto['id']; ?>" name="correos-ocultos_<?php echo $proyecto['id']; ?>">
                                         </div>
                                     </div>
                                     <div class="mb-3">

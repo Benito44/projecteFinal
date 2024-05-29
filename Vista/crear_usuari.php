@@ -25,7 +25,7 @@
             border-radius: 10px;
             background-color: #fff;
         }
-        h2 {
+        h1 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -48,6 +48,8 @@
         }
         .error {
             color: red;
+            font-size: 14pt;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -91,7 +93,7 @@
 </nav>
 <div class="content">
     <div class="container">
-        <h2>Crear Nou Usuari</h2>
+        <h1>Crear Nou Usuari</h1>
         <div class="forms-container">
             <form id="second-form" action="../Controlador/crear_usuari.php" method="post">
                 <div class="mb-3">

@@ -4,7 +4,7 @@ require '../Model/mainfunction.php';
 session_start(); // Iniciar sesión si aún no está iniciada
 
 if (!isset($_SESSION['email'])) {
-    exit("Error: No se ha iniciado sesión");
+    header('Location: ../Vista/login.vista.php');
 } else {
     $connexio = connexio(); 
     $sql = "SELECT id, rol FROM usuaris WHERE email = ?";

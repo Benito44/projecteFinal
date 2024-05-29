@@ -35,57 +35,6 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="../js/tascas.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .column {
-            flex: 1;
-            margin: 0 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #f8f9fa;
-            overflow-y: auto;
-        }
-        .column h2 {
-            text-align: center;
-        }
-        .task {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .deleteTaskBtn {
-            float: right;
-            color: red;
-            border: none;
-            background: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #newTaskForm {
-            margin: 20px auto;
-            max-width: 600px;
-            display: flex;
-            justify-content: space-between;
-        }
-        #newTaskInput {
-            flex: 1;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
 

@@ -94,7 +94,7 @@
                     <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                         <div class="max-w-xl">
                             <form action="../Controlador/perfil.php" id="form" method="post" enctype="multipart/form-data">
-                                <h3>Imagen de perfil</h3>
+                                <h2>Imatge de perfil</h2>
                                 <div class="profile-picture text-center mt-4">
                                     <?php
                                     // Obtener la imagen de perfil del usuario
@@ -104,7 +104,8 @@
                                     }
                                     ?>
                                 </div>
-                                <input type="file" name="imagen" class="form-control mb-3">
+                                <label for="imagen">Imatge</label>
+                                <input type="file" id="imagen" name="imagen" class="form-control mb-3">
                                 <input type="submit" value="Actualitzar informació" class="btn btn-primary">
                             </form>
                         </div>

@@ -127,8 +127,8 @@ function loadChatComments(projectId) {
         method: 'GET',
         data: { projectId: projectId }, // Pasar el ID del proyecto al servidor
         success: function(response) {
-            $('#chat-messages').val(response);
-            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            $('#comentaris').val(response);
+            $('#comentaris').scrollTop($('#comentaris')[0].scrollHeight);
         },
         error: function(xhr, status, error) {
             console.error('Error al cargar comentarios del chat:', error);
@@ -149,7 +149,7 @@ setInterval(function() {
 
 $('#chat-form').submit(function(event) {
     event.preventDefault();
-    let message = $('#message-input').val().trim();
+    let message = $('#enviar_missatge').val().trim();
     if (message !== '') {
         $.ajax({
             url: '../Controlador/chat_server.php',
@@ -157,9 +157,9 @@ $('#chat-form').submit(function(event) {
             data: { projectId: projectId, message: message }, // Pasar el ID del proyecto al servidor junto con el mensaje
             success: function(response) {
                 loadChatComments(projectId); 
-                $('#message-input').val(''); 
+                $('#enviar_missatge').val(''); 
                             // Enfocar el último mensaje recibido
-            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            $('#comentaris').scrollTop($('#comentaris')[0].scrollHeight);
             },
             error: function(xhr, status, error) {
                 console.error('Error al enviar comentario:', error);

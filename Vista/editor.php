@@ -1,7 +1,3 @@
-<?php
-if ($row) {
-    if ($row['permissos'] === 'editar') {
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +11,11 @@ if ($row) {
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="../css/editor.css">
 </head>
+<?php
+if ($row) {
+    if ($row['permissos'] === 'editar') {
+?>
+
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand">Gestió de Projectes</a>
@@ -82,10 +83,12 @@ if ($row) {
   </div>
   <div class="offcanvas-body">
     <div id="chat-container">
-      <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
+      <label for="comentaris">Comentaris</label>
+      <textarea id="comentaris" name="comentaris" rows="10" cols="50" readonly></textarea>
     </div>
     <form id="chat-form">
-      <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+      <label for="enviar_missatge">Enviar Missatge</label>
+      <input type="text" id="enviar_missatge" name="enviar_missatge" placeholder="Escribe un mensaje...">
       <button type="submit">Enviar</button>
     </form> 
   </div>
@@ -94,7 +97,7 @@ if ($row) {
 <div class="title-container">
     <h1 id="nombre_proyecto">Nombre del Proyecto</h1>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
-        El proyecto se ha actualizado.
+        El projecte s'ha actualitzat
     </div>
 </div>
 <div class="buttons-container d-flex justify-content-center">
@@ -104,7 +107,8 @@ if ($row) {
 
 
 <div id="chat-container">
-  <textarea id="editor" rows="10" cols="50"></textarea>
+  <label for="editor">Contingut Editable</label>
+  <textarea id="editor" name="editor" rows="10" cols="50" title="Contingut editable del projecte"></textarea>
 </div>
 </body>
 </html>
@@ -112,19 +116,6 @@ if ($row) {
 <?php
     } elseif($row['permissos'] === 'visualitzar'){
         ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Editor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
-    <link rel="stylesheet" href="../css/editor.css">
-</head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand">Gestió de Projectes</a>
@@ -191,11 +182,13 @@ if ($row) {
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div id="chat-container">
-      <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
+  <div id="chat-container">
+      <label for="comentaris">Comentaris</label>
+      <textarea id="comentaris" name="comentaris" rows="10" cols="50" readonly></textarea>
     </div>
     <form id="chat-form">
-      <input type="text" id="message-input" placeholder="Escribe un mensaje..." readonly>
+      <label for="enviar_missatge">Enviar Missatge</label>
+      <input type="text" id="enviar_missatge" name="enviar_missatge" placeholder="Escribe un mensaje..." readonly>
       <button type="submit">Enviar</button>
     </form> 
   </div>
@@ -204,7 +197,7 @@ if ($row) {
 <div class="title-container">
     <h1 id="nombre_proyecto">Nombre del Proyecto</h1>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
-        El proyecto se ha actualizado.
+        El projecte s'ha actualitzat
     </div>
 </div>
 <div class="buttons-container d-flex justify-content-center">
@@ -214,7 +207,8 @@ if ($row) {
 
 
 <div id="chat-container">
-  <textarea id="editor" rows="10" cols="50" readonly></textarea>
+<label for="editor">Contingut No Editable</label>
+  <textarea id="editor" name="editor" rows="10" cols="50" title="Contingut editable del projecte" readonly></textarea>
 </div>
 </body>
 </html>
@@ -222,19 +216,6 @@ if ($row) {
 <?php
     } elseif($row['permissos'] === 'comentar'){
         ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Editor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
-    <link rel="stylesheet" href="../css/editor.css">
-</head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand">Gestió de Projectes</a>
@@ -301,11 +282,13 @@ if ($row) {
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div id="chat-container">
-      <textarea id="chat-messages" rows="10" cols="50" readonly></textarea>
+  <div id="chat-container">
+      <label for="comentaris">Comentaris</label>
+      <textarea id="comentaris" name="comentaris" rows="10" cols="50" readonly></textarea>
     </div>
     <form id="chat-form">
-      <input type="text" id="message-input" placeholder="Escribe un mensaje...">
+      <label for="enviar_missatge">Enviar Missatge</label>
+      <input type="text" id="enviar_missatge" name="enviar_missatge" placeholder="Escribe un mensaje..." readonly>
       <button type="submit">Enviar</button>
     </form> 
   </div>
@@ -314,7 +297,7 @@ if ($row) {
 <div class="title-container">
     <h1 id="nombre_proyecto">Nombre del Proyecto</h1>
     <div id="actualizacion" style="display: none;" class="alert alert-success" role="alert">
-        El proyecto se ha actualizado.
+        El projecte s'ha actualitzat
     </div>
 </div>
 <div class="buttons-container d-flex justify-content-center">
@@ -324,7 +307,8 @@ if ($row) {
 
 
 <div id="chat-container">
-  <textarea id="editor" rows="10" cols="50" readonly></textarea>
+<label for="editor">Contingut No Editable</label>
+  <textarea id="editor" name="editor" rows="10" cols="50" title="Contingut editable del projecte" readonly></textarea>
 </div>
 </body>
 </html>
