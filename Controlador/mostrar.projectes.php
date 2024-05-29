@@ -26,7 +26,7 @@ $statement_proyectos = $connexio->prepare($sql_proyectos);
 $statement_proyectos->execute([$row['id']]);
 $proyectos = $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);
 
-$sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
+$sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(CONCAT(u.usuari, ' (', u.email, ')') SEPARATOR ', ') AS usuarios_con_permisos 
                  FROM proyecto_usuario pu 
                  INNER JOIN usuaris u ON pu.id_usuario = u.id 
                  GROUP BY pu.id_proyecto";
@@ -36,7 +36,6 @@ $usuarios_proyectos = $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);
 $es_admin = $row['rol'] === 'admin';
 
 include '../Vista/mostrar.projectes.vista.php'; 
-
 
 if (!$proyectos) {
     echo ("Error: No se encontraron proyectos para este usuario");

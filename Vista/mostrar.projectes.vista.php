@@ -61,7 +61,7 @@
                                Informació
                             </button>
                             <?php if ($es_admin): ?>
-                                <button class="btn btn-danger float-end delete-project" data-project-id="<?php echo $proyecto['id']; ?>">X</button>
+                                <button class="btn btn-danger float-end delete-project" data-project-id="<?php echo $proyecto['id']; ?>">Eliminar</button>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                         if ($usuario_proyecto['id_proyecto'] == $proyecto['id']) {
                                             $usuarios_con_permisos = explode(", ", $usuario_proyecto['usuarios_con_permisos']);
                                             foreach ($usuarios_con_permisos as $usuario) {
-                                                echo "<li>$usuario</li> ($usuario)";
+                                                echo "<li>$usuario</li>";
                                             }
                                         }
                                     }
