@@ -63,8 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#modifyEventId').val(event.id);
     $('#modifyTitle').val(event.title);
     $('#modifyDesc').val(event.extendedProps.desc);
-    $('#modifyStart').val(event.start.toISOString().slice(0, 16));
-    $('#modifyEnd').val(event.end ? event.end.toISOString().slice(0, 16) : '');
+    let localStart = new Date(event.start.getTime() - (event.start.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+    $('#modifyStart').val(localStart);
+
+    let localEnd = event.end ? new Date(event.end.getTime() - (event.end.getTimezoneOffset() * 60000)).toISOString().slice(0, 16) : '';
+    $('#modifyEnd').val(localEnd);
+
     $('#modifyColor').val(event.backgroundColor);
 
     $('#eventDetailsModal').modal('hide');

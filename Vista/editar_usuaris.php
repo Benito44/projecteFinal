@@ -89,6 +89,10 @@
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
             </div>
             <div class="mb-3">
+                <label for="contra" class="form-label">Canviar contrasenya</label>
+                <input type="text" class="form-control" id="contra" name="contra">
+            </div>
+            <div class="mb-3">
                 <label for="rol" class="form-label">Rol de l'usuari</label>
                 <select id="rol" name="rol" class="form-select">
                     <option value="admin" <?php if ($usuario['rol'] === 'admin') echo 'selected'; ?>>Administrador</option>

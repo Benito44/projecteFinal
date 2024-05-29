@@ -19,30 +19,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function actualizarUsuario($data, $files) {
     $conn = connexio();
-    $statement = $conn->prepare("UPDATE usuaris SET usuari = :usuari, email = :email, rol = :rol, imatge = :imatge WHERE id = :id");
+    if ($data['contra'] == ''){
+        $statement = $conn->prepare("UPDATE usuaris SET usuari = :usuari, email = :email, rol = :rol, imatge = :imatge WHERE id = :id");
 
-    $imatge = null;
-    if (isset($files['imatge']) && $files['imatge']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = '../uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+        $imatge = null;
+        if (isset($files['imatge']) && $files['imatge']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = '../uploads/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            $uploadFile = $uploadDir . basename($files['imatge']['name']);
+            if (move_uploaded_file($files['imatge']['tmp_name'], $uploadFile)) {
+                $imatge = $uploadFile;
+            }
+        } else {
+            $usuario = obtenerUsuarioPorId($data['id']);
+            $imatge = $usuario['imatge'];
         }
-        $uploadFile = $uploadDir . basename($files['imatge']['name']);
-        if (move_uploaded_file($files['imatge']['tmp_name'], $uploadFile)) {
-            $imatge = $uploadFile;
-        }
+    
+        $statement->execute([
+            'usuari' => $data['usuari'],
+            'email' => $data['email'],
+            'rol' => $data['rol'],
+            'imatge' => $imatge,
+            'id' => $data['id']
+        ]);
     } else {
-        $usuario = obtenerUsuarioPorId($data['id']);
-        $imatge = $usuario['imatge'];
+        $statement = $conn->prepare("UPDATE usuaris SET usuari = :usuari, email = :email, contrasenya = :contrasenya, rol = :rol, imatge = :imatge WHERE id = :id");
+
+        $imatge = null;
+        if (isset($files['imatge']) && $files['imatge']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = '../uploads/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            $uploadFile = $uploadDir . basename($files['imatge']['name']);
+            if (move_uploaded_file($files['imatge']['tmp_name'], $uploadFile)) {
+                $imatge = $uploadFile;
+            }
+        } else {
+            $usuario = obtenerUsuarioPorId($data['id']);
+            $imatge = $usuario['imatge'];
+        }
+        $encriptada = password_hash($data['contra'], PASSWORD_BCRYPT);
+        $statement->execute([
+            'usuari' => $data['usuari'],
+            'email' => $data['email'],
+            'contrasenya' => $encriptada,
+            'rol' => $data['rol'],
+            'imatge' => $imatge,
+            'id' => $data['id']
+        ]);
     }
 
-    $statement->execute([
-        'usuari' => $data['usuari'],
-        'email' => $data['email'],
-        'rol' => $data['rol'],
-        'imatge' => $imatge,
-        'id' => $data['id']
-    ]);
 }
 
 function eliminarUsuario($id) {
