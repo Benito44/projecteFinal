@@ -4,56 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 20px auto;
-            max-width: 600px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        li a {
-            text-decoration: none;
-            color: #333;
-            display: block;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        li a:hover {
-            background-color: #f0f0f0;
-        }
-        .dialeg {
-            position: absolute;
-            margin: 0;
-            padding: 2rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 32.5rem;
-            background-color: white;
-            border-radius: 1.5rem;
-            box-shadow: 8px 8px 24px 0 rgba(0, 0, 0, 0.5);
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/perfil.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

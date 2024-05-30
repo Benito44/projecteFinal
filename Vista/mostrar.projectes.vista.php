@@ -103,9 +103,10 @@
                                         <label for="emails_compartidos_<?php echo $proyecto['id']; ?>" class="form-label">Correus Electronics:</label>
                                         <textarea id="emails_compartidos_<?php echo $proyecto['id']; ?>" name="emails_compartidos_<?php echo $proyecto['id']; ?>" rows="4" class="form-control"></textarea>
                                         <div id="emails-container_<?php echo $proyecto['id']; ?>">
-                                            <ul id="emails-list_<?php echo $proyecto['id']; ?>" class="list-group"></ul>
+                                            
                                             <label for="correos-ocultos_<?php echo $proyecto['id']; ?>" class="form-label">Correus Afegits:</label>
                                             <input type="hidden" id="correos-ocultos_<?php echo $proyecto['id']; ?>" name="correos-ocultos_<?php echo $proyecto['id']; ?>">
+                                            <ul id="emails-list_<?php echo $proyecto['id']; ?>" class="list-group"></ul>
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -134,6 +135,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 </body>
 </html>

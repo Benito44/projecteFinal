@@ -2,40 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Usuario</title>
+    <title>Editar Usuari</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
-            margin-top: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .image-preview {
-            max-width: 150px;
-            max-height: 150px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/editar_usuari.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -77,7 +46,7 @@
 </nav>
 <div class="content">
     <div class="container">
-        <h1>Editar Usuario</h1>
+        <h1>Editar Usuari</h1>
         <form method="post" id="editUserForm" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id']); ?>">
             <div class="mb-3">

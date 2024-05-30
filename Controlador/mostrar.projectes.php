@@ -5,12 +5,18 @@ session_start(); // Iniciar sesión si aún no está iniciada
 
 if (!isset($_SESSION['email'])) {
     header('Location: ../Vista/login.vista.php');
-} else {
-    $connexio = connexio(); 
-    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
-    $statement = $connexio->prepare($sql);
-    $statement->execute([$_SESSION['email']]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    exit;
+}
+
+$connexio = connexio(); 
+$sql = "SELECT id, rol FROM usuaris WHERE email = ?";
+$statement = $connexio->prepare($sql);
+$statement->execute([$_SESSION['email']]);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+if (!$row) {
+    header('Location: ../Vista/login.vista.php');
+    exit;
 }
 
 $connexio = connexio(); 
@@ -37,16 +43,13 @@ $es_admin = $row['rol'] === 'admin';
 
 include '../Vista/mostrar.projectes.vista.php'; 
 
-if (!$proyectos) {
-    echo ("Error: No se encontraron proyectos para este usuario");
-}
-?>
-    <script>
+?>    
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.delete-project').forEach(function(button) {
                 button.addEventListener('click', function() {
                     const projectId = this.getAttribute('data-project-id');
-                    if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
+                    if (confirm("¿Estàs segur de que quieres eliminar este proyecto?")) {
                         window.location.href = '../Controlador/eliminar_projecte.php?id=' + projectId;
                     }
                 });
@@ -77,11 +80,12 @@ if (!$proyectos) {
             <?php foreach($proyectos as $proyecto): ?>
             $('#agregar-correos_<?php echo $proyecto['id']; ?>').click(function() {
                 let correos = $('#emails_compartidos_<?php echo $proyecto['id']; ?>').val().split('\n');
-
                 correos.forEach(function(correo) {
                     correo = correo.trim();
-                    if (correo !== "") {
+                    if (validateEmail(correo)) {
                         $('#emails-list_<?php echo $proyecto['id']; ?>').append('<li>' + correo + ' <button class="btn btn-danger btn-sm" onclick="removeEmail(this)">Eliminar</button></li>');
+                    } else {
+                        alert('Correo inválido: ' + correo);
                     }
                 });
 
@@ -119,4 +123,10 @@ if (!$proyectos) {
             });
             $('#correos-ocultos_' + proyectoId).val(correos.join(','));
         }
+
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
     </script>
+

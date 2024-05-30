@@ -4,49 +4,20 @@
     <meta charset="UTF-8">
     <title>Ver Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/mostrar_usuaris.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .content {
+        .title-container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
-            margin-top: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .table tr {
-            cursor: pointer;
-        }
-        .image-preview {
-            max-width: 150px;
-            max-height: 150px;
-            margin-bottom: 10px;
-        }
-        .fixed-profile-image {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            justify-content: space-between;
         }
         .fixed-profile-image img {
-            width: 100px;
-            height: 100px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            position: fixed;
+            top: 10px;
+            right: 10px;
         }
     </style>
 </head>
@@ -74,7 +45,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
             </li>
-
         </ul>
     </div>
 </nav>
@@ -91,8 +61,10 @@
 </div>
 <div class="content">
     <div class="container">
-        <h1>Ver Usuarios</h1>
-        <a href='../Controlador/crear_usuari.php' class='btn btn-primary'>+</a>
+        <div class="title-container">
+            <h1>Usuaris</h1>
+            <a href='../Controlador/crear_usuari.php' class='btn btn-primary'>+</a>
+        </div>
 
         <table class="table table-striped">
             <thead>

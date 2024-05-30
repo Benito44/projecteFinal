@@ -4,54 +4,7 @@
     <meta charset="UTF-8">
     <title>Crear Proyecto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        .btn-center-right {
-            display: flex;
-            justify-content: flex-end;
-        }
-        .profile-image {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-        .profile-image img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-        .error {
-            color: red;
-            font-size: 14pt;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/crear_usuari.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

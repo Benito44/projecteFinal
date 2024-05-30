@@ -9,7 +9,6 @@ function getProjectComments($projectId) {
         $pdo = connexio(); // Conectar a la base de datos
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Obtener los comentarios del proyecto desde la base de datos
         $commentQuery = $pdo->prepare("SELECT comentari FROM projectes WHERE id = :project_id");
         $commentQuery->bindParam(':project_id', $projectId);
         $commentQuery->execute();
@@ -24,19 +23,17 @@ function getProjectComments($projectId) {
     }
 }
 
-// Si se recibe un ID de proyecto a través de GET, cargar los comentarios de ese proyecto
+
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
-    // Obtener el ID del proyecto desde la solicitud
     $projectId = $_GET['projectId'];
     // Obtener los comentarios del proyecto y devolverlos como respuesta
     echo getProjectComments($projectId);
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_POST['projectId'])) {
-    // Si se recibe un mensaje y un ID de proyecto a través de POST, agregar el comentario a la base de datos
     $projectId = $_POST['projectId'];
     $message = $_POST['message'];
     
     // Obtener el nombre de usuario de la sesión
-    $username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario Desconocido';
+    $username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuari Desconegut';
 
     try {
         $pdo = connexio(); // Conectar a la base de datos
@@ -50,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
         $existingComment = $existingCommentResult['comentari'];
 
         // Concatenar el nuevo comentario al existente (con un salto de línea)
-        $updatedComment = $existingComment . "\n" . $username . ': ' . $message;
+        $updatedComment = $existingComment . "\n" . date('Y-m-d\H:i:sP') . $username . ': ' . $message;
 
         // Actualizar el campo de comentarios en la tabla de proyectos
         $updateStatement = $pdo->prepare("UPDATE projectes SET comentari = :comment WHERE id = :project_id");

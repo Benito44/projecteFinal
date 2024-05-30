@@ -58,7 +58,7 @@
 
     <div class="content">
         <div class="container">
-            <h1>Crear Nuevo Proyecto</h1>
+            <h1>Crear Nou Projecte</h1>
             <form action="../Controlador/crear_proyecte.php" method="post" id="crearProyectoForm">
                 <div class="mb-3">
                     <label for="nombre_proyecto" class="form-label">Nom del projecte:</label>
