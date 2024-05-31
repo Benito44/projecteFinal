@@ -4,7 +4,7 @@ session_start();
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario'])) {
     // Si no ha iniciado sesión, mostrar un mensaje de error
-        header('Location: ./login.vista.php');
+        header('Location: ../Vista/login.vista.php');
     exit(); // Detener la ejecución del script después de mostrar el mensaje de error
 }
 require '../Model/mainfunction.php';

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <title>Editar Usuari</title>
@@ -55,7 +55,8 @@
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/cerrar_session.php">
-                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    <img src="../uploads/icono cerrar.png" alt="Cerrar sesión" class="icono-cerrar">
+
                     </a>
                 </li>
             </ul>

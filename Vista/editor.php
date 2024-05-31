@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collaborative Editor</title>
+    <title>Editor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
@@ -39,7 +39,8 @@ if ($row) {
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                <a class="nav-link" href="../Controlador/tasques.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -60,7 +61,8 @@ if ($row) {
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/cerrar_session.php">
-                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    <img src="../uploads/icono cerrar.png" alt="Cerrar sesión" class="icono-cerrar">
+
                     </a>
                 </li>
             </ul>
@@ -126,7 +128,7 @@ if ($row) {
 </div>
 <div class="buttons-container d-flex justify-content-center">
   <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
-  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
+  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Comentaris</button>
 </div>
 
 
@@ -163,7 +165,8 @@ if ($row) {
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                <a class="nav-link" href="../Controlador/tasques.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -184,7 +187,8 @@ if ($row) {
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/cerrar_session.php">
-                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    <img src="../uploads/icono cerrar.png" alt="Cerrar sesión" class="icono-cerrar">
+
                     </a>
                 </li>
             </ul>
@@ -250,7 +254,7 @@ if ($row) {
 </div>
 <div class="buttons-container d-flex justify-content-center">
   <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
-  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
+  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Comentaris</button>
 </div>
 
 
@@ -287,7 +291,7 @@ if ($row) {
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                    <a class="nav-link" href="../Controlador/tasques.php?id=<?php echo $proyectoId; ?>">Tasques</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
@@ -308,7 +312,8 @@ if ($row) {
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/cerrar_session.php">
-                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    <img src="../uploads/icono cerrar.png" alt="Cerrar sesión" class="icono-cerrar">
+
                     </a>
                 </li>
             </ul>
@@ -375,7 +380,7 @@ if ($row) {
 </div>
 <div class="buttons-container d-flex justify-content-center">
   <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Tasques pendents</button>
-  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Chat</button>
+  <button class="btn btn-primary ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Comentaris</button>
 </div>
 
 

@@ -6,9 +6,9 @@ require '../vendor/autoload.php';
 require '../Model/mainfunction.php'; 
 
 $config = [
-    'callback' => 'http://localhost/Controlador/github.php',
+    'callback' => 'http://bmartinez2.dawprojectes.sapalomera.cat/Controlador/github.php',
 
-    'keys' => ['id' => 'Ov23lijKPpfqthUlYDif', 'secret' => '2d95dbbe576f6cf5b52c2f134443bf6a21525141'],
+    'keys' => ['id' => 'Ov23lijKPpfqthUlYDif', 'secret' => '2eb3ff7700df8d748c31ddb1852a9a676d24cf19'],
 ];
 
 try {

@@ -1,51 +1,22 @@
-<?php
-// Aquí deberías incluir tu lógica para conectar a la base de datos y verificar la sesión
-session_start();
-require '../Model/mainfunction.php';
 
-if (!isset($_SESSION['email'])) {
-    exit("Error: No se ha iniciado sesión");
-} else {
-    $connexio = connexio(); 
-    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
-    $statement = $connexio->prepare($sql);
-    $statement->execute([$_SESSION['email']]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-    $es_admin = $row['rol'] === 'admin';
-}
-
-$connexio = connexio();
-$proyectoId = $_GET['id'];
-// Consulta para obtener las tareas del proyecto
-$sql = "SELECT * FROM tasques WHERE id_projecte = ?";
-$statement = $connexio->prepare($sql);
-$statement->execute([$proyectoId]);
-$tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
-?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tasques</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="../js/tascas.js"></script>
-    <link rel="stylesheet" href="../css/tascas.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../js/tascas.js"></script>
+    <link rel="stylesheet" href="../css/tascas.css">
 
 </head>
 <body>
@@ -89,7 +60,8 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../Controlador/cerrar_session.php">
-                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    <img src="../uploads/icono cerrar.png" alt="Cerrar sesión" class="icono-cerrar">
+
                     </a>
                 </li>
             </ul>
@@ -98,8 +70,9 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
 </nav>
 
 <form id="newTaskForm">
-    <input type="text" id="newTaskInput" placeholder="Nueva tarea" class="form-control">
-    <button type="submit" class="btn btn-primary">Crear tarea</button>
+    <label for="newTaskInput">Nova Tasca</label>
+    <input type="text" name="newTaskInput" id="newTaskInput" placeholder="Nova tasca" class="form-control">
+    <button type="submit" class="btn btn-primary">Crear tasca</button>
 </form>
 
 <div class="container">
@@ -160,8 +133,6 @@ $tareas = $statement->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 </body>
 </html>

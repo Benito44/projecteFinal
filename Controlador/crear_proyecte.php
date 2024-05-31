@@ -40,7 +40,7 @@ if (isset($_POST['nombre_proyecto'])) {
     }
 } 
 
-if (isset($_POST['correos-ocultos']) && !empty(trim($_POST['correos-ocultos']))) {
+if (isset($_POST['correos-ocultos'])) {
     $nombre_proyecto_compartido = $_POST['nombre_proyectos_compartidos'];
     $id_proyecto = obtenirIdProjectePerNom($conn, $nombre_proyecto_compartido);
     $emails_compartidos = explode(',', $_POST['correos-ocultos']);
@@ -57,7 +57,7 @@ if (isset($_POST['correos-ocultos']) && !empty(trim($_POST['correos-ocultos'])))
                 actualitzarPermisosUsuariProjecte($conn, $permisos, $id_usuario, $id_proyecto);
             }
 
-            $link_proyecto = "http://localhost/Controlador/editor.php?id=" . $id_proyecto;
+            $link_proyecto = "http://bmartinez2.dawprojectes.sapalomera.cat/Controlador/editor.php?id=" . $id_proyecto;
             $usuari = trobarUsuariPerEmail($conn, $email); 
             $text = 'Hola ' . $usuari . ',<br><br>';
             $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';

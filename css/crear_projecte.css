@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e6e6da;
+    background-color: #fbfff0;
 }
 .content {
     display: flex;
@@ -49,4 +49,8 @@ img {
     color: red;
     font-size: 14pt;
     font-weight: bold;
+}
+.icono-cerrar {
+    width: 50px;
+    height: 50px;
 }

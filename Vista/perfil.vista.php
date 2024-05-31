@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
             if ($imagen_perfil) {
                 echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil">';
             } else {
-                                echo '<img src="../uploads/default.webp" alt="Imagen de perfil por defecto">';
+                echo '<img src="../uploads/default.webp" alt="Imagen de perfil por defecto">';
             }
             ?>
         </a>

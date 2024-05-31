@@ -39,7 +39,7 @@ if (isset($_POST['email'])) {
         'L\'administrador ha proporcionat una nova contrasenya per al teu compte.<br>' .
         '<strong>Nova contrasenya:</strong> ' . $nova_contra . '<br><br>' .
         'Si us plau, inicia sessió amb la nova contrasenya i canvia-la des del teu perfil el més aviat possible.<br><br>' .
-        '<a href="http://localhost">http://localhost</a><br><br>' .
+        '<a href="http://bmartinez2.dawprojectes.sapalomera.cat/">http://bmartinez2.dawprojectes.sapalomera.cat/</a><br><br>' .
         'Salutacions,<br>' .
         'L\'equip de suport';
 
