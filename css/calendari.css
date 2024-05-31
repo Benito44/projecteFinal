@@ -4,4 +4,8 @@
     white-space: pre-wrap; /* Asegura que el texto se envuelva dentro del contenedor */
     word-wrap: break-word; /* Permite la rotura de palabras largas para evitar desbordamientos horizontales */
   }
-  
+  img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 10px;
+}

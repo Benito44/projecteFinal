@@ -3,26 +3,6 @@
 include '../Model/mainfunction.php';
 session_start();
 
-// Función para obtener los comentarios de un proyecto específico desde la base de datos
-function getProjectComments($projectId) {
-    try {
-        $pdo = connexio(); // Conectar a la base de datos
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $commentQuery = $pdo->prepare("SELECT comentari FROM projectes WHERE id = :project_id");
-        $commentQuery->bindParam(':project_id', $projectId);
-        $commentQuery->execute();
-        $commentResult = $commentQuery->fetch(PDO::FETCH_ASSOC);
-
-        return $commentResult['comentari']; // Devolver los comentarios del proyecto
-    } catch(PDOException $e) {
-        return "Error al obtener comentarios: " . $e->getMessage();
-    } finally {
-        // Cerrar la conexión PDO
-        $pdo = null;
-    }
-}
-
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
     $projectId = $_GET['projectId'];

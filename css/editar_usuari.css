@@ -28,3 +28,8 @@ h1 {
     max-height: 150px;
     margin-bottom: 10px;
 }
+img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 10px;
+}

@@ -2,16 +2,27 @@
 ob_start();
 session_start();
 require_once '../Model/mainfunction.php';
-
+        $conn = connexio();
 if (!isset($_SESSION['email'])) {
     header('Location: ../Vista/login.vista.php');
+}
+
+$sql = "SELECT rol FROM usuaris WHERE email = ?";
+$statement = $conn->prepare($sql);
+$statement->execute([$_SESSION['email']]);
+$row = $statement->fetch(PDO::FETCH_ASSOC);
+
+$es_admin = false;
+
+if ($row && isset($row['rol'])) {
+    $es_admin = ($row['rol'] === 'admin');
 }
 
 // Verificar si se enviaron los datos del formulario
 if (isset($_POST['usuari']) && isset($_POST['email']) && isset($_POST['contrasenya']) && isset($_POST['contrasenya_2'])) {
     // Verificar si las contraseñas coinciden
     if ($_POST['contrasenya'] === $_POST['contrasenya_2']) {
-        $conn = connexio();
+
         $usuari = $_POST['usuari'];
         $email = $_POST['email'];
         $contrasenya = $_POST['contrasenya'];

@@ -17,31 +17,55 @@ if ($row) {
 ?>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand">Gestió de Projectes</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="../Controlador/perfil.php">
+            <?php
+            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+            if ($imagen_perfil) {
+                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil">';
+            } else {
+              echo '<img src="../uploads/default.webp" alt="Imagen de perfil por defecto">';
+            }
+            ?>
+        </a>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            Gestió de Projecte
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
-      </li>
-    </ul>
-  </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar projectes</a>
+                </li>
+                <?php if ($es_admin): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar_usuaris.php">Mostrar Usuaris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/cerrar_session.php">
+                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
@@ -117,31 +141,55 @@ if ($row) {
     } elseif($row['permissos'] === 'visualitzar'){
         ?>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand">Gestió de Projectes</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="../Controlador/perfil.php">
+            <?php
+            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+            if ($imagen_perfil) {
+                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil">';
+            } else {
+                                echo '<img src="../uploads/default.webp" alt="Imagen de perfil por defecto">';
+            }
+            ?>
+        </a>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            Gestió de Projecte
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
-      </li>
-    </ul>
-  </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar projectes</a>
+                </li>
+                <?php if ($es_admin): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar_usuaris.php">Mostrar Usuaris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/cerrar_session.php">
+                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
@@ -217,32 +265,57 @@ if ($row) {
     } elseif($row['permissos'] === 'comentar'){
         ?>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand">Gestió de Projectes</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="../Controlador/perfil.php">
+            <?php
+            $imagen_perfil = obtenerImagenPerfil($_SESSION['email']);
+            if ($imagen_perfil) {
+                echo '<img src="' . $imagen_perfil . '" alt="Imagen de perfil">';
+            } else {
+                                echo '<img src="../uploads/default.webp" alt="Imagen de perfil por defecto">';
+            }
+            ?>
+        </a>
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            Gestió de Projecte
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-      <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tascas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar Projectes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/perfil.php">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../Controlador/cerrar_session.php">Tancar sessió</a>
-      </li>
-    </ul>
-  </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Vista/tascas.php?id=<?php echo $proyectoId; ?>">Tasques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/calendari.php">Calendari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar.projectes.php">Mostrar projectes</a>
+                </li>
+                <?php if ($es_admin): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/mostrar_usuaris.php">Mostrar Usuaris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_usuari.php">Crear Usuari</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/crear_proyecte.php">Crear Projecte</a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Controlador/cerrar_session.php">
+                        <img src="../uploads/ruberga.png" alt="Cerrar sesión" width="20" height="20">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
+
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
@@ -288,7 +361,7 @@ if ($row) {
     </div>
     <form id="chat-form">
       <label for="enviar_missatge">Enviar Missatge</label>
-      <input type="text" id="enviar_missatge" name="enviar_missatge" placeholder="Escribe un mensaje..." readonly>
+      <input type="text" id="enviar_missatge" name="enviar_missatge" placeholder="Escribe un mensaje...">
       <button type="submit">Enviar</button>
     </form> 
   </div>

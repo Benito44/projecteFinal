@@ -52,7 +52,96 @@ if (!function_exists('phphmailer')) {
     }
   }
 }
+// Función para insertar un proyecto en la base de datos
+function inserirProjecte($conn, $nom_projecte, $descripcio, $data_inici, $data_fi) {
+    $statement = $conn->prepare("INSERT INTO projectes (nom, descripcio, data_inici, data_fi) VALUES (?,?,?,?)");
+    $statement->bindParam(1, $nom_projecte);
+    $statement->bindParam(2, $descripcio);
+    $statement->bindParam(3, $data_inici);
+    $statement->bindParam(4, $data_fi);
+    $statement->execute();
+}
 
+// Función para obtener el ID de usuario por correo electrónico
+function obtenirIdUsuariPerEmail($conn, $email) {
+    $id_usuari = "";
+    $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
+    $statement->bindParam(1, $email);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $id_usuari = $row["id"];
+    }
+    return $id_usuari;
+}
+
+// Función para obtener el ID de proyecto por nombre
+function obtenirIdProjectePerNom($conn, $nom_projecte) {
+    $id_projecte = "";
+    $statement = $conn->prepare("SELECT id FROM projectes WHERE nom = ?");
+    $statement->bindParam(1, $nom_projecte);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $id_projecte = $row["id"];
+    }
+    return $id_projecte;
+}
+function cerrar_sessio() {
+    // Verificar si la sesión está iniciada
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        // Destruir la sesión
+        session_destroy();
+    }
+
+    // Redirigir a la página de inicio de sesión
+    header('Location: ../Vista/login.vista.php');
+    exit(); 
+}
+function actualitzarPermisosUsuariProjecte($conn, $permisos, $id_usuario, $id_proyecto) {
+    $statement = $conn->prepare("UPDATE proyecto_usuario SET permissos=? WHERE id_usuario = ? AND id_proyecto = ?");
+    $statement->execute([$permisos, $id_usuario, $id_proyecto]);
+}
+
+function trobarUsuariPerEmail($conn, $email) {
+    $statement = $conn->prepare("SELECT usuari FROM usuaris WHERE email = ?");
+    $statement->execute([$email]);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    return $row['usuari'] ?? null;
+}
+
+// Función para obtener los comentarios de un proyecto específico desde la base de datos
+function getProjectComments($projectId) {
+    try {
+        $pdo = connexio(); // Conectar a la base de datos
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $commentQuery = $pdo->prepare("SELECT comentari FROM projectes WHERE id = :project_id");
+        $commentQuery->bindParam(':project_id', $projectId);
+        $commentQuery->execute();
+        $commentResult = $commentQuery->fetch(PDO::FETCH_ASSOC);
+
+        return $commentResult['comentari']; // Devolver los comentarios del proyecto
+    } catch(PDOException $e) {
+        return "Error al obtener comentarios: " . $e->getMessage();
+    } finally {
+        // Cerrar la conexión PDO
+        $pdo = null;
+    }
+}
+
+function actualitzarEstatTasca($connexio, $idTasca, $nouEstat) {
+    $sql = "UPDATE tasques SET estat = ? WHERE id = ?";
+    $declaracio = $connexio->prepare($sql);
+    $declaracio->execute([$nouEstat, $idTasca]);
+}
+
+// Función para insertar permisos de proyecto-usuario
+function inserirPermisosUsuariProjecte($conn, $id_projecte, $id_usuari, $permisos) {
+    $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
+    $statement->bindParam(1, $id_projecte);
+    $statement->bindParam(2, $id_usuari);
+    $statement->bindParam(3, $permisos);
+    $statement->execute();
+}
 // Función para obtener el nombre del proyecto basado en su ID
 function obtenerNombreProyecto($id) {
     $conn = connexio(); // Conexión a la base de datos
@@ -147,6 +236,22 @@ function usuari($usuari){
     return $usuari_id;
 }
 
+// Funció per inserir una tasca a la base de dades
+function inserirTasca($connexio, $projectId, $taskName) {
+    $sql = "INSERT INTO tasques (id_projecte, descripcio, estat) VALUES (?, ?, 'Por hacer')";
+    $statement = $connexio->prepare($sql);
+    $statement->execute([$projectId, $taskName]);
+    return $connexio->lastInsertId();
+}
+
+// Funció per obtenir una tasca per ID
+function obtenirTascaPerId($connexio, $taskId) {
+    $sql = "SELECT * FROM tasques WHERE id = ?";
+    $statement = $connexio->prepare($sql);
+    $statement->execute([$taskId]);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
 function usuariCompartit($usuari, $projecte) {
     $connexio = connexio();
     $statement = $connexio->prepare("SELECT id FROM proyecto_usuario WHERE id_usuario = ? AND id_proyecto = ?");
@@ -155,6 +260,34 @@ function usuariCompartit($usuari, $projecte) {
     $statement->execute();
     return $statement->fetch(PDO::FETCH_ASSOC) !== false;
 }
+
+function obtenirDadesUsuari($connexio, $email) {
+    $sql = "SELECT id, rol FROM usuaris WHERE email = ?";
+    $statement = $connexio->prepare($sql);
+    $statement->execute([$email]);
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function obtenirProjectesUsuari($connexio, $idUsuari) {
+    // Consulta para obtener los proyectos del usuario actual
+    $sql_proyectos = "SELECT p.*, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
+                     FROM proyecto_usuario pu 
+                     INNER JOIN projectes p ON pu.id_proyecto = p.id 
+                     INNER JOIN usuaris u ON pu.id_usuario = u.id 
+                     WHERE pu.id_usuario = ? 
+                     GROUP BY p.id";
+    $statement_proyectos = $connexio->prepare($sql_proyectos);
+    $statement_proyectos->execute([$idUsuari]);
+    return $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);}
+    
+    function obtenirUsuarisProjectes($connexio) {
+        $sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(CONCAT(u.usuari, ' (', u.email, ')') SEPARATOR ', ') AS usuarios_con_permisos 
+        FROM proyecto_usuario pu 
+        INNER JOIN usuaris u ON pu.id_usuario = u.id 
+        GROUP BY pu.id_proyecto";
+    $statement_usuarios = $connexio->query($sql_usuarios);
+     return $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);}
+    
 
 /**
  * insertar_token
@@ -209,6 +342,15 @@ function obtenerImagenPerfil($email) {
         return null;
     }
 }
+            // Función para verificar si el usuario es administrador
+            function esAdmin($usuario){
+                $connexio = connexio();
+                $statement = $connexio->prepare("SELECT rol FROM usuaris WHERE usuari = ?");
+                $statement->bindParam(1, $usuario);
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+                return $result['rol'] ?? '';
+            }
 
 /**
  * comprovarEmail

@@ -156,3 +156,17 @@ a:hover {
 #tareasDropdown li:hover {
     background-color: #f1f1f1;
 }
+/* Ocultar los enlaces de navegación por defecto */
+.navbar-nav li {
+    display: none;
+}
+
+/* Mostrar los enlaces de navegación cuando el mouse está sobre el navbar */
+.navbar:hover .navbar-nav li {
+    display: block;
+}
+img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 10px;
+    }

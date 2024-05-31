@@ -10,16 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $id_usuario = encontrarPorUsuario($_SESSION["usuario"]);
 
-            // Función para verificar si el usuario es administrador
-            function esAdmin($usuario){
-                $connexio = connexio();
-                $statement = $connexio->prepare("SELECT rol FROM usuaris WHERE usuari = ?");
-                $statement->bindParam(1, $usuario);
-                $statement->execute();
-                $result = $statement->fetch(PDO::FETCH_ASSOC);
-                return $result['rol'] ?? '';
-            }
-
             // Verificar si el usuario es administrador
             $esAdmin = esAdmin($_SESSION["usuario"]);
 

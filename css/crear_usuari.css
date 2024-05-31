@@ -44,3 +44,8 @@ label {
     font-size: 14pt;
     font-weight: bold;
 }
+img {
+    width: 80px; 
+    height: 80px; 
+    margin-right: 10px;
+}

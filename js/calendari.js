@@ -8,9 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
       $('#eventDesc').text('Descripció: ' + info.event.extendedProps.desc);
       $('#eventStart').text('Fecha de inicio: ' + info.event.start.toLocaleString());
       $('#eventEnd').text('Fecha de fin: ' + (info.event.end ? info.event.end.toLocaleString() : ''));
-      
       $('#eventDetailsModal').modal('show');
-      
       $('#eventIdToDelete').val(info.event.id);
     },
     headerToolbar: {
