@@ -38,8 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
     try {
         $pdo = connexio(); // Conectar a la base de datos
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Obtener el comentario actual del proyecto
         $existingCommentQuery = $pdo->prepare("SELECT comentari FROM projectes WHERE id = :project_id");
         $existingCommentQuery->bindParam(':project_id', $projectId);
         $existingCommentQuery->execute();
@@ -47,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['projectId'])) {
         $existingComment = $existingCommentResult['comentari'];
 
         // Concatenar el nuevo comentario al existente (con un salto de línea)
-        $updatedComment = $existingComment . "\n" . date('Y-m-d\H:i:sP') . $username . ': ' . $message;
+        $updatedComment = $existingComment . "\n" .  $fecha_y_hora = date("H:i - ") . '\n' . $username . ': ' . $message;
 
         // Actualizar el campo de comentarios en la tabla de proyectos
         $updateStatement = $pdo->prepare("UPDATE projectes SET comentari = :comment WHERE id = :project_id");

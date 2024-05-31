@@ -21,23 +21,33 @@ if (!$row) {
 
 $connexio = connexio(); 
 
-// Consulta para obtener los proyectos del usuario actual
-$sql_proyectos = "SELECT p.*, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
-                 FROM proyecto_usuario pu 
-                 INNER JOIN projectes p ON pu.id_proyecto = p.id 
-                 INNER JOIN usuaris u ON pu.id_usuario = u.id 
-                 WHERE pu.id_usuario = ? 
-                 GROUP BY p.id";
-$statement_proyectos = $connexio->prepare($sql_proyectos);
-$statement_proyectos->execute([$row['id']]);
-$proyectos = $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);
+function obtenirProjectesUsuari($connexio, $idUsuario) {
+    $sql_proyectos = "SELECT p.*, GROUP_CONCAT(u.usuari SEPARATOR ', ') AS usuarios_con_permisos 
+                      FROM proyecto_usuario pu 
+                      INNER JOIN projectes p ON pu.id_proyecto = p.id 
+                      INNER JOIN usuaris u ON pu.id_usuario = u.id 
+                      WHERE pu.id_usuario = ? 
+                      GROUP BY p.id";
+    $statement_proyectos = $connexio->prepare($sql_proyectos);
+    $statement_proyectos->execute([$idUsuario]);
+    return $statement_proyectos->fetchAll(PDO::FETCH_ASSOC);
+}
 
-$sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(CONCAT(u.usuari, ' (', u.email, ')') SEPARATOR ', ') AS usuarios_con_permisos 
-                 FROM proyecto_usuario pu 
-                 INNER JOIN usuaris u ON pu.id_usuario = u.id 
-                 GROUP BY pu.id_proyecto";
-$statement_usuarios = $connexio->query($sql_usuarios);
-$usuarios_proyectos = $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);
+function obtenirUsuarisProjectes($connexio) {
+    $sql_usuarios = "SELECT pu.id_proyecto, GROUP_CONCAT(CONCAT(u.usuari, ' (', u.email, ')') SEPARATOR ', ') AS usuarios_con_permisos 
+                     FROM proyecto_usuario pu 
+                     INNER JOIN usuaris u ON pu.id_usuario = u.id 
+                     GROUP BY pu.id_proyecto";
+    $statement_usuarios = $connexio->query($sql_usuarios);
+    return $statement_usuarios->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Uso de las funciones
+$connexio = connexio();
+$idUsuarioActual = $row['id'];
+
+$proyectos = obtenirProjectesUsuari($connexio, $idUsuarioActual);
+$usuariosProyectos = obtenirUsuarisProjectes($connexio);
 
 $es_admin = $row['rol'] === 'admin';
 
@@ -72,10 +82,15 @@ include '../Vista/mostrar.projectes.vista.php';
             document.querySelectorAll('.share-project').forEach(function(button) {
                 button.addEventListener('click', function() {
                     const projectId = this.getAttribute('data-project-id');
+                    // Cerrar el diálogo y abrir el modal de compartir proyecto
                     document.getElementById('dialog_' + projectId).close();
                     $('#modalCompartirProyecto_' + projectId).modal('show');
+                    // Actualizar el campo oculto con el ID del proyecto en el formulario dentro del modal
+                    const projectIdField = document.getElementById('share-form_' + projectId).querySelector('input[name="project_id"]');
+                    projectIdField.value = projectId;
                 });
             });
+
 
             <?php foreach($proyectos as $proyecto): ?>
             $('#agregar-correos_<?php echo $proyecto['id']; ?>').click(function() {
@@ -100,7 +115,7 @@ include '../Vista/mostrar.projectes.vista.php';
                     correos.push($(this).text().replace(' Eliminar', ''));
                 });
 
-                $('#correos-ocultos_<?php echo $proyecto['id']; ?>').val(correos.join(','));
+                $('#correos-ocultos').val(correos.join(','));
 
                 if (correos.length === 0) {
                     alert('Por favor, agregue al menos un correo electrónico.');
@@ -121,7 +136,7 @@ include '../Vista/mostrar.projectes.vista.php';
             $('#emails-list_' + proyectoId + ' li').each(function() {
                 correos.push($(this).text().replace(' Eliminar', ''));
             });
-            $('#correos-ocultos_' + proyectoId).val(correos.join(','));
+            $('#correos-ocultos').val(correos.join(','));
         }
 
         function validateEmail(email) {

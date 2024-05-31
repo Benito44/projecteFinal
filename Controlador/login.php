@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     } else {
-        $error = "Credenciales incorrectas";
+        $error = "Correu electrònic o contrasenya incorrectes";
         include '../Vista/login.vista.php';
     }
 }

@@ -10,6 +10,7 @@ if (!isset($_SESSION['email'])) {
 } 
 
 $conn = connexio();
+
 if (isset($_POST['nombre_proyecto'])) {
     if (strtotime($_POST['data_fi']) < strtotime(date("Y-m-d"))) {
         $error = 'La data final no pot ser abans que la data actual';
@@ -55,9 +56,67 @@ if (isset($_POST['nombre_proyecto'])) {
     $statement->bindParam(3, $permissos);
     $statement->execute();
 }
+} 
+if (isset($_POST['correos-ocultos'])) {
+    
+    $nombre_proyecto_compartido = $_POST['nombre_proyectos_compartidos'];
+
+    $id_proyecto = "";
+    $statement = $conn->prepare("SELECT id FROM projectes WHERE nom = ?");
+    $statement->bindParam(1, $nombre_proyecto_compartido);
+    $statement->execute();
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $id_proyecto = $row["id"];
+    }
+
+    $emails_compartidos = explode(',', $_POST['correos-ocultos']);
+
+
+    foreach ($emails_compartidos as $email) {
+        $email = trim($email);
+        $id_usuario = "";
+        $statement = $conn->prepare("SELECT id FROM usuaris WHERE email = ?");
+        $statement->bindParam(1, $email);
+        $statement->execute();
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $id_usuario = $row["id"];
+        }
+
+        if ($id_usuario !== "") {
+            if (!usuariCompartit($id_usuario, $id_proyecto)) {
+                $permisos = $_POST['permisos'];
+                $statement = $conn->prepare("INSERT INTO proyecto_usuario (id_proyecto, id_usuario, permissos) VALUES (?,?,?)");
+                $statement->bindParam(1, $id_proyecto);
+                $statement->bindParam(2, $id_usuario);
+                $statement->bindParam(3, $permisos);
+                $statement->execute();
+            } else {
+                $permisos = $_POST['permisos'];
+                $statement = $conn->prepare("UPDATE proyecto_usuario SET permissos=? WHERE id_usuario = ? AND id_proyecto = ?");
+                $statement->bindParam(1, $permisos);
+                $statement->bindParam(2, $id_usuario);
+                $statement->bindParam(3, $id_proyecto);
+                $statement->execute();
+            }
+
+            $link_proyecto = "http://localhost/Controlador/editor.php?id=" . $id_proyecto;
+            $usuari = encontrarPorEmail($email); 
+            $text = 'Hola ' . $usuari . ',<br><br>';
+            $text .= 'Este proyecto ha sido compartido contigo. Puedes acceder al editor del proyecto en el siguiente enlace:<br>';
+            $text .= '<a href="' . $link_proyecto . '">' . $link_proyecto . '</a>';
+
+            // Enviar el correo electrónico
+            phphmailer($usuari, $email, $text);
+            echo "El proyecto se ha creado y compartido correctamente.";
+        }
+    }
+
+    header("Location: ./mostrar.projectes.php");
 } else {
     include '../Vista/creacio_projecte.vista.php';
-
 }
+
+
+
 
 ?>
